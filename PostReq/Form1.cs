@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Linq;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,18 +11,22 @@ using System.Windows.Forms;
 using PostReq.Controller;
 using PostReq.Model;
 using PostReq.Util;
-using DataGrid = System.Web.UI.WebControls.DataGrid;
 
 namespace PostReq
 {
 	public partial class AddRequestForm : Form
 	{
+		private Utils.FormMode formMode;
 		SearchModel searchModel;
 		NomLoader nomLoader;
+		Request request;
 		List<RequestRow> requestRowList;
 		BindingSource bsSource;
-		public AddRequestForm()
+		UnitOfWork unitOfWork;
+
+		public AddRequestForm(Utils.FormMode formMode, int editId = 0)
 		{
+			this.formMode = formMode;
 			InitializeComponent();
 			Stack<Control> controlsStack = new Stack<Control>();
 			controlsStack.Push(this);
@@ -35,7 +41,28 @@ namespace PostReq
 			}
 			nomLoader = NomLoader.Create();
 			searchModel = new SearchModel();
-			requestRowList = new List<RequestRow>();
+			unitOfWork = new UnitOfWork();
+			if (formMode == Utils.FormMode.Edit)
+			{
+				request = unitOfWork.Requests.Get(editId);
+				requestRowBindingSource.DataSource = request.RequestRows;
+				dataGridView1.DataSource = requestRowBindingSource;
+			}
+
+			//bsSource = new BindingSource();
+			//bsSource.DataSource = ReqDataContext.GetInstance().Requests;
+			//Request r = (Request) bsSource.AddNew();
+			//r.Date=DateTime.Now;
+			//r.Username = $"{Environment.UserDomainName}\\{Environment.UserName}";
+			//requestRowBindingSource.DataSource = r.RequestRows;
+			//dataGridView1.DataSource = requestRowBindingSource;
+			//dataGridView1.Columns.Clear();
+			//dataGridView1.Columns.Add(new DataGridViewButtonColumn()
+			//{
+			//	DataPropertyName = "StringRep",
+			//	HeaderText = "",
+			//	AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+			//});
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
@@ -94,7 +121,7 @@ namespace PostReq
 
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			if (e.Node.Parent != null) categoryLabel.Text = ((Nom)e.Node.Parent.Tag).Name;
+			if (e.Node.Parent != null) categoryStatusBarLabel.Text = ((Nom)e.Node.Parent.Tag).Name;
 		}
 
 		private void addPositionButton_Click(object sender, EventArgs e)
@@ -112,10 +139,39 @@ namespace PostReq
 				}
 				if (!nomFound)
 				{
-					var changeAmountForm = new ChangeAmountForm(nom.Name,nom.EdIzm);
-					if (changeAmountForm.ShowDialog() == DialogResult.OK)
-						requestRowBindingSource.Add(new RequestRow() { Amount = changeAmountForm.Value, EdIzm = nom.EdIzm, GoodsId = nom.Id, Name = nom.Name });
-					treeView1.Focus();
+					if (formMode == Utils.FormMode.New)
+					{
+						var changeAmountForm = new ChangeAmountForm(nom.Name, nom.EdIzm);
+						if (changeAmountForm.ShowDialog() == DialogResult.OK)
+							requestRowBindingSource.Add(new RequestRow()
+							{
+								Amount = changeAmountForm.Value,
+								EdIzm = nom.EdIzm,
+								GoodsId = nom.Id,
+								Name = nom.Name
+							});
+						treeView1.Focus();
+						infoStatusBarLabel.Text = "Заявка изменена";
+					}
+					else
+					{
+						var changeAmountForm = new ChangeAmountForm(nom.Name, nom.EdIzm);
+						if (changeAmountForm.ShowDialog() == DialogResult.OK)
+						{
+							var requestRow = new RequestRow()
+							{
+								Amount = changeAmountForm.Value,
+								EdIzm = nom.EdIzm,
+								GoodsId = nom.Id,
+								Name = nom.Name,
+								RequestId = request.Id
+							};
+							unitOfWork.RequestRows.Add(requestRow);
+							requestRowBindingSource.Add(requestRow);
+							treeView1.Focus();
+							infoStatusBarLabel.Text = "Заявка изменена";
+						}
+					}
 				}
 
 			}
@@ -145,20 +201,94 @@ namespace PostReq
 		{
 			if (e.KeyCode == Keys.F3)
 				findButton_Click(sender, e);
+			if (e.KeyCode == Keys.F && e.Control)
+				searchPatternTextBox.Focus();
 		}
 
 		private void changePositionAmount_Click(object sender, EventArgs e)
 		{
-			RequestRow currentRequestRow= (RequestRow) requestRowBindingSource.Current;
-			var changeAmountForm = new ChangeAmountForm(currentRequestRow.Name,currentRequestRow.EdIzm,currentRequestRow.Amount);
+			RequestRow currentRequestRow = (RequestRow)requestRowBindingSource.Current;
+			var changeAmountForm = new ChangeAmountForm(currentRequestRow.Name, currentRequestRow.EdIzm, currentRequestRow.Amount);
 			if (changeAmountForm.ShowDialog() == DialogResult.OK)
 				currentRequestRow.Amount = changeAmountForm.Value;
+			Refresh(dataGridView1);
 			dataGridView1.Focus();
+			infoStatusBarLabel.Text = "Заявка изменена";
 		}
 
 		private void saveAndSendButton_Click(object sender, EventArgs e)
 		{
 
+		}
+
+		private void SaveRequest()
+		{
+			if (formMode == Utils.FormMode.New)
+			{
+				Request r = new Request();
+				r.Date = DateTime.Now;
+				r.Username = $"{Environment.UserDomainName}\\{Environment.UserName}";
+				r.RequestRows = new EntitySet<RequestRow>();
+				unitOfWork.Requests.Add(r);
+				unitOfWork.SaveChanges();
+				for (int i = 0; i < requestRowBindingSource.List.Count; i++)
+				{
+					RequestRow requestRow = (RequestRow)requestRowBindingSource.List[i];
+					requestRow.RequestId = r.Id;
+					r.RequestRows.Add(requestRow);
+				}
+				//unitOfWork.Requests.Add(r);
+				unitOfWork.SaveChanges();
+				request = r;
+				formMode = Utils.FormMode.Edit;
+				requestRowBindingSource.DataSource = request.RequestRows;
+				dataGridView1.DataSource = requestRowBindingSource;
+				infoStatusBarLabel.Text = "Заявка сохранена";
+			}
+			else
+			{
+				unitOfWork.SaveChanges();
+				infoStatusBarLabel.Text = "Заявка сохранена";
+			}
+		}
+
+		private void saveButton_Click(object sender, EventArgs e)
+		{
+			SaveRequest();
+		}
+
+		private void deletePositionButton_Click(object sender, EventArgs e)
+		{
+			if (formMode == Utils.FormMode.New)
+				requestRowBindingSource.RemoveCurrent();
+			else
+			{
+				unitOfWork.RequestRows.Delete((RequestRow)requestRowBindingSource.Current);
+				requestRowBindingSource.RemoveCurrent();
+			}
+			dataGridView1.Focus();
+			infoStatusBarLabel.Text = "Заявка изменена";
+		}
+
+		private void AddRequestForm_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			unitOfWork.Dispose();
+		}
+
+		private void cancelButton_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
+
+		private void printRequestButton_Click(object sender, EventArgs e)
+		{
+			string fileName = null;
+			if (formMode == Utils.FormMode.New)
+				fileName = RequestController.GeneratePrintForm(null, (IEnumerable<RequestRow>)requestRowBindingSource.List);
+			else
+				fileName = RequestController.GeneratePrintForm(request, request.RequestRows);
+			if (fileName != null)
+				Process.Start(fileName);
 		}
 	}
 }

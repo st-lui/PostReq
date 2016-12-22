@@ -33,6 +33,8 @@
 			this.findButton = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this._Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.label2 = new System.Windows.Forms.Label();
 			this.searchPatternTextBox = new System.Windows.Forms.TextBox();
 			this.addPositionButton = new System.Windows.Forms.Button();
@@ -42,11 +44,20 @@
 			this.saveAndSendButton = new System.Windows.Forms.Button();
 			this.cancelButton = new System.Windows.Forms.Button();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-			this.categoryLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.categoryStatusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
+			this.infoStatusBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.printRequestButton = new System.Windows.Forms.Button();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-			this.requestRowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.edIzmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.goodsIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.requestIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.stringRepDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.amountStringDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.requestRowBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).BeginInit();
@@ -71,6 +82,7 @@
 			this.findButton.Size = new System.Drawing.Size(143, 23);
 			this.findButton.TabIndex = 2;
 			this.findButton.Text = "Найти";
+			this.toolTip1.SetToolTip(this.findButton, "Поиск по номенклатуре");
 			this.findButton.UseVisualStyleBackColor = true;
 			this.findButton.Click += new System.EventHandler(this.findButton_Click);
 			// 
@@ -90,9 +102,21 @@
 			this.dataGridView1.AllowUserToResizeRows = false;
 			this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+			this.dataGridView1.ColumnHeadersVisible = false;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.stringRepDataGridViewTextBoxColumn});
+            this._Name,
+            this.Amount,
+            this.idDataGridViewTextBoxColumn,
+            this.amountDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.edIzmDataGridViewTextBoxColumn,
+            this.goodsIdDataGridViewTextBoxColumn,
+            this.requestIdDataGridViewTextBoxColumn,
+            this.stringRepDataGridViewTextBoxColumn,
+            this.amountStringDataGridViewTextBoxColumn});
+			this.dataGridView1.DataSource = this.requestRowBindingSource;
 			this.dataGridView1.Location = new System.Drawing.Point(575, 51);
 			this.dataGridView1.MultiSelect = false;
 			this.dataGridView1.Name = "dataGridView1";
@@ -100,8 +124,27 @@
 			this.dataGridView1.RowHeadersVisible = false;
 			this.dataGridView1.RowHeadersWidth = 15;
 			this.dataGridView1.RowTemplate.Height = 18;
+			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridView1.Size = new System.Drawing.Size(454, 311);
 			this.dataGridView1.TabIndex = 9;
+			// 
+			// _Name
+			// 
+			this._Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this._Name.DataPropertyName = "Name";
+			this._Name.HeaderText = "Номенклатура";
+			this._Name.Name = "_Name";
+			this._Name.ReadOnly = true;
+			this._Name.Width = 5;
+			// 
+			// Amount
+			// 
+			this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.Amount.DataPropertyName = "AmountString";
+			this.Amount.HeaderText = "Количество";
+			this.Amount.Name = "Amount";
+			this.Amount.ReadOnly = true;
+			this.Amount.Width = 5;
 			// 
 			// label2
 			// 
@@ -131,6 +174,7 @@
 			this.addPositionButton.Size = new System.Drawing.Size(143, 23);
 			this.addPositionButton.TabIndex = 3;
 			this.addPositionButton.Text = "Добавить в заявку";
+			this.toolTip1.SetToolTip(this.addPositionButton, "Добавить выбранную позицию в заявку");
 			this.addPositionButton.UseVisualStyleBackColor = true;
 			this.addPositionButton.Click += new System.EventHandler(this.addPositionButton_Click);
 			// 
@@ -142,7 +186,9 @@
 			this.deletePositionButton.Size = new System.Drawing.Size(143, 23);
 			this.deletePositionButton.TabIndex = 4;
 			this.deletePositionButton.Text = "Убрать из заявки";
+			this.toolTip1.SetToolTip(this.deletePositionButton, "Удалить выбранную позицию из заявки");
 			this.deletePositionButton.UseVisualStyleBackColor = true;
+			this.deletePositionButton.Click += new System.EventHandler(this.deletePositionButton_Click);
 			// 
 			// changePositionAmount
 			// 
@@ -152,6 +198,7 @@
 			this.changePositionAmount.Size = new System.Drawing.Size(143, 23);
 			this.changePositionAmount.TabIndex = 5;
 			this.changePositionAmount.Text = "Изменить количество";
+			this.toolTip1.SetToolTip(this.changePositionAmount, "Изменить количество товара по выбранной позиции");
 			this.changePositionAmount.UseVisualStyleBackColor = true;
 			this.changePositionAmount.Click += new System.EventHandler(this.changePositionAmount_Click);
 			// 
@@ -163,7 +210,9 @@
 			this.saveButton.Size = new System.Drawing.Size(143, 23);
 			this.saveButton.TabIndex = 7;
 			this.saveButton.Text = "Сохранить";
+			this.toolTip1.SetToolTip(this.saveButton, "Сохранить заявку без отправки");
 			this.saveButton.UseVisualStyleBackColor = true;
+			this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
 			// 
 			// saveAndSendButton
 			// 
@@ -173,6 +222,7 @@
 			this.saveAndSendButton.Size = new System.Drawing.Size(143, 23);
 			this.saveAndSendButton.TabIndex = 6;
 			this.saveAndSendButton.Text = "Отправить заявку";
+			this.toolTip1.SetToolTip(this.saveAndSendButton, "Сохранить и отправить заявку в УФПС");
 			this.saveAndSendButton.UseVisualStyleBackColor = true;
 			this.saveAndSendButton.Click += new System.EventHandler(this.saveAndSendButton_Click);
 			// 
@@ -184,22 +234,30 @@
 			this.cancelButton.Size = new System.Drawing.Size(143, 23);
 			this.cancelButton.TabIndex = 8;
 			this.cancelButton.Text = "Закрыть без сохранения";
+			this.toolTip1.SetToolTip(this.cancelButton, "Закрыть окно без сохранения заявки");
 			this.cancelButton.UseVisualStyleBackColor = true;
+			this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
 			// 
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.categoryLabel});
+            this.categoryStatusBarLabel,
+            this.infoStatusBarLabel});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 374);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(1020, 22);
 			this.statusStrip1.TabIndex = 10;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
-			// categoryLabel
+			// categoryStatusBarLabel
 			// 
-			this.categoryLabel.Name = "categoryLabel";
-			this.categoryLabel.Size = new System.Drawing.Size(0, 17);
+			this.categoryStatusBarLabel.Name = "categoryStatusBarLabel";
+			this.categoryStatusBarLabel.Size = new System.Drawing.Size(0, 17);
+			// 
+			// infoStatusBarLabel
+			// 
+			this.infoStatusBarLabel.Name = "infoStatusBarLabel";
+			this.infoStatusBarLabel.Size = new System.Drawing.Size(0, 17);
 			// 
 			// printRequestButton
 			// 
@@ -209,26 +267,83 @@
 			this.printRequestButton.Size = new System.Drawing.Size(143, 23);
 			this.printRequestButton.TabIndex = 5;
 			this.printRequestButton.Text = "Печать заявки";
+			this.toolTip1.SetToolTip(this.printRequestButton, "Вывести печатную формы заявки");
 			this.printRequestButton.UseVisualStyleBackColor = true;
+			this.printRequestButton.Click += new System.EventHandler(this.printRequestButton_Click);
 			// 
 			// notifyIcon1
 			// 
 			this.notifyIcon1.Text = "notifyIcon1";
 			this.notifyIcon1.Visible = true;
 			// 
+			// idDataGridViewTextBoxColumn
+			// 
+			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+			this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.ReadOnly = true;
+			this.idDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// amountDataGridViewTextBoxColumn
+			// 
+			this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+			this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
+			this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+			this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+			this.amountDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.nameDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// edIzmDataGridViewTextBoxColumn
+			// 
+			this.edIzmDataGridViewTextBoxColumn.DataPropertyName = "EdIzm";
+			this.edIzmDataGridViewTextBoxColumn.HeaderText = "EdIzm";
+			this.edIzmDataGridViewTextBoxColumn.Name = "edIzmDataGridViewTextBoxColumn";
+			this.edIzmDataGridViewTextBoxColumn.ReadOnly = true;
+			this.edIzmDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// goodsIdDataGridViewTextBoxColumn
+			// 
+			this.goodsIdDataGridViewTextBoxColumn.DataPropertyName = "GoodsId";
+			this.goodsIdDataGridViewTextBoxColumn.HeaderText = "GoodsId";
+			this.goodsIdDataGridViewTextBoxColumn.Name = "goodsIdDataGridViewTextBoxColumn";
+			this.goodsIdDataGridViewTextBoxColumn.ReadOnly = true;
+			this.goodsIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// requestIdDataGridViewTextBoxColumn
+			// 
+			this.requestIdDataGridViewTextBoxColumn.DataPropertyName = "RequestId";
+			this.requestIdDataGridViewTextBoxColumn.HeaderText = "RequestId";
+			this.requestIdDataGridViewTextBoxColumn.Name = "requestIdDataGridViewTextBoxColumn";
+			this.requestIdDataGridViewTextBoxColumn.ReadOnly = true;
+			this.requestIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// stringRepDataGridViewTextBoxColumn
+			// 
+			this.stringRepDataGridViewTextBoxColumn.DataPropertyName = "StringRep";
+			this.stringRepDataGridViewTextBoxColumn.HeaderText = "StringRep";
+			this.stringRepDataGridViewTextBoxColumn.Name = "stringRepDataGridViewTextBoxColumn";
+			this.stringRepDataGridViewTextBoxColumn.ReadOnly = true;
+			this.stringRepDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// amountStringDataGridViewTextBoxColumn
+			// 
+			this.amountStringDataGridViewTextBoxColumn.DataPropertyName = "AmountString";
+			this.amountStringDataGridViewTextBoxColumn.HeaderText = "AmountString";
+			this.amountStringDataGridViewTextBoxColumn.Name = "amountStringDataGridViewTextBoxColumn";
+			this.amountStringDataGridViewTextBoxColumn.ReadOnly = true;
+			this.amountStringDataGridViewTextBoxColumn.Visible = false;
+			// 
 			// requestRowBindingSource
 			// 
 			this.requestRowBindingSource.DataSource = typeof(PostReq.Model.RequestRow);
 			this.requestRowBindingSource.CurrentChanged += new System.EventHandler(this.requestRowBindingSource_CurrentChanged);
-			// 
-			// stringRepDataGridViewTextBoxColumn
-			// 
-			this.stringRepDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.stringRepDataGridViewTextBoxColumn.DataPropertyName = "StringRep";
-			this.stringRepDataGridViewTextBoxColumn.HeaderText = "";
-			this.stringRepDataGridViewTextBoxColumn.Name = "stringRepDataGridViewTextBoxColumn";
-			this.stringRepDataGridViewTextBoxColumn.ReadOnly = true;
-			this.stringRepDataGridViewTextBoxColumn.Width = 19;
 			// 
 			// AddRequestForm
 			// 
@@ -253,6 +368,7 @@
 			this.Name = "AddRequestForm";
 			this.Text = "Новая заявка";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddRequestForm_FormClosed);
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.Resize += new System.EventHandler(this.Form1_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -278,11 +394,22 @@
 		private System.Windows.Forms.Button saveAndSendButton;
 		private System.Windows.Forms.Button cancelButton;
 		private System.Windows.Forms.StatusStrip statusStrip1;
-		private System.Windows.Forms.ToolStripStatusLabel categoryLabel;
+		private System.Windows.Forms.ToolStripStatusLabel categoryStatusBarLabel;
 		private System.Windows.Forms.Button printRequestButton;
 		private System.Windows.Forms.NotifyIcon notifyIcon1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn stringRepDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource requestRowBindingSource;
+		private System.Windows.Forms.DataGridViewTextBoxColumn _Name;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn edIzmDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn goodsIdDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn requestIdDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn stringRepDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn amountStringDataGridViewTextBoxColumn;
+		private System.Windows.Forms.ToolStripStatusLabel infoStatusBarLabel;
+		private System.Windows.Forms.ToolTip toolTip1;
 	}
 }
 

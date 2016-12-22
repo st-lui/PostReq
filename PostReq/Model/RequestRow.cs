@@ -63,7 +63,7 @@ namespace PostReq.Model
 			}
 		}
 
-		[Column(Name = "goods_id", DbType = "VARCHAR(20)")]
+		[Column(Name = "goods_id", DbType = "VARCHAR(32)")]
 		public string GoodsId
 		{
 			get { return goodsId; }
@@ -88,6 +88,11 @@ namespace PostReq.Model
 		public string StringRep
 		{
 			get { return $"{Name} {Amount:f3} {EdIzm}"; }
+		}
+
+		public string AmountString
+		{
+			get { return $"{Amount:f3} {EdIzm}"; }
 		}
 
 		public override string ToString()

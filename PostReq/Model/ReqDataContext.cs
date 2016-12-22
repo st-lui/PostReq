@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PostReq.Model
 {
-	class ReqDataContext:DataContext
+	public class ReqDataContext:DataContext
 	{
 		private static ReqDataContext db;
 		public Table<Request> Requests;

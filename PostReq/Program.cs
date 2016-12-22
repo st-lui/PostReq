@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using PostReq.Util;
 
 namespace PostReq
 {
@@ -15,7 +16,7 @@ namespace PostReq
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new AddRequestForm());
+			Application.Run(new AddRequestForm(Utils.FormMode.Edit,16));
 		}
 	}
 }

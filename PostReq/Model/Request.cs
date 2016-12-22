@@ -54,7 +54,7 @@ namespace PostReq.Model
 
 
 		[Association(Storage = "requestRows", OtherKey = "RequestId", ThisKey = "Id")]
-		public EntitySet<RequestRow> Sessions
+		public EntitySet<RequestRow> RequestRows
 		{
 			get { return requestRows; }
 			set { requestRows.Assign(value); }
