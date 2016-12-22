@@ -137,6 +137,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1482421095_Shop-Payment-58.ico" />
+    <Content Include="Image\icon.ico" />
+    <Content Include="Image\icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
