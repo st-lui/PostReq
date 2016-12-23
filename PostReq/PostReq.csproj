@@ -61,6 +61,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -92,12 +93,14 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\FilterModel.cs" />
     <Compile Include="Model\Nom.cs" />
     <Compile Include="Model\Repository.cs" />
     <Compile Include="Model\ReqDataContext.cs" />
     <Compile Include="Model\Request.cs" />
     <Compile Include="Model\RequestRow.cs" />
     <Compile Include="Model\SearchModel.cs" />
+    <Compile Include="Model\State.cs" />
     <Compile Include="Model\UnitOfWork.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,6 +127,7 @@
     </Compile>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\PostReq.Model.Request.datasource" />
     <None Include="Properties\DataSources\PostReq.Model.RequestRow.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

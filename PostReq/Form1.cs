@@ -23,8 +23,9 @@ namespace PostReq
 		List<RequestRow> requestRowList;
 		BindingSource bsSource;
 		UnitOfWork unitOfWork;
-
-		public AddRequestForm(Utils.FormMode formMode, int editId = 0)
+		public int Result { get; private set; }
+	
+		public AddRequestForm(Utils.FormMode formMode, NomLoader nomLoader, int editId = 0)
 		{
 			this.formMode = formMode;
 			InitializeComponent();
@@ -39,7 +40,7 @@ namespace PostReq
 					controlsStack.Push(o);
 				}
 			}
-			nomLoader = NomLoader.Create();
+			this.nomLoader = nomLoader;
 			searchModel = new SearchModel();
 			unitOfWork = new UnitOfWork();
 			if (formMode == Utils.FormMode.Edit)
@@ -48,7 +49,8 @@ namespace PostReq
 				requestRowBindingSource.DataSource = request.RequestRows;
 				dataGridView1.DataSource = requestRowBindingSource;
 			}
-
+			nomLoader.LoadNomListToTreeView(treeView1);
+			Result = 0;
 			//bsSource = new BindingSource();
 			//bsSource.DataSource = ReqDataContext.GetInstance().Requests;
 			//Request r = (Request) bsSource.AddNew();
@@ -67,10 +69,7 @@ namespace PostReq
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			nomLoader.UpdateLocalNom();
 			searchModel.NomList = nomLoader.NomList;
-			nomLoader.LoadNomListToTreeView(treeView1);
-
 			//backgroundWorker1.RunWorkerAsync();
 			Form1_Resize(sender, e);
 		}
@@ -171,6 +170,7 @@ namespace PostReq
 							treeView1.Focus();
 							infoStatusBarLabel.Text = "Заявка изменена";
 						}
+
 					}
 				}
 
@@ -218,7 +218,9 @@ namespace PostReq
 
 		private void saveAndSendButton_Click(object sender, EventArgs e)
 		{
-
+			SaveRequest();
+			Result = request.Id;
+			Close();
 		}
 
 		private void SaveRequest()
@@ -255,6 +257,7 @@ namespace PostReq
 		private void saveButton_Click(object sender, EventArgs e)
 		{
 			SaveRequest();
+			Result = request.Id;
 		}
 
 		private void deletePositionButton_Click(object sender, EventArgs e)
@@ -278,6 +281,7 @@ namespace PostReq
 		private void cancelButton_Click(object sender, EventArgs e)
 		{
 			Close();
+			
 		}
 
 		private void printRequestButton_Click(object sender, EventArgs e)

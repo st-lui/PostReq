@@ -59,5 +59,32 @@ namespace PostReq.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to загружена накладная.
+        /// </summary>
+        internal static string requestStateLoaded {
+            get {
+                return ResourceManager.GetString("requestStateLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to cохранена.
+        /// </summary>
+        internal static string requestStateSaved {
+            get {
+                return ResourceManager.GetString("requestStateSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to отправлена.
+        /// </summary>
+        internal static string requestStateSent {
+            get {
+                return ResourceManager.GetString("requestStateSent", resourceCulture);
+            }
+        }
     }
 }

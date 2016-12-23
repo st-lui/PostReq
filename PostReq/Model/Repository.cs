@@ -83,4 +83,38 @@ namespace PostReq.Model
 			return db.RequestRows.SingleOrDefault(x => x.Id == id);
 		}
 	}
+	public class StatesRepository : IRepository<RequestRow>
+	{
+		private ReqDataContext db;
+
+		public RequestRowRepository(ReqDataContext db)
+		{
+			this.db = db;
+		}
+
+		public IEnumerable<RequestRow> GetAll()
+		{
+			return db.RequestRows;
+		}
+
+		public void Add(RequestRow item)
+		{
+			db.RequestRows.InsertOnSubmit(item);
+		}
+
+		public void Change(RequestRow item)
+		{
+
+		}
+
+		public void Delete(RequestRow item)
+		{
+			db.RequestRows.DeleteOnSubmit(item);
+		}
+
+		public RequestRow Get(int id)
+		{
+			return db.RequestRows.SingleOrDefault(x => x.Id == id);
+		}
+	}
 }

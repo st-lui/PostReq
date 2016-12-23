@@ -17,8 +17,9 @@ namespace PostReq.Model
 		private int id;
 		private DateTime date;
 		private string username;
-
+		private State state;
 		[Column(Name = "id", IsPrimaryKey = true, AutoSync = AutoSync.OnInsert, IsDbGenerated = true,DbType = "INT IDENTITY(1,1)")]
+		[DisplayName("Номер заявки")]
 		public int Id
 		{
 			get { return id; }
@@ -42,6 +43,7 @@ namespace PostReq.Model
 		}
 
 		[Column(Name = "username", DbType = "VARCHAR(50)")]
+		[DisplayName("Имя пользователя")]
 		public string Username
 		{
 			get { return username; }
@@ -57,6 +59,13 @@ namespace PostReq.Model
 		public EntitySet<RequestRow> RequestRows
 		{
 			get { return requestRows; }
+			set { requestRows.Assign(value); }
+		}
+
+		[Association(Storage = "states", OtherKey = "Id", ThisKey = "State")]
+		public EntityRef<State> State
+		{
+			get { return state; }
 			set { requestRows.Assign(value); }
 		}
 

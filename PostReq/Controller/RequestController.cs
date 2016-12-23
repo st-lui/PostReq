@@ -18,5 +18,13 @@ namespace PostReq.Controller
 		{
 			throw new NotImplementedException();
 		}
+
+		public static IEnumerable<Request> GetRequests(FilterModel filterModel)
+		{
+			UnitOfWork uof=new UnitOfWork();
+			var requests = uof.Requests.GetAll().ToList();
+			uof.Dispose();
+			return requests;
+		}
 	}
 }
