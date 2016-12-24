@@ -29,7 +29,7 @@ namespace PostReq
 			//}
 			nomLoader = NomLoader.Create();
 			nomLoader.UpdateLocalNom();
-			filterModel=new FilterModel();
+			filterModel = new FilterModel();
 		}
 
 		private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,17 +56,17 @@ namespace PostReq
 		{
 			for (int i = 0; i < bindingSource1.List.Count; i++)
 			{
-				Request req = (Request) bindingSource1.List[i];
+				Request req = (Request)bindingSource1.List[i];
 				if (req.Id == id)
 				{
-					bindingSource1.Position=i;
+					bindingSource1.Position = i;
 				}
 			}
 		}
 
 		private void addRequestToolStripButton_Click(object sender, EventArgs e)
 		{
-			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.New,nomLoader);
+			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.New, nomLoader);
 			addRequestForm.ShowDialog();
 			if (addRequestForm.Result > 0)
 			{
@@ -79,7 +79,7 @@ namespace PostReq
 
 		void editCurrentRequest()
 		{
-			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Edit, nomLoader,((Request)bindingSource1.Current).Id);
+			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Edit, nomLoader, ((Request)bindingSource1.Current).Id);
 			addRequestForm.ShowDialog();
 			if (addRequestForm.Result > 0)
 			{
@@ -98,6 +98,25 @@ namespace PostReq
 		private void toolStripButton2_Click(object sender, EventArgs e)
 		{
 			editCurrentRequest();
+		}
+
+		private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		{
+			//DataGridView grid = (DataGridView)sender;
+			//DataGridViewRow row = grid.Rows[e.RowIndex];
+			//DataGridViewColumn col = grid.Columns[e.ColumnIndex];
+			//if (row.DataBoundItem != null && col.DataPropertyName.Contains("."))
+			//{
+			//	string[] props = col.DataPropertyName.Split('.');
+			//	PropertyInfo propInfo = row.DataBoundItem.GetType().GetProperty(props[0]);
+			//	object val = propInfo.GetValue(row.DataBoundItem, null);
+			//	for (int i = 1; i < props.Length; i++)
+			//	{
+			//		propInfo = val.GetType().GetProperty(props[i]);
+			//		val = propInfo.GetValue(val, null);
+			//	}
+			//	e.Value = val;
+			//}
 		}
 	}
 }

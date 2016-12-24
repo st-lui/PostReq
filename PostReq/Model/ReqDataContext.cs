@@ -13,8 +13,13 @@ namespace PostReq.Model
 		private static ReqDataContext db;
 		public Table<Request> Requests;
 		public Table<RequestRow> RequestRows;
+		public Table<State> States;
 
 		public ReqDataContext():base(ConfigurationManager.AppSettings["connection"])
+		{
+		}
+
+		public ReqDataContext(string connectionString) : base(connectionString)
 		{
 		}
 

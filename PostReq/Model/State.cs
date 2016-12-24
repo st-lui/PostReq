@@ -14,6 +14,6 @@ namespace PostReq.Model
 		[Column(Name = "id", DbType = "int IDENTITY (1,1)", IsPrimaryKey = true,IsDbGenerated = true,AutoSync = AutoSync.OnInsert)]
 		public int Id { get; set; }
 		[Column(Name = "name", DbType = "varchar(32)")]
-		public int Name { get; set; }
+		public string Name { get; set; }
 	}
 }

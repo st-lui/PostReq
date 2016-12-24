@@ -121,7 +121,7 @@
     <value>загружена накладная</value>
   </data>
   <data name="requestStateSaved" xml:space="preserve">
-    <value>cохранена</value>
+    <value>сохранена</value>
   </data>
   <data name="requestStateSent" xml:space="preserve">
     <value>отправлена</value>

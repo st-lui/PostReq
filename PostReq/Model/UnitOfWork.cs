@@ -10,12 +10,18 @@ namespace PostReq.Model
 	{
 		private RequestRepository requestRepository;
 		private RequestRowRepository requestRowRepository;
+		private StatesRepository stateRepository;
 		private ReqDataContext db;
 		private bool disposed = false;
 
 		public UnitOfWork()
 		{
 			db = new ReqDataContext();
+		}
+
+		public UnitOfWork(string connectionString)
+		{
+			db = new ReqDataContext(connectionString);
 		}
 
 		public RequestRepository Requests
@@ -35,6 +41,16 @@ namespace PostReq.Model
 				if (requestRowRepository == null)
 					requestRowRepository = new RequestRowRepository(db);
 				return requestRowRepository;
+			}
+		}
+
+		public StatesRepository States
+		{
+			get
+			{
+				if (stateRepository==null)
+					stateRepository=new StatesRepository(db);
+				return stateRepository;
 			}
 		}
 

@@ -219,6 +219,7 @@ namespace PostReq
 		private void saveAndSendButton_Click(object sender, EventArgs e)
 		{
 			SaveRequest();
+			SendRequest();
 			Result = request.Id;
 			Close();
 		}
@@ -240,6 +241,7 @@ namespace PostReq
 					r.RequestRows.Add(requestRow);
 				}
 				//unitOfWork.Requests.Add(r);
+				r.State = unitOfWork.States.Get(Properties.Resources.requestStateSaved);
 				unitOfWork.SaveChanges();
 				request = r;
 				formMode = Utils.FormMode.Edit;
@@ -252,6 +254,12 @@ namespace PostReq
 				unitOfWork.SaveChanges();
 				infoStatusBarLabel.Text = "Заявка сохранена";
 			}
+		}
+
+		void SendRequest()
+		{
+			request.State = unitOfWork.States.Get(Properties.Resources.requestStateSent);
+			unitOfWork.SaveChanges();
 		}
 
 		private void saveButton_Click(object sender, EventArgs e)

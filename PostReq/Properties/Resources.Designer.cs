@@ -22,7 +22,7 @@ namespace PostReq.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -70,9 +70,9 @@ namespace PostReq.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to cохранена.
+        ///   Looks up a localized string similar to сохранена.
         /// </summary>
-        internal static string requestStateSaved {
+        public static string requestStateSaved {
             get {
                 return ResourceManager.GetString("requestStateSaved", resourceCulture);
             }

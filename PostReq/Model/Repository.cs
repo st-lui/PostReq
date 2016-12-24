@@ -83,38 +83,43 @@ namespace PostReq.Model
 			return db.RequestRows.SingleOrDefault(x => x.Id == id);
 		}
 	}
-	public class StatesRepository : IRepository<RequestRow>
+	public class StatesRepository : IRepository<State>
 	{
 		private ReqDataContext db;
 
-		public RequestRowRepository(ReqDataContext db)
+		public StatesRepository(ReqDataContext db)
 		{
 			this.db = db;
 		}
 
-		public IEnumerable<RequestRow> GetAll()
+		public IEnumerable<State> GetAll()
 		{
-			return db.RequestRows;
+			return db.States;
 		}
 
-		public void Add(RequestRow item)
+		public void Add(State item)
 		{
-			db.RequestRows.InsertOnSubmit(item);
+			db.States.InsertOnSubmit(item);
 		}
 
-		public void Change(RequestRow item)
+		public void Change(State item)
 		{
 
 		}
 
-		public void Delete(RequestRow item)
+		public void Delete(State item)
 		{
-			db.RequestRows.DeleteOnSubmit(item);
+			db.States.DeleteOnSubmit(item);
 		}
 
-		public RequestRow Get(int id)
+		public State Get(int id)
 		{
-			return db.RequestRows.SingleOrDefault(x => x.Id == id);
+			return db.States.SingleOrDefault(x => x.Id == id);
+		}
+
+		public State Get(string name)
+		{
+			return db.States.SingleOrDefault(x => x.Name== name);
 		}
 	}
 }

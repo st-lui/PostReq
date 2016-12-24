@@ -14,10 +14,12 @@ namespace PostReq.Model
 	public class Request : INotifyPropertyChanged
 	{
 		private readonly EntitySet<RequestRow> requestRows = new EntitySet<RequestRow>();
+		private EntityRef<State> state;
 		private int id;
 		private DateTime date;
 		private string username;
-		private State state;
+		private int stateId;
+		
 		[Column(Name = "id", IsPrimaryKey = true, AutoSync = AutoSync.OnInsert, IsDbGenerated = true,DbType = "INT IDENTITY(1,1)")]
 		[DisplayName("Номер заявки")]
 		public int Id
@@ -62,11 +64,23 @@ namespace PostReq.Model
 			set { requestRows.Assign(value); }
 		}
 
-		[Association(Storage = "states", OtherKey = "Id", ThisKey = "State")]
-		public EntityRef<State> State
+		[Association(Storage = "state", OtherKey = "Id", ThisKey = "StateId",IsForeignKey = true)]
+		public State State
 		{
-			get { return state; }
-			set { requestRows.Assign(value); }
+			get { return state.Entity; }
+			set { state.Entity=value; }
+		}
+
+		public string StateName
+		{
+			get { return State.Name; }
+		}
+
+		[Column(Name="state_id",DbType = "int")]
+		public int StateId
+		{
+			get { return stateId; }
+			set { stateId = value; }
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
