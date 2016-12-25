@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddRequestForm));
 			this.treeView1 = new System.Windows.Forms.TreeView();
 			this.findButton = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
@@ -91,7 +92,7 @@
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(12, 26);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(80, 13);
+			this.label1.Size = new System.Drawing.Size(157, 27);
 			this.label1.TabIndex = 4;
 			this.label1.Text = "Номенклатура";
 			// 
@@ -222,7 +223,7 @@
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(572, 26);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(81, 13);
+			this.label2.Size = new System.Drawing.Size(157, 27);
 			this.label2.TabIndex = 6;
 			this.label2.Text = "Состав заявки";
 			// 
@@ -231,7 +232,7 @@
 			this.searchPatternTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.searchPatternTextBox.Location = new System.Drawing.Point(390, 51);
 			this.searchPatternTextBox.Name = "searchPatternTextBox";
-			this.searchPatternTextBox.Size = new System.Drawing.Size(143, 21);
+			this.searchPatternTextBox.Size = new System.Drawing.Size(143, 34);
 			this.searchPatternTextBox.TabIndex = 1;
 			this.searchPatternTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchPatternTextBox_KeyPress);
 			// 
@@ -310,6 +311,7 @@
 			// 
 			// statusStrip1
 			// 
+			this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.categoryStatusBarLabel,
             this.infoStatusBarLabel});
@@ -348,7 +350,7 @@
 			// 
 			// AddRequestForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 27F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(1020, 396);
@@ -367,6 +369,7 @@
 			this.Controls.Add(this.findButton);
 			this.Controls.Add(this.treeView1);
 			this.Font = new System.Drawing.Font("Tahoma", 8.25F);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "AddRequestForm";
 			this.Text = "Новая заявка";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

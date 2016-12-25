@@ -26,6 +26,13 @@ namespace PostReq
 			InitializeComponent();
 			Text += $" {Assembly.GetExecutingAssembly().GetName().Version}";
 			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
+			ToolStripControlHost tsHostFrom = new ToolStripControlHost(fromDateTimePicker);
+			ToolStripControlHost tsHostTo = new ToolStripControlHost(toDateTimePicker);
+			tsHostFrom.Height = 40;
+			tsHostTo.Height = 40;
+			toolStrip1.Items.Insert(6,tsHostTo);
+			toolStrip1.Items.Insert(5,tsHostFrom);
+			toolStrip1.Height = 40;
 			//dataGridView1.DataSource = requestBindingSource;
 			//for (int i = 0; i < dataGridView1.ColumnCount; i++)
 			//{
@@ -121,6 +128,31 @@ namespace PostReq
 				}
 				e.Value = val;
 			}
+		}
+
+		private void dateFromCombBox_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void fromDateTimePicker_ValueChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		private void toolStripLabel2_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+		{
+
+		}
+
+		private void postamtComboBox_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

@@ -25,8 +25,8 @@ namespace PostReq
 		BindingSource bsSource;
 		UnitOfWork unitOfWork;
 		public int Result { get; private set; }
-	
-		public AddRequestForm(UnitOfWork unitOfWork,Utils.FormMode formMode, NomLoader nomLoader, int editId = 0)
+
+		public AddRequestForm(UnitOfWork unitOfWork, Utils.FormMode formMode, NomLoader nomLoader, int editId = 0)
 		{
 			this.formMode = formMode;
 			InitializeComponent();
@@ -229,30 +229,26 @@ namespace PostReq
 		{
 			if (formMode == Utils.FormMode.New)
 			{
-				using (TransactionScope ts = new TransactionScope())
+
+
+				Request r = new Request();
+				r.Date = DateTime.Now;
+				r.Username = $"{Environment.UserDomainName}\\{Environment.UserName}";
+				r.RequestRows = new EntitySet<RequestRow>();
+				for (int i = 0; i < requestRowBindingSource.List.Count; i++)
 				{
-					Request r = new Request();
-					r.Date = DateTime.Now;
-					r.Username = $"{Environment.UserDomainName}\\{Environment.UserName}";
-					r.RequestRows = new EntitySet<RequestRow>();
-					unitOfWork.Requests.Add(r);
-					//unitOfWork.SaveChanges();
-					for (int i = 0; i < requestRowBindingSource.List.Count; i++)
-					{
-						RequestRow requestRow = (RequestRow) requestRowBindingSource.List[i];
-						//requestRow.RequestId = r.Id;
-						requestRow.Request = r;
-						r.RequestRows.Add(requestRow);
-					}
-					//UnitOfWork.Requests.Add(r);
-					r.State = unitOfWork.States.Get(Properties.Resources.requestStateSaved);
-					unitOfWork.SaveChanges();
-					request = r;
-					formMode = Utils.FormMode.Edit;
-					requestRowBindingSource.DataSource = request.RequestRows;
-					dataGridView1.DataSource = requestRowBindingSource;
-					infoStatusBarLabel.Text = "Заявка сохранена";
+					RequestRow requestRow = (RequestRow)requestRowBindingSource.List[i];
+					requestRow.Request = r;
+					r.RequestRows.Add(requestRow);
 				}
+				r.State = unitOfWork.States.Get(Properties.Resources.requestStateSaved);
+				unitOfWork.Requests.Add(r);
+				unitOfWork.SaveChanges();
+				request = r;
+				formMode = Utils.FormMode.Edit;
+				requestRowBindingSource.DataSource = request.RequestRows;
+				dataGridView1.DataSource = requestRowBindingSource;
+				infoStatusBarLabel.Text = "Заявка сохранена";
 			}
 			else
 			{
@@ -293,7 +289,7 @@ namespace PostReq
 		private void cancelButton_Click(object sender, EventArgs e)
 		{
 			Close();
-			
+
 		}
 
 		private void printRequestButton_Click(object sender, EventArgs e)
