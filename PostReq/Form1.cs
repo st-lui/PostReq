@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Transactions;
 using System.Windows.Forms;
 using PostReq.Controller;
 using PostReq.Model;
@@ -25,7 +26,7 @@ namespace PostReq
 		UnitOfWork unitOfWork;
 		public int Result { get; private set; }
 	
-		public AddRequestForm(Utils.FormMode formMode, NomLoader nomLoader, int editId = 0)
+		public AddRequestForm(UnitOfWork unitOfWork,Utils.FormMode formMode, NomLoader nomLoader, int editId = 0)
 		{
 			this.formMode = formMode;
 			InitializeComponent();
@@ -42,7 +43,7 @@ namespace PostReq
 			}
 			this.nomLoader = nomLoader;
 			searchModel = new SearchModel();
-			unitOfWork = new UnitOfWork();
+			this.unitOfWork = unitOfWork;
 			if (formMode == Utils.FormMode.Edit)
 			{
 				request = unitOfWork.Requests.Get(editId);
@@ -228,26 +229,30 @@ namespace PostReq
 		{
 			if (formMode == Utils.FormMode.New)
 			{
-				Request r = new Request();
-				r.Date = DateTime.Now;
-				r.Username = $"{Environment.UserDomainName}\\{Environment.UserName}";
-				r.RequestRows = new EntitySet<RequestRow>();
-				unitOfWork.Requests.Add(r);
-				unitOfWork.SaveChanges();
-				for (int i = 0; i < requestRowBindingSource.List.Count; i++)
+				using (TransactionScope ts = new TransactionScope())
 				{
-					RequestRow requestRow = (RequestRow)requestRowBindingSource.List[i];
-					requestRow.RequestId = r.Id;
-					r.RequestRows.Add(requestRow);
+					Request r = new Request();
+					r.Date = DateTime.Now;
+					r.Username = $"{Environment.UserDomainName}\\{Environment.UserName}";
+					r.RequestRows = new EntitySet<RequestRow>();
+					unitOfWork.Requests.Add(r);
+					//unitOfWork.SaveChanges();
+					for (int i = 0; i < requestRowBindingSource.List.Count; i++)
+					{
+						RequestRow requestRow = (RequestRow) requestRowBindingSource.List[i];
+						//requestRow.RequestId = r.Id;
+						requestRow.Request = r;
+						r.RequestRows.Add(requestRow);
+					}
+					//UnitOfWork.Requests.Add(r);
+					r.State = unitOfWork.States.Get(Properties.Resources.requestStateSaved);
+					unitOfWork.SaveChanges();
+					request = r;
+					formMode = Utils.FormMode.Edit;
+					requestRowBindingSource.DataSource = request.RequestRows;
+					dataGridView1.DataSource = requestRowBindingSource;
+					infoStatusBarLabel.Text = "Заявка сохранена";
 				}
-				//unitOfWork.Requests.Add(r);
-				r.State = unitOfWork.States.Get(Properties.Resources.requestStateSaved);
-				unitOfWork.SaveChanges();
-				request = r;
-				formMode = Utils.FormMode.Edit;
-				requestRowBindingSource.DataSource = request.RequestRows;
-				dataGridView1.DataSource = requestRowBindingSource;
-				infoStatusBarLabel.Text = "Заявка сохранена";
 			}
 			else
 			{
@@ -283,7 +288,6 @@ namespace PostReq
 
 		private void AddRequestForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			unitOfWork.Dispose();
 		}
 
 		private void cancelButton_Click(object sender, EventArgs e)

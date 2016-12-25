@@ -26,7 +26,14 @@ namespace PostReq.Model
 		public static ReqDataContext GetInstance()
 		{
 			if (db == null)
-				db=new ReqDataContext();
+			{
+				db = new ReqDataContext();
+				
+				//db.LoadOptions.AssociateWith<Request>(r => r.State);
+				db.DeferredLoadingEnabled = false;
+				db.ObjectTrackingEnabled = true;
+				db.LoadOptions.LoadWith<Request>(r => r.State);
+			}
 			return db;
 		}
 	}

@@ -21,9 +21,7 @@ namespace PostReq.Controller
 
 		public static IEnumerable<Request> GetRequests(FilterModel filterModel)
 		{
-			UnitOfWork uof=new UnitOfWork();
-			var requests = uof.Requests.GetAll().ToList();
-			uof.Dispose();
+			var requests = filterModel.UnitOfWork.Requests.GetAll().ToList();
 			return requests;
 		}
 	}

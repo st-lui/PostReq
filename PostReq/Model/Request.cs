@@ -45,7 +45,7 @@ namespace PostReq.Model
 		}
 
 		[Column(Name = "username", DbType = "VARCHAR(50)")]
-		[DisplayName("Имя пользователя")]
+		[DisplayName("Автор")]
 		public string Username
 		{
 			get { return username; }
@@ -69,11 +69,6 @@ namespace PostReq.Model
 		{
 			get { return state.Entity; }
 			set { state.Entity=value; }
-		}
-
-		public string StateName
-		{
-			get { return State.Name; }
 		}
 
 		[Column(Name="state_id",DbType = "int")]

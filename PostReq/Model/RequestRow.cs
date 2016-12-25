@@ -18,6 +18,7 @@ namespace PostReq.Model
 		private string edIzm;
 		private string goodsId;
 		private int requestId;
+		EntityRef<Request> request;
 
 		[Column(Name = "id", IsPrimaryKey = true, AutoSync = AutoSync.OnInsert, IsDbGenerated = true, DbType = "INT IDENTITY(1,1)")]
 		public int Id
@@ -83,6 +84,13 @@ namespace PostReq.Model
 				requestId = value;
 				Change("RequestId");
 			}
+		}
+
+		[Association(Storage = "request", IsForeignKey = true, ThisKey = "RequestId", OtherKey = "Id")]
+		public Request Request
+		{
+			get { return request.Entity; }
+			set { request.Entity = value; Change("Request"); }
 		}
 
 		public string StringRep

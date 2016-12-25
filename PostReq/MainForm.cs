@@ -17,8 +17,12 @@ namespace PostReq
 	{
 		NomLoader nomLoader;
 		FilterModel filterModel;
+		UnitOfWork unitOfWork;
 		public MainForm()
 		{
+			unitOfWork = new UnitOfWork();
+			filterModel = new FilterModel();
+			filterModel.UnitOfWork = unitOfWork;
 			InitializeComponent();
 			Text += $" {Assembly.GetExecutingAssembly().GetName().Version}";
 			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
@@ -29,7 +33,6 @@ namespace PostReq
 			//}
 			nomLoader = NomLoader.Create();
 			nomLoader.UpdateLocalNom();
-			filterModel = new FilterModel();
 		}
 
 		private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,6 +47,7 @@ namespace PostReq
 
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			unitOfWork.Dispose();
 		}
 
 		private void Refresh(DataGridView gridView)
@@ -66,7 +70,7 @@ namespace PostReq
 
 		private void addRequestToolStripButton_Click(object sender, EventArgs e)
 		{
-			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.New, nomLoader);
+			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork,Utils.FormMode.New, nomLoader);
 			addRequestForm.ShowDialog();
 			if (addRequestForm.Result > 0)
 			{
@@ -79,7 +83,7 @@ namespace PostReq
 
 		void editCurrentRequest()
 		{
-			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Edit, nomLoader, ((Request)bindingSource1.Current).Id);
+			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork,Utils.FormMode.Edit, nomLoader, ((Request)bindingSource1.Current).Id);
 			addRequestForm.ShowDialog();
 			if (addRequestForm.Result > 0)
 			{
@@ -102,21 +106,21 @@ namespace PostReq
 
 		private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
 		{
-			//DataGridView grid = (DataGridView)sender;
-			//DataGridViewRow row = grid.Rows[e.RowIndex];
-			//DataGridViewColumn col = grid.Columns[e.ColumnIndex];
-			//if (row.DataBoundItem != null && col.DataPropertyName.Contains("."))
-			//{
-			//	string[] props = col.DataPropertyName.Split('.');
-			//	PropertyInfo propInfo = row.DataBoundItem.GetType().GetProperty(props[0]);
-			//	object val = propInfo.GetValue(row.DataBoundItem, null);
-			//	for (int i = 1; i < props.Length; i++)
-			//	{
-			//		propInfo = val.GetType().GetProperty(props[i]);
-			//		val = propInfo.GetValue(val, null);
-			//	}
-			//	e.Value = val;
-			//}
+			DataGridView grid = (DataGridView)sender;
+			DataGridViewRow row = grid.Rows[e.RowIndex];
+			DataGridViewColumn col = grid.Columns[e.ColumnIndex];
+			if (row.DataBoundItem != null && col.DataPropertyName.Contains("."))
+			{
+				string[] props = col.DataPropertyName.Split('.');
+				PropertyInfo propInfo = row.DataBoundItem.GetType().GetProperty(props[0]);
+				object val = propInfo.GetValue(row.DataBoundItem, null);
+				for (int i = 1; i < props.Length; i++)
+				{
+					propInfo = val.GetType().GetProperty(props[i]);
+					val = propInfo.GetValue(val, null);
+				}
+				e.Value = val;
+			}
 		}
 	}
 }
