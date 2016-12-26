@@ -44,6 +44,10 @@ namespace PostReq
 			this.nomLoader = nomLoader;
 			searchModel = new SearchModel();
 			this.unitOfWork = unitOfWork;
+			if (formMode == Utils.FormMode.New)
+			{
+
+			}
 			if (formMode == Utils.FormMode.Edit)
 			{
 				request = unitOfWork.Requests.Get(editId);
@@ -296,9 +300,9 @@ namespace PostReq
 		{
 			string fileName = null;
 			if (formMode == Utils.FormMode.New)
-				fileName = RequestController.GeneratePrintForm(null, (IEnumerable<RequestRow>)requestRowBindingSource.List);
+				fileName = RequestController.GeneratePrintForm(null, (List<RequestRow>)requestRowBindingSource.List);
 			else
-				fileName = RequestController.GeneratePrintForm(request, request.RequestRows);
+				fileName = RequestController.GeneratePrintForm(request, request.RequestRows.ToList());
 			if (fileName != null)
 				Process.Start(fileName);
 		}
