@@ -17,6 +17,8 @@ namespace PostReq.Model
 		public UnitOfWork()
 		{
 			db = new ReqDataContext();
+			db.DeleteDatabase();
+			db.CreateDatabase();
 		}
 
 		public UnitOfWork(string connectionString)

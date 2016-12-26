@@ -15,10 +15,12 @@ namespace PostReq.Model
 	{
 		private readonly EntitySet<RequestRow> requestRows = new EntitySet<RequestRow>();
 		private EntityRef<State> state;
+		private EntityRef<User> user;
 		private int id;
 		private DateTime date;
 		private string username;
 		private int stateId;
+		private int userId;
 
 		public Request()
 		{
@@ -50,7 +52,7 @@ namespace PostReq.Model
 			}
 		}
 
-		[Column(Name = "date", DbType = "DateTime")]
+		[Column(Name = "date", DbType = "DateTime", CanBeNull = false)]
 		[DisplayName("Дата заявки")]
 		public DateTime Date
 		{
@@ -62,7 +64,7 @@ namespace PostReq.Model
 			}
 		}
 
-		[Column(Name = "username", DbType = "VARCHAR(50)")]
+		[Column(Name = "username", DbType = "VARCHAR(50)", CanBeNull = false)]
 		[DisplayName("Автор")]
 		public string Username
 		{
@@ -89,11 +91,25 @@ namespace PostReq.Model
 			set { state.Entity=value; }
 		}
 
-		[Column(Name="state_id",DbType = "int")]
+		[Column(Name="state_id",DbType = "int", CanBeNull = false)]
 		public int StateId
 		{
 			get { return stateId; }
-			set { stateId = value; }
+			set { stateId = value; Change("StateId");}
+		}
+
+		[Column(Name = "user_id", DbType = "int", CanBeNull = false)]
+		public int UserId
+		{
+			get { return userId; }
+			set { userId = value; Change("UserId"); }
+		}
+
+		[Association(Storage = "user",ThisKey = "UserId",OtherKey = "Id",IsForeignKey = true)]
+		public User User
+		{
+			get { return user.Entity; }
+			set { user.Entity=value; }
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

@@ -14,6 +14,8 @@ namespace PostReq.Model
 		public Table<Request> Requests;
 		public Table<RequestRow> RequestRows;
 		public Table<State> States;
+		public Table<User> Users;
+		public Table<Post> Posts;
 
 		public ReqDataContext():base(ConfigurationManager.AppSettings["connection"])
 		{

@@ -43,7 +43,7 @@ namespace PostReq.Model
 			}
 		}
 
-		[Column(Name="amount",DbType = "decimal(10,3)")]
+		[Column(Name="amount",DbType = "decimal(10,3)", CanBeNull = false)]
 		public double Amount
 		{
 			get { return amount; }
@@ -54,7 +54,7 @@ namespace PostReq.Model
 			}
 		}
 
-		[Column(Name = "name", DbType = "VARCHAR(256)")]
+		[Column(Name = "name", DbType = "VARCHAR(256)", CanBeNull = false)]
 		public string Name
 		{
 			get { return name; }
@@ -65,7 +65,7 @@ namespace PostReq.Model
 			}
 		}
 
-		[Column(Name = "ed_izm", DbType = "VARCHAR(32)")]
+		[Column(Name = "ed_izm", DbType = "VARCHAR(32)", CanBeNull = false)]
 		public string EdIzm
 		{
 			get { return edIzm; }
@@ -76,7 +76,7 @@ namespace PostReq.Model
 			}
 		}
 
-		[Column(Name = "goods_id", DbType = "VARCHAR(32)")]
+		[Column(Name = "goods_id", DbType = "VARCHAR(32)", CanBeNull = false)]
 		public string GoodsId
 		{
 			get { return goodsId; }
@@ -87,7 +87,7 @@ namespace PostReq.Model
 			}
 		}
 
-		[Column(Name = "request_id", DbType = "int")]
+		[Column(Name = "request_id", DbType = "int", CanBeNull = false)]
 		public int RequestId
 		{
 			get { return requestId; }
