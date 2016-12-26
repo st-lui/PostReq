@@ -123,6 +123,9 @@
   <metadata name="dataGridViewTextBoxColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>374, 17</value>
+  </metadata>
   <metadata name="bindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>237, 17</value>
   </metadata>
@@ -133,13 +136,13 @@
   <data name="addRequestToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFiSURBVDhPY8AFOItYd4rX818CYRAbKkw8sGkyOdN2rOl/
-        y/GG/w5N5qegwsQD+wl2N2femfV/6u3p/537na5DhYkHNhNNb3Reafvfdrnpv02/GekGWE/Su9Z8pfx/
-        w+Xi/7Z9RlehwtgBSw3jBo5G9q0c9axbuJtYt3BUsG7xWGj8ovZyxv/qSyn/vRdZPOcoZ93MAZID4WbW
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFiSURBVDhPY8AFOItYd4rX810CYRAbKkw8sGkyOdN2rOl/
+        y/GG/w5N5qegwsQD+wl2N2femfV/6u3p/536na5DhYkHNhNNb3Reafvfdrnpv02/GekGWE/Su9Z8pfx/
+        w+Xi/7Z9RlehwtgBSw3jBo5G9q0c9axbuJtYt3BUsG7xWGD4ovZyxv/qSyn/vRdZPOcoZ93MAZID4WbW
         rSz1jJug2hkYdOaq/6+/WPi/9mLW//pLGf+bbqT9r74c87/sQsj/4vOB/8suhv4vvxr5v+Bs2P/MkyH/
         U46F/FeaLfsfqp2BwXC++v+my2n/m64k/m+5Hv+/7Ub0/4or3v9LL7v/L7rk/L/yis//+qtB/ysu+f8v
         POf7P+eU73/VuVIIAxjqGf5jwxU3bP6X3bDEKgfGeAFQQfVDrf9VDzWIUIwNADXVvIdgsg1Y+9v9/9o/
-        7uQb0PnI7H/3EzPyDUDBgxQwMAAAIN3FXWfsCDMAAAAASUVORK5CYII=
+        7uQb0PnI7H/3EzPyDUDBgxQwMAAADYXFV03UbkcAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="toolStripButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -156,16 +159,16 @@
   <data name="toolStripButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH0SURBVDhPhZJfSFpRHMcPaS3DInNO8WXPQdBTD720516i
-        ve1pyF620UMM9lAPUSObubTGKKnwYXPMwXwUJEhdLLlBjm5Eo+Eg2Fj+R51/JheFb+ec0rn04g8+cDn8
-        vp/zu+ccwioYDEp+v7/YikAgUHa73SHaZuDNtB5NTPSKT8Zf9BEyQNRq9f1qtQo5yuUyIpEInE7nIc3S
-        DCEum9kkvZv9M3JbPcYEk62CNZhAFEX+7XA4hHXHtvn3RRTvpx/+7VeSe20FlUoF4XAY8XgcoeAn4OcM
-        3tjMVWV3z3M6TEdbAUMQBHx02YDzURwsduNO/y0PDSvY79QFbCc5vvg/AL/GcLzShc31Vej1+ikeZtVO
-        IOx5gB8jOLEqsbWxxicyGo1Pr+P/BJIkNcHD30chWrvw+tUCisWivICddiP7u2+ByDBESycd245CocCR
-        FZRKpTqhz3Tnb8M4sShgt8whm80il8shn89zgcFgaBbUGvZ2NoGzIXxdomPbLUgmk8hkMnVkBel0GkdH
-        Ig3P49SqgO3lHBKJBF9vpEmgUqm4IBaL4cCzhe1nD7C6soxoNMoFN2E3o9PpmgU+nw/Tj03wer1cxmCv
-        7ybsdloK2HipVIo3NN5G4+EyWO9/Alp36ctaoouLNbRabUs0Go2ZQTODV1FCLgHTdJq2/vYexAAAAABJ
-        RU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHySURBVDhPhZNdSJpRGMcPaR8ONzJnije7DgZdddFNXXcT
+        7W5XQ7qpsYsRxOgmaqRzzo+6yCjxYggzyEtBgomLTd5gRu+IouFgsLH5jZofiSj8O+eUZumLD/zg5fD8
+        f+d5z3lfwioUClWDwWCpE4FAoOL1esO0Tcebac1OTz8U56fePiJkiCiVymf1eh1SVCoVRKNRuN3u7zRL
+        M4R4bEZD2fXmYuyxcoIJZjoFGzCBKIr82el0CptbLuO//zG4519cDsrJZFdBrVZDJBJBIpFAOLQH/FmC
+        1bRSlw88WKTD9HQVMARBwK7HBvwex+HaAIYH+300LGOv0xSwnaT4GvwE/J3AD2sftjcd0Gq1r3iYVTeB
+        cOADfo3hxCLHjnOdT6TX61/exG8F1Wq1DR7+OQ7R0oeND6solUrSAnbarXz7/BGIjkI099Kx7SgWixxJ
+        QblcbhL+Qnc+G8WJWQa7eRm5XA75fB6FQoELdDpdu6DRcLC/DZw/xZGJjm03I5VKIZvNNpEUZDIZHB+L
+        NLyCU4sMtnfLSCaTfL2VNoFCoeCCeDyOQ98OXAvP4bC+RywW44L7sJvRaDTtAvrT4PWcAX6/n8sY7Ou7
+        D7udjgI2Xjqd5g2tt9F6uAzWe0dA6wn9skx0ca2BWq3uiEqlMjJoZuQ6SsgV20Kab9avx+cAAAAASUVO
+        RK5CYII=
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

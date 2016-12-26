@@ -30,8 +30,8 @@ namespace PostReq
 			ToolStripControlHost tsHostTo = new ToolStripControlHost(toDateTimePicker);
 			tsHostFrom.Height = 40;
 			tsHostTo.Height = 40;
-			toolStrip1.Items.Insert(6,tsHostTo);
-			toolStrip1.Items.Insert(5,tsHostFrom);
+			toolStrip1.Items.Insert(6, tsHostTo);
+			toolStrip1.Items.Insert(5, tsHostFrom);
 			toolStrip1.Height = 40;
 			//dataGridView1.DataSource = requestBindingSource;
 			//for (int i = 0; i < dataGridView1.ColumnCount; i++)
@@ -77,7 +77,7 @@ namespace PostReq
 
 		private void addRequestToolStripButton_Click(object sender, EventArgs e)
 		{
-			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork,Utils.FormMode.New, nomLoader);
+			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork, Utils.FormMode.New, nomLoader);
 			addRequestForm.ShowDialog();
 			if (addRequestForm.Result > 0)
 			{
@@ -90,12 +90,12 @@ namespace PostReq
 
 		void EditCurrentRequest()
 		{
-			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork,Utils.FormMode.Edit, nomLoader, ((Request)bindingSource1.Current).Id);
+			if (bindingSource1.Current == null) return;
+			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork, Utils.FormMode.Edit, nomLoader,
+				((Request)bindingSource1.Current).Id);
 			addRequestForm.ShowDialog();
 			if (addRequestForm.Result > 0)
-			{
 				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
-			}
 		}
 
 		void CreateCopyRequest()
@@ -166,6 +166,22 @@ namespace PostReq
 		}
 
 		private void toolStripButton3_Click(object sender, EventArgs e)
+		{
+			EditCurrentRequest();
+		}
+
+		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+		}
+
+		private void dataGridView1_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+		{
+			if (MouseButtons == MouseButtons.Right)
+				bindingSource1.Position = e.RowIndex;
+			contextMenuStrip1.Show();
+		}
+
+		private void открытьЗаявкуToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditCurrentRequest();
 		}

@@ -48,7 +48,7 @@ namespace PostReq.Model
 			get { return fio; }
 			set { fio = value; Change("Fio"); }
 		}
-		[Column(Name="post_id",DbType = "int", CanBeNull = false)]
+		[Column(Name="post_id",DbType = "int", CanBeNull = true)]
 		public int PostId
 		{
 			get { return postId; }
@@ -61,7 +61,7 @@ namespace PostReq.Model
 			get { return requests; }
 			set { requests.Assign(value); }
 		}
-		[Association(Storage = "post", ThisKey = "PostId", OtherKey = "Id",IsForeignKey = true)]
+		[Association(Storage = "post", ThisKey = "PostId", OtherKey = "Id",IsForeignKey = false)]
 		public Post Post
 		{
 			get { return post.Entity; }

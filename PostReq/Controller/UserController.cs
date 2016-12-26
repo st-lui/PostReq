@@ -15,24 +15,36 @@ namespace PostReq.Controller
 			User user = uow.Users.Get(userName);
 			if (user != null)
 				return user;
-			using (PrincipalContext domainContext = new PrincipalContext(ContextType.Domain, Environment.UserDomainName))
+			try
 			{
-				using (UserPrincipal foundPrincipal = UserPrincipal.FindByIdentity(domainContext,IdentityType.SamAccountName, userName))
+				using (PrincipalContext domainContext = new PrincipalContext(ContextType.Domain, Environment.UserDomainName))
 				{
-					using (DirectoryEntry de = (DirectoryEntry) foundPrincipal.GetUnderlyingObject())
+					using (
+						UserPrincipal foundPrincipal = UserPrincipal.FindByIdentity(domainContext, IdentityType.SamAccountName, userName))
 					{
-						using (var deParentContainer = de.Parent)
+						using (DirectoryEntry de = (DirectoryEntry) foundPrincipal.GetUnderlyingObject())
 						{
-							user = new User
+							using (var deParentContainer = de.Parent)
 							{
-								UserName = foundPrincipal.SamAccountName,
-								Fio = foundPrincipal.DisplayName,
-								Post = uow.Posts.Get(deParentContainer.Properties["Name"].Value.ToString())
-							};
-							return user;
+								user = new User
+								{
+									UserName = foundPrincipal.SamAccountName,
+									Fio = foundPrincipal.DisplayName,
+									Post = uow.Posts.Get(deParentContainer.Properties["Name"].Value.ToString())
+								};
+								return user;
+							}
 						}
-					} 
+					}
 				}
+			}
+			catch (Exception e)
+			{
+				user = new User
+				{
+					UserName = userName
+				};
+				return user;
 			}
 		}
 	}
