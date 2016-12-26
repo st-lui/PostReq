@@ -155,7 +155,7 @@
 			this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.toolStripButton2.Name = "toolStripButton2";
-			this.toolStripButton2.Size = new System.Drawing.Size(173, 36);
+			this.toolStripButton2.Size = new System.Drawing.Size(173, 22);
 			this.toolStripButton2.Text = "Создать заявку из текущей";
 			this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
 			// 
@@ -172,30 +172,30 @@
 			// toolStripSeparator1
 			// 
 			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
+			this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
 			// 
 			// toolStripLabel2
 			// 
 			this.toolStripLabel2.Name = "toolStripLabel2";
-			this.toolStripLabel2.Size = new System.Drawing.Size(13, 36);
+			this.toolStripLabel2.Size = new System.Drawing.Size(13, 22);
 			this.toolStripLabel2.Text = "с";
 			this.toolStripLabel2.Click += new System.EventHandler(this.toolStripLabel2_Click);
 			// 
 			// toolStripLabel1
 			// 
 			this.toolStripLabel1.Name = "toolStripLabel1";
-			this.toolStripLabel1.Size = new System.Drawing.Size(21, 36);
+			this.toolStripLabel1.Size = new System.Drawing.Size(21, 22);
 			this.toolStripLabel1.Text = "по";
 			// 
 			// toolStripSeparator2
 			// 
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
-			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
+			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
 			// 
 			// postamtComboBox
 			// 
 			this.postamtComboBox.Name = "postamtComboBox";
-			this.postamtComboBox.Size = new System.Drawing.Size(121, 39);
+			this.postamtComboBox.Size = new System.Drawing.Size(121, 25);
 			this.postamtComboBox.Click += new System.EventHandler(this.postamtComboBox_Click);
 			// 
 			// fromDateTimePicker
