@@ -46,8 +46,18 @@ namespace PostReq
 			this.unitOfWork = unitOfWork;
 			if (formMode == Utils.FormMode.New)
 			{
-
+				request = new Request();
+				requestRowBindingSource.DataSource = request.RequestRows;
+				dataGridView1.DataSource = requestRowBindingSource;
 			}
+			else
+			if (formMode == Utils.FormMode.Copy)
+			{
+				request=new Request(unitOfWork.Requests.Get(editId));
+				requestRowBindingSource.DataSource = request.RequestRows;
+				dataGridView1.DataSource = requestRowBindingSource;
+			}
+			else
 			if (formMode == Utils.FormMode.Edit)
 			{
 				request = unitOfWork.Requests.Get(editId);
@@ -143,7 +153,7 @@ namespace PostReq
 				}
 				if (!nomFound)
 				{
-					if (formMode == Utils.FormMode.New)
+					if (formMode == Utils.FormMode.New || formMode == Utils.FormMode.Copy)
 					{
 						var changeAmountForm = new ChangeAmountForm(nom.Name, nom.EdIzm);
 						if (changeAmountForm.ShowDialog() == DialogResult.OK)
@@ -152,7 +162,9 @@ namespace PostReq
 								Amount = changeAmountForm.Value,
 								EdIzm = nom.EdIzm,
 								GoodsId = nom.Id,
-								Name = nom.Name
+								Name = nom.Name,
+								Request = request
+
 							});
 						treeView1.Focus();
 						infoStatusBarLabel.Text = "Заявка изменена";
@@ -231,27 +243,14 @@ namespace PostReq
 
 		private void SaveRequest()
 		{
-			if (formMode == Utils.FormMode.New)
+			if (formMode == Utils.FormMode.New || formMode == Utils.FormMode.Copy)
 			{
-
-
-				Request r = new Request();
-				r.Date = DateTime.Now;
-				r.Username = $"{Environment.UserDomainName}\\{Environment.UserName}";
-				r.RequestRows = new EntitySet<RequestRow>();
-				for (int i = 0; i < requestRowBindingSource.List.Count; i++)
-				{
-					RequestRow requestRow = (RequestRow)requestRowBindingSource.List[i];
-					requestRow.Request = r;
-					r.RequestRows.Add(requestRow);
-				}
-				r.State = unitOfWork.States.Get(Properties.Resources.requestStateSaved);
-				unitOfWork.Requests.Add(r);
+				request.State = unitOfWork.States.Get(Properties.Resources.requestStateSaved);
+				unitOfWork.Requests.Add(request);
 				unitOfWork.SaveChanges();
-				request = r;
 				formMode = Utils.FormMode.Edit;
-				requestRowBindingSource.DataSource = request.RequestRows;
-				dataGridView1.DataSource = requestRowBindingSource;
+				//requestRowBindingSource.DataSource = request.RequestRows;
+				//dataGridView1.DataSource = requestRowBindingSource;
 				infoStatusBarLabel.Text = "Заявка сохранена";
 			}
 			else

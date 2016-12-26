@@ -19,7 +19,25 @@ namespace PostReq.Model
 		private DateTime date;
 		private string username;
 		private int stateId;
-		
+
+		public Request()
+		{
+			date=DateTime.Today;
+			username = $"{Environment.UserDomainName}\\{Environment.UserName}";
+			requestRows=new EntitySet<RequestRow>();
+		}
+
+		public Request(Request o)
+		{
+			date = DateTime.Today;
+			username = $"{Environment.UserDomainName}\\{Environment.UserName}";
+			requestRows=new EntitySet<RequestRow>();
+			foreach (var requestRow in o.requestRows)
+			{
+				requestRows.Add(new RequestRow(requestRow) {Request = this});
+			}
+		}
+
 		[Column(Name = "id", IsPrimaryKey = true, AutoSync = AutoSync.OnInsert, IsDbGenerated = true,DbType = "INT IDENTITY(1,1)")]
 		[DisplayName("Номер заявки")]
 		public int Id

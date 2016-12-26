@@ -9,7 +9,7 @@ namespace PostReq.Util
 	{
 		public enum FormMode
 		{
-			New,Edit
+			New,Edit,Copy
 		}
 	}
 }

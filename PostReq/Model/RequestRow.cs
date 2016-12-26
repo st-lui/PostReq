@@ -20,6 +20,18 @@ namespace PostReq.Model
 		private int requestId;
 		EntityRef<Request> request;
 
+		public RequestRow()
+		{
+		}
+
+		public RequestRow(RequestRow o)
+		{
+			amount = o.amount;
+			name = o.name;
+			edIzm = o.edIzm;
+			goodsId = o.goodsId;
+		}
+
 		[Column(Name = "id", IsPrimaryKey = true, AutoSync = AutoSync.OnInsert, IsDbGenerated = true, DbType = "INT IDENTITY(1,1)")]
 		public int Id
 		{

@@ -88,9 +88,19 @@ namespace PostReq
 
 		}
 
-		void editCurrentRequest()
+		void EditCurrentRequest()
 		{
 			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork,Utils.FormMode.Edit, nomLoader, ((Request)bindingSource1.Current).Id);
+			addRequestForm.ShowDialog();
+			if (addRequestForm.Result > 0)
+			{
+				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
+			}
+		}
+
+		void CreateCopyRequest()
+		{
+			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork, Utils.FormMode.Copy, nomLoader, ((Request)bindingSource1.Current).Id);
 			addRequestForm.ShowDialog();
 			if (addRequestForm.Result > 0)
 			{
@@ -102,13 +112,13 @@ namespace PostReq
 		{
 			if (e.Button == MouseButtons.Left)
 			{
-				editCurrentRequest();
+				EditCurrentRequest();
 			}
 		}
 
 		private void toolStripButton2_Click(object sender, EventArgs e)
 		{
-			editCurrentRequest();
+			CreateCopyRequest();
 		}
 
 		private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -153,6 +163,11 @@ namespace PostReq
 		private void postamtComboBox_Click(object sender, EventArgs e)
 		{
 
+		}
+
+		private void toolStripButton3_Click(object sender, EventArgs e)
+		{
+			EditCurrentRequest();
 		}
 	}
 }

@@ -141,9 +141,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="template.xls">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="1482421095_Shop-Payment-58.ico" />
+    <Content Include="Image\add_7201.png" />
     <Content Include="Image\icon.ico" />
     <Content Include="Image\icon.png" />
   </ItemGroup>

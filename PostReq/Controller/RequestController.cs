@@ -7,6 +7,7 @@ using PostReq.Model;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace PostReq.Controller
 {
@@ -17,34 +18,49 @@ namespace PostReq.Controller
 
 		}
 
-		public static string GeneratePrintForm(Request request, IEnumerable<RequestRow> requestRows)
+		public static string GeneratePrintForm(Request request, List<RequestRow> requestRows)
 		{
+			if (!Directory.Exists("files"))
+				Directory.CreateDirectory("files");
 			string filename = null;
-			using (MemoryStream ms = new MemoryStream())
+			string templateFilename = "template.xls";
+
+			if (File.Exists(templateFilename))
 			{
-				HSSFWorkbook wb = new HSSFWorkbook();
-				HSSFSheet sheet = new HSSFSheet(wb);
-				int i = 0;
-				var flo = wb.CreateCellStyle();
-				var df = wb.CreateDataFormat();
-				flo.DataFormat=df.GetFormat("#,###");
-				foreach (RequestRow requestRow in requestRows)
+				using (Stream templateStream = new FileStream(templateFilename, FileMode.Open))
 				{
-					var row=sheet.CreateRow(i+2);
-					row.CreateCell(0).SetCellValue(i + 1);
-					row.CreateCell(1).SetCellValue(requestRow.Name);
-					row.CreateCell(2).SetCellValue(requestRow.Amount);
-					row.Cells[1].CellStyle = flo;
-					i++;
+					HSSFWorkbook wb = new HSSFWorkbook(templateStream);
+					HSSFSheet sheet = (HSSFSheet)wb.GetSheetAt(0);
+					int firstRowNum = sheet.FirstRowNum;
+					if (request == null)
+					{
+						sheet.GetRow(firstRowNum + 10).Cells[0].SetCellValue("Почтамт");
+						sheet.GetRow(firstRowNum + 11).Cells[0].SetCellValue("Заявка №");
+						sheet.GetRow(firstRowNum + 12).Cells[0].SetCellValue($"Дата составления: {DateTime.Today:dd.MM.YYYY} г.");
+					}
+					if (requestRows.Count() > 0)
+					{
+						var row = sheet.GetRow(firstRowNum + 13);
+						row.Cells[0].SetCellValue(1);
+						row.Cells[4].SetCellValue(requestRows[0].Name);
+						row.Cells[8].SetCellValue(requestRows[0].Amount);
+					}
+					for (int i = 1; i < requestRows.Count; i++)
+					{
+						var row = sheet.CopyRow(firstRowNum+13,firstRowNum+13+i);
+						row.Cells[0].SetCellValue(i + 1);
+						row.Cells[4].SetCellValue(requestRows[i].Name);
+						row.Cells[8].SetCellValue(requestRows[i].Amount);
+					}
+					//for (int i = 0; i < 11; i++)
+					//{
+					//	sheet.AutoSizeColumn(i);
+					//}
+					filename = $"files\\{Guid.NewGuid().ToString()}.xls";
+					using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
+						wb.Write(fs);
+					wb.Close();
 				}
-				sheet.AutoSizeColumn(2);
-				sheet.AutoSizeColumn(1);
-				sheet.AutoSizeColumn(0);
-				wb.Add(sheet);
-				filename = Guid.NewGuid().ToString() + ".xls";
-				using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
-					wb.Write(fs);
-				wb.Close();
 			}
 			return filename;
 		}
