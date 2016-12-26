@@ -17,7 +17,7 @@ namespace PostReq.Model
 		private string fio;
 		
 		private int postId;
-		private EntitySet<Request> requests;
+		private EntitySet<Request> requests=new EntitySet<Request>();
 		private EntityRef<Post> post;
 
 		

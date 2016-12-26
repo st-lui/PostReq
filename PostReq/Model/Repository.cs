@@ -122,4 +122,84 @@ namespace PostReq.Model
 			return db.States.SingleOrDefault(x => x.Name== name);
 		}
 	}
+
+	public class UsersRepository : IRepository<User>
+	{
+		private ReqDataContext db;
+
+		public UsersRepository(ReqDataContext db)
+		{
+			this.db = db;
+		}
+
+		public IEnumerable<User> GetAll()
+		{
+			return db.Users;
+		}
+
+		public void Add(User item)
+		{
+			db.Users.InsertOnSubmit(item);
+		}
+
+		public void Change(User item)
+		{
+
+		}
+
+		public void Delete(User item)
+		{
+			db.Users.DeleteOnSubmit(item);
+		}
+
+		public User Get(int id)
+		{
+			return db.Users.SingleOrDefault(x => x.Id == id);
+		}
+
+		public User Get(string name)
+		{
+			return db.Users.SingleOrDefault(x => x.UserName == name);
+		}
+	}
+
+	public class PostsRepository : IRepository<Post>
+	{
+		private ReqDataContext db;
+
+		public PostsRepository(ReqDataContext db)
+		{
+			this.db = db;
+		}
+
+		public IEnumerable<Post> GetAll()
+		{
+			return db.Posts;
+		}
+
+		public void Add(Post item)
+		{
+			db.Posts.InsertOnSubmit(item);
+		}
+
+		public void Change(Post item)
+		{
+
+		}
+
+		public void Delete(Post item)
+		{
+			db.Posts.DeleteOnSubmit(item);
+		}
+
+		public Post Get(int id)
+		{
+			return db.Posts.SingleOrDefault(x => x.Id == id);
+		}
+
+		public Post Get(string name)
+		{
+			return db.Posts.SingleOrDefault(x => x.Name == name);
+		}
+	}
 }

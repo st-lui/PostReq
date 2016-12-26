@@ -14,8 +14,8 @@ namespace PostReq.Model
 	public class Post : INotifyPropertyChanged
 	{
 		private int id;
-		private int name;
-		private EntitySet<User> users;
+		private string name;
+		private EntitySet<User> users=new EntitySet<User>();
 		private int privilegies;
 
 		[Column(Name = "privilegies", DbType = "int",CanBeNull = false)]
@@ -32,7 +32,7 @@ namespace PostReq.Model
 			set { id = value; Change("Id"); }
 		}
 		[Column(Name = "name", DbType = "varchar(64)", CanBeNull = false)]
-		public int Name
+		public string Name
 		{
 			get { return name; }
 			set { name = value; Change("Name"); }

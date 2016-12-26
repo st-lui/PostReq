@@ -1,24 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Net.Configuration;
 using System.Text;
 
 namespace PostReq.Model
 {
-	public class UnitOfWork:IDisposable
+	public class UnitOfWork : IDisposable
 	{
 		private RequestRepository requestRepository;
 		private RequestRowRepository requestRowRepository;
 		private StatesRepository stateRepository;
+		private UsersRepository userRepository;
+		private PostsRepository postRepository;
 		private ReqDataContext db;
 		private bool disposed = false;
 
 		public UnitOfWork()
 		{
 			db = new ReqDataContext();
-			db.DeleteDatabase();
+			if (db.DatabaseExists())
+				db.DeleteDatabase();
 			db.CreateDatabase();
+			initializeDb();
+		}
+
+		private void initializeDb()
+		{
+			if (db == null)
+				return;
+			States.Add(new State() { Name = "Сохранена" });
+			States.Add(new State() { Name = "Отправлена" });
+			States.Add(new State() { Name = "Загружены данные" });
+			Posts.Add(new Post() { Name = "УФПС Алтайского края", Privilegies = 1});
+			Posts.Add(new Post() { Name = "Барнаульский почтамт", Privilegies = 1});
+			SaveChanges();
 		}
 
 		public UnitOfWork(string connectionString)
@@ -31,7 +48,7 @@ namespace PostReq.Model
 			get
 			{
 				if (requestRepository == null)
-					requestRepository=new RequestRepository(db);
+					requestRepository = new RequestRepository(db);
 				return requestRepository;
 			}
 		}
@@ -50,9 +67,29 @@ namespace PostReq.Model
 		{
 			get
 			{
-				if (stateRepository==null)
-					stateRepository=new StatesRepository(db);
+				if (stateRepository == null)
+					stateRepository = new StatesRepository(db);
 				return stateRepository;
+			}
+		}
+
+		public UsersRepository Users
+		{
+			get
+			{
+				if (userRepository == null)
+					userRepository = new UsersRepository(db);
+				return userRepository;
+			}
+		}
+
+		public PostsRepository Posts
+		{
+			get
+			{
+				if (postRepository == null)
+					postRepository = new PostsRepository(db);
+				return postRepository;
 			}
 		}
 
