@@ -47,6 +47,7 @@ namespace PostReq
 			if (formMode == Utils.FormMode.New)
 			{
 				request = new Request();
+				request.User = UserController.GetUserInfo(request.Username,unitOfWork);
 				requestRowBindingSource.DataSource = request.RequestRows;
 				dataGridView1.DataSource = requestRowBindingSource;
 			}
