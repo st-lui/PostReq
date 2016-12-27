@@ -35,7 +35,8 @@
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.открытьЗаявкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.addRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -47,16 +48,15 @@
 			this.postamtComboBox = new System.Windows.Forms.ToolStripComboBox();
 			this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.toDateTimePicker = new System.Windows.Forms.DateTimePicker();
-			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.открытьЗаявкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-			this.toolStrip1.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
+			this.toolStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -119,12 +119,19 @@
 			this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
 			this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
 			// 
-			// dataGridViewTextBoxColumn1
+			// contextMenuStrip1
 			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "State.Name";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Состояние";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.открытьЗаявкуToolStripMenuItem});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(160, 26);
+			// 
+			// открытьЗаявкуToolStripMenuItem
+			// 
+			this.открытьЗаявкуToolStripMenuItem.Name = "открытьЗаявкуToolStripMenuItem";
+			this.открытьЗаявкуToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.открытьЗаявкуToolStripMenuItem.Text = "Открыть заявку";
+			this.открытьЗаявкуToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаявкуToolStripMenuItem_Click);
 			// 
 			// toolStrip1
 			// 
@@ -219,19 +226,9 @@
 			this.toDateTimePicker.Size = new System.Drawing.Size(150, 21);
 			this.toDateTimePicker.TabIndex = 5;
 			// 
-			// contextMenuStrip1
+			// bindingSource1
 			// 
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.открытьЗаявкуToolStripMenuItem});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(160, 26);
-			// 
-			// открытьЗаявкуToolStripMenuItem
-			// 
-			this.открытьЗаявкуToolStripMenuItem.Name = "открытьЗаявкуToolStripMenuItem";
-			this.открытьЗаявкуToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-			this.открытьЗаявкуToolStripMenuItem.Text = "Открыть заявку";
-			this.открытьЗаявкуToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаявкуToolStripMenuItem_Click);
+			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -249,14 +246,17 @@
 			// 
 			// usernameDataGridViewTextBoxColumn
 			// 
-			this.usernameDataGridViewTextBoxColumn.DataPropertyName = "Username";
+			this.usernameDataGridViewTextBoxColumn.DataPropertyName = "User.Fio";
 			this.usernameDataGridViewTextBoxColumn.HeaderText = "Имя пользователя";
 			this.usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
 			this.usernameDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
-			// bindingSource1
+			// dataGridViewTextBoxColumn1
 			// 
-			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "State.Name";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Состояние";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
 			// 
 			// MainForm
 			// 
@@ -279,9 +279,9 @@
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			this.contextMenuStrip1.ResumeLayout(false);
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
-			this.contextMenuStrip1.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -304,13 +304,13 @@
 		private System.Windows.Forms.ToolStripComboBox postamtComboBox;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel2;
 		private System.Windows.Forms.BindingSource bindingSource1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DateTimePicker fromDateTimePicker;
 		private System.Windows.Forms.DateTimePicker toDateTimePicker;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem открытьЗаявкуToolStripMenuItem;
+		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 	}
 }

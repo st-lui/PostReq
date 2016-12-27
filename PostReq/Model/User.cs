@@ -42,13 +42,13 @@ namespace PostReq.Model
 			set { userName = value; Change("UserName");}
 		}
 		[Column(Name = "fio",DbType = "varchar(64)", CanBeNull = false)]
-		[DisplayName("Сотрудник")]
+		[DisplayName("Автор")]
 		public string Fio
 		{
 			get { return fio; }
 			set { fio = value; Change("Fio"); }
 		}
-		[Column(Name="post_id",DbType = "int", CanBeNull = true)]
+		[Column(Name="post_id",DbType = "int", CanBeNull = false)]
 		public int PostId
 		{
 			get { return postId; }
@@ -61,7 +61,7 @@ namespace PostReq.Model
 			get { return requests; }
 			set { requests.Assign(value); }
 		}
-		[Association(Storage = "post", ThisKey = "PostId", OtherKey = "Id",IsForeignKey = false)]
+		[Association(Storage = "post", ThisKey = "PostId", OtherKey = "Id",IsForeignKey = true)]
 		public Post Post
 		{
 			get { return post.Entity; }
