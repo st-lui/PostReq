@@ -55,6 +55,7 @@ namespace PostReq
 			if (formMode == Utils.FormMode.Copy)
 			{
 				request=new Request(unitOfWork.Requests.Get(editId));
+				request.User = UserController.GetUserInfo(request.Username, unitOfWork);
 				requestRowBindingSource.DataSource = request.RequestRows;
 				dataGridView1.DataSource = requestRowBindingSource;
 			}
@@ -164,6 +165,7 @@ namespace PostReq
 								EdIzm = nom.EdIzm,
 								GoodsId = nom.Id,
 								Name = nom.Name,
+								Code=nom.Code,
 								Request = request
 
 							});
@@ -275,10 +277,11 @@ namespace PostReq
 
 		private void deletePositionButton_Click(object sender, EventArgs e)
 		{
-			if (formMode == Utils.FormMode.New)
+			if (formMode == Utils.FormMode.New || formMode == Utils.FormMode.Copy)
 				requestRowBindingSource.RemoveCurrent();
 			else
 			{
+				((RequestRow) requestRowBindingSource.Current).Request = null;
 				unitOfWork.RequestRows.Delete((RequestRow)requestRowBindingSource.Current);
 				requestRowBindingSource.RemoveCurrent();
 			}
@@ -300,7 +303,7 @@ namespace PostReq
 		{
 			string fileName = null;
 			if (formMode == Utils.FormMode.New)
-				fileName = RequestController.GeneratePrintForm(null, (List<RequestRow>)requestRowBindingSource.List);
+				fileName = RequestController.GeneratePrintForm(request, ((IEnumerable<RequestRow>)requestRowBindingSource.DataSource).ToList());
 			else
 				fileName = RequestController.GeneratePrintForm(request, request.RequestRows.ToList());
 			if (fileName != null)

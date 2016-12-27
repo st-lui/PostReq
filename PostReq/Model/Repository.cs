@@ -199,7 +199,11 @@ namespace PostReq.Model
 
 		public Post Get(string name)
 		{
-			return db.Posts.SingleOrDefault(x => x.Name == name);
+			if (name.ToLower().Contains("ауф"))
+				return db.Posts.SingleOrDefault(x => x.Name.Contains("УФПС"));
+			string postName = name.Split('.')[1].Trim();
+
+			return db.Posts.SingleOrDefault(x => x.Name == postName);
 		}
 	}
 }

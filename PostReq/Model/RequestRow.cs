@@ -19,6 +19,7 @@ namespace PostReq.Model
 		private string goodsId;
 		private int requestId;
 		EntityRef<Request> request;
+		private string code;
 
 		public RequestRow()
 		{
@@ -30,6 +31,7 @@ namespace PostReq.Model
 			name = o.name;
 			edIzm = o.edIzm;
 			goodsId = o.goodsId;
+			code = o.code;
 		}
 
 		[Column(Name = "id", IsPrimaryKey = true, AutoSync = AutoSync.OnInsert, IsDbGenerated = true, DbType = "INT IDENTITY(1,1)")]
@@ -98,7 +100,7 @@ namespace PostReq.Model
 			}
 		}
 
-		[Association(Storage = "request", IsForeignKey = true, ThisKey = "RequestId", OtherKey = "Id")]
+		[Association(Storage = "request", IsForeignKey = true, ThisKey = "RequestId", OtherKey = "Id",DeleteOnNull = false)]
 		public Request Request
 		{
 			get { return request.Entity; }
@@ -113,6 +115,13 @@ namespace PostReq.Model
 		public string AmountString
 		{
 			get { return $"{Amount:f3} {EdIzm}"; }
+		}
+
+		[Column(Name = "code",DbType = "varchar(30)")]
+		public string Code
+		{
+			get { return code; }
+			set { code = value; Change("Code");}
 		}
 
 		public override string ToString()

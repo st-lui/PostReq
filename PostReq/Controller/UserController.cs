@@ -20,20 +20,18 @@ namespace PostReq.Controller
 				using (PrincipalContext domainContext = new PrincipalContext(ContextType.Domain, Environment.UserDomainName))
 				{
 					using (
-						UserPrincipal foundPrincipal = UserPrincipal.FindByIdentity(domainContext, IdentityType.SamAccountName, userName))
+						UserPrincipal foundPrincipal = UserPrincipal.FindByIdentity(domainContext, IdentityType.SamAccountName, "main\\Svetlana.Egorova"))
 					{
 						using (DirectoryEntry de = (DirectoryEntry) foundPrincipal.GetUnderlyingObject())
 						{
-							using (var deParentContainer = de.Parent)
-							{
 								user = new User
 								{
 									UserName = foundPrincipal.SamAccountName,
 									Fio = foundPrincipal.DisplayName,
-									Post = uow.Posts.Get(deParentContainer.Properties["Name"].Value.ToString())
+									Post = uow.Posts.Get(de.Properties["Company"].Value.ToString())
 								};
 								return user;
-							}
+							
 						}
 					}
 				}

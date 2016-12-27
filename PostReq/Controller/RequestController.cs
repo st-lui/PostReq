@@ -7,6 +7,7 @@ using PostReq.Model;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System.IO;
+using System.Net.Mail;
 using System.Runtime.InteropServices.ComTypes;
 
 namespace PostReq.Controller
@@ -36,12 +37,19 @@ namespace PostReq.Controller
 					{
 						sheet.GetRow(firstRowNum + 10).Cells[0].SetCellValue("Почтамт");
 						sheet.GetRow(firstRowNum + 11).Cells[0].SetCellValue("Заявка №");
-						sheet.GetRow(firstRowNum + 12).Cells[0].SetCellValue($"Дата составления: {DateTime.Today:dd.MM.YYYY} г.");
+						sheet.GetRow(firstRowNum + 12).Cells[0].SetCellValue($"Дата составления: {DateTime.Today:dd.MM.yyyy} г.");
+					}
+					else
+					{
+						sheet.GetRow(firstRowNum + 10).Cells[0].SetCellValue(request.User.Post.Name);
+						sheet.GetRow(firstRowNum + 11).Cells[0].SetCellValue("Заявка №"+(request.Id==0?"":request.Id.ToString()));
+						sheet.GetRow(firstRowNum + 12).Cells[0].SetCellValue($"Дата составления: {request.Date:dd.MM.yyyy} г.");
 					}
 					if (requestRows.Count() > 0)
 					{
 						var row = sheet.GetRow(firstRowNum + 13);
 						row.Cells[0].SetCellValue(1);
+						row.Cells[1].SetCellValue(requestRows[0].Code);
 						row.Cells[4].SetCellValue(requestRows[0].Name);
 						row.Cells[8].SetCellValue(requestRows[0].Amount);
 					}
@@ -49,6 +57,7 @@ namespace PostReq.Controller
 					{
 						var row = sheet.CopyRow(firstRowNum+13,firstRowNum+13+i);
 						row.Cells[0].SetCellValue(i + 1);
+						row.Cells[1].SetCellValue(requestRows[i].Code);
 						row.Cells[4].SetCellValue(requestRows[i].Name);
 						row.Cells[8].SetCellValue(requestRows[i].Amount);
 					}
@@ -63,6 +72,12 @@ namespace PostReq.Controller
 				}
 			}
 			return filename;
+		}
+
+		public static void SendEmail()
+		{
+			SmtpClient smtpClient = new SmtpClient();
+			
 		}
 
 		public static IEnumerable<Request> GetRequests(FilterModel filterModel)
