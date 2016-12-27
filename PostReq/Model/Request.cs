@@ -25,7 +25,8 @@ namespace PostReq.Model
 		public Request()
 		{
 			date=DateTime.Today;
-			requestRows=new EntitySet<RequestRow>();
+			username = $"{Environment.UserDomainName}\\{Environment.UserName}";
+			requestRows =new EntitySet<RequestRow>();
 		}
 
 		public Request(Request o)
