@@ -33,8 +33,22 @@ namespace PostReq.Model
 			States.Add(new State() { Name = "Сохранена" });
 			States.Add(new State() { Name = "Отправлена" });
 			States.Add(new State() { Name = "Загружены данные" });
-			Posts.Add(new Post() { Name = "УФПС Алтайского края", Privilegies = 1});
-			Posts.Add(new Post() { Name = "Барнаульский почтамт", Privilegies = 1});
+			Posts.Add(new Post() { Name = "УФПС Алтайского края", Privilegies = 1 });
+			Posts.Add(new Post() { Name = "Алейский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Барнаульский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Бийский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Благовещенский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Заринский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Каменский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Кулундинский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Мамонтовский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Павловский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Первомайский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Поспелихинский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Рубцовский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Славгородский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Смоленский почтамт", Privilegies = 0 });
+			Posts.Add(new Post() { Name = "Смоленский почтамт", Privilegies = 0 });
 			SaveChanges();
 		}
 
