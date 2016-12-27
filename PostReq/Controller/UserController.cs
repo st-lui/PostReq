@@ -20,7 +20,7 @@ namespace PostReq.Controller
 				using (PrincipalContext domainContext = new PrincipalContext(ContextType.Domain, Environment.UserDomainName))
 				{
 					using (
-						UserPrincipal foundPrincipal = UserPrincipal.FindByIdentity(domainContext, IdentityType.SamAccountName, "main\\Svetlana.Egorova"))
+						UserPrincipal foundPrincipal = UserPrincipal.FindByIdentity(domainContext, IdentityType.SamAccountName, userName))
 					{
 						using (DirectoryEntry de = (DirectoryEntry) foundPrincipal.GetUnderlyingObject())
 						{
