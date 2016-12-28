@@ -104,6 +104,7 @@ namespace PostReq
 
 		void CreateCopyRequest()
 		{
+			if (bindingSource1.Current == null) return;
 			unitOfWork.Dispose();
 			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Copy, nomLoader, ((Request)bindingSource1.Current).Id);
 			addRequestForm.ShowDialog();

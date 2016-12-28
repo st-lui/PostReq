@@ -320,25 +320,7 @@ namespace PostReq
 
 		private void cancelButton_Click(object sender, EventArgs e)
 		{
-			if (changed)
-			{
-				DialogResult closeResult = MessageBox.Show("В заявке есть несохраненные изменения. Вы хотите сохранить заявку?",
-					"Заявки на поставку товаров", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
-				if (closeResult == DialogResult.Yes)
-				{
-					SaveRequest();
-					Result = request.Id;
-					Close();
-				}
-				else if (closeResult == DialogResult.No)
-				{
-					Close();
-				}
-				else if (closeResult == DialogResult.Cancel)
-					return;
-			}
-			else
-				Close();
+			Close();
 		}
 
 		private void printRequestButton_Click(object sender, EventArgs e)
@@ -356,6 +338,26 @@ namespace PostReq
 		{
 			if (e.KeyCode == Keys.Escape)
 				cancelButton_Click(sender, e);
+		}
+
+		private void AddRequestForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			if (changed)
+			{
+				DialogResult closeResult = MessageBox.Show("В заявке есть несохраненные изменения. Вы хотите сохранить заявку?",
+					"Заявки на поставку товаров", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+				if (closeResult == DialogResult.Yes)
+				{
+					SaveRequest();
+					Result = request.Id;
+				}
+				else if (closeResult == DialogResult.No)
+					e.Cancel = false;
+				else if (closeResult == DialogResult.Cancel)
+					e.Cancel = true;
+			}
+			else
+				e.Cancel = false;
 		}
 	}
 }

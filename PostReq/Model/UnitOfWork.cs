@@ -20,10 +20,10 @@ namespace PostReq.Model
 		public UnitOfWork()
 		{
 			db = new ReqDataContext();
-			if (db.DatabaseExists())
-				db.DeleteDatabase();
-			db.CreateDatabase();
-			initializeDb();
+			//if (db.DatabaseExists())
+			//	db.DeleteDatabase();
+			//db.CreateDatabase();
+			//initializeDb();
 		}
 
 		private void initializeDb()
