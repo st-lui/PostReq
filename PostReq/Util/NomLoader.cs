@@ -194,12 +194,12 @@ select _IDRRef,_ParentIDRRef,_Description,_Code,_Fld2258RRef from tree;", conn))
 		public void LoadNomListToTreeView(TreeView treeView, List<Nom> nomList)
 		{
 			treeView.Nodes.Clear();
-			TreeNode rootNode=treeView.Nodes.Add(nomList[0].Id, $"{nomList[0].Name} {nomList[1].Code}");
+			TreeNode rootNode=treeView.Nodes.Add(nomList[0].Id, $"{nomList[0].Name} {nomList[0].Code} {nomList[0].Price:f2}");
 			rootNode.Tag = nomList[0];
 			for (int i = 1; i < nomList.Count; i++)
 			{
 				var pnode = FindParentNode(nomList[i], rootNode);
-				TreeNode cnode = pnode.Nodes.Add(nomList[i].Id, $"{nomList[i].Name} {nomList[i].Code}");
+				TreeNode cnode = pnode.Nodes.Add(nomList[i].Id, $"{nomList[i].Name} {nomList[i].Code} {nomList[i].Price:f2}");
 				cnode.Tag = nomList[i];
 			}
 		}

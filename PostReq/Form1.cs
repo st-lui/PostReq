@@ -24,6 +24,7 @@ namespace PostReq
 		List<RequestRow> requestRowList;
 		BindingSource bsSource;
 		UnitOfWork unitOfWork;
+		bool changed = false;
 		public int Result { get; private set; }
 
 		public AddRequestForm(UnitOfWork unitOfWork, Utils.FormMode formMode, NomLoader nomLoader, int editId = 0)
@@ -159,18 +160,21 @@ namespace PostReq
 					{
 						var changeAmountForm = new ChangeAmountForm(nom.Name, nom.EdIzm);
 						if (changeAmountForm.ShowDialog() == DialogResult.OK)
+						{
 							requestRowBindingSource.Add(new RequestRow()
 							{
 								Amount = changeAmountForm.Value,
 								EdIzm = nom.EdIzm,
 								GoodsId = nom.Id,
 								Name = nom.Name,
-								Code=nom.Code,
-								Request = request
+								Code = nom.Code,
+								Request = request,
+								Price = nom.Price
 
 							});
-						treeView1.Focus();
-						infoStatusBarLabel.Text = "Заявка изменена";
+							treeView1.Focus();
+							Change(true);
+						}
 					}
 					else
 					{
@@ -183,12 +187,13 @@ namespace PostReq
 								EdIzm = nom.EdIzm,
 								GoodsId = nom.Id,
 								Name = nom.Name,
-								RequestId = request.Id
+								RequestId = request.Id,
+								Price=nom.Price
 							};
 							unitOfWork.RequestRows.Add(requestRow);
 							requestRowBindingSource.Add(requestRow);
 							treeView1.Focus();
-							infoStatusBarLabel.Text = "Заявка изменена";
+							Change(true);
 						}
 
 					}
@@ -230,10 +235,12 @@ namespace PostReq
 			RequestRow currentRequestRow = (RequestRow)requestRowBindingSource.Current;
 			var changeAmountForm = new ChangeAmountForm(currentRequestRow.Name, currentRequestRow.EdIzm, currentRequestRow.Amount);
 			if (changeAmountForm.ShowDialog() == DialogResult.OK)
+			{
 				currentRequestRow.Amount = changeAmountForm.Value;
-			Refresh(dataGridView1);
-			dataGridView1.Focus();
-			infoStatusBarLabel.Text = "Заявка изменена";
+				Refresh(dataGridView1);
+				dataGridView1.Focus();
+				Change(true);
+			}
 		}
 
 		private void saveAndSendButton_Click(object sender, EventArgs e)
@@ -254,12 +261,12 @@ namespace PostReq
 				formMode = Utils.FormMode.Edit;
 				//requestRowBindingSource.DataSource = request.RequestRows;
 				//dataGridView1.DataSource = requestRowBindingSource;
-				infoStatusBarLabel.Text = "Заявка сохранена";
+				Change(false);
 			}
 			else
 			{
 				unitOfWork.SaveChanges();
-				infoStatusBarLabel.Text = "Заявка сохранена";
+				Change(false);
 			}
 		}
 
@@ -286,7 +293,21 @@ namespace PostReq
 				requestRowBindingSource.RemoveCurrent();
 			}
 			dataGridView1.Focus();
-			infoStatusBarLabel.Text = "Заявка изменена";
+			Change(true);
+		}
+
+		void Change(bool change)
+		{
+			if (change)
+			{
+				changed = true;
+				infoStatusBarLabel.Text = "Заявка изменена";
+			}
+			else
+			{
+				changed = false;
+				infoStatusBarLabel.Text = "Заявка сохранена";
+			}
 		}
 
 		private void AddRequestForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -295,8 +316,12 @@ namespace PostReq
 
 		private void cancelButton_Click(object sender, EventArgs e)
 		{
-			Close();
-
+			if (changed)
+			{
+				MessageBox.Show("В заявке есть несохраненные изменения. Вы хотите сохранить внесенные изменения?","Заявки на ")
+			}
+			else
+				Close();
 		}
 
 		private void printRequestButton_Click(object sender, EventArgs e)

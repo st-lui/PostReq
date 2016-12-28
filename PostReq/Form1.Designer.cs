@@ -29,6 +29,8 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddRequestForm));
 			this.treeView1 = new System.Windows.Forms.TreeView();
 			this.findButton = new System.Windows.Forms.Button();
@@ -36,15 +38,8 @@
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this._Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.edIzmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.goodsIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.requestIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.stringRepDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.amountStringDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.requestRowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.label2 = new System.Windows.Forms.Label();
 			this.searchPatternTextBox = new System.Windows.Forms.TextBox();
 			this.addPositionButton = new System.Windows.Forms.Button();
@@ -59,9 +54,18 @@
 			this.printRequestButton = new System.Windows.Forms.Button();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.edIzmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.goodsIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.requestIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.stringRepDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.amountStringDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.requestRowBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).BeginInit();
 			this.statusStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// treeView1
@@ -92,7 +96,7 @@
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(12, 26);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(157, 27);
+			this.label1.Size = new System.Drawing.Size(80, 13);
 			this.label1.TabIndex = 4;
 			this.label1.Text = "Номенклатура";
 			// 
@@ -109,6 +113,8 @@
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this._Name,
             this.Amount,
+            this.Column1,
+            this.Column2,
             this.idDataGridViewTextBoxColumn,
             this.amountDataGridViewTextBoxColumn,
             this.nameDataGridViewTextBoxColumn,
@@ -122,7 +128,6 @@
 			this.dataGridView1.MultiSelect = false;
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.ReadOnly = true;
-			this.dataGridView1.RowHeadersVisible = false;
 			this.dataGridView1.RowHeadersWidth = 15;
 			this.dataGridView1.RowTemplate.Height = 18;
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -147,74 +152,23 @@
 			this.Amount.ReadOnly = true;
 			this.Amount.Width = 5;
 			// 
-			// idDataGridViewTextBoxColumn
+			// Column1
 			// 
-			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			this.idDataGridViewTextBoxColumn.ReadOnly = true;
-			this.idDataGridViewTextBoxColumn.Visible = false;
+			this.Column1.DataPropertyName = "Price";
+			dataGridViewCellStyle1.Format = "F2";
+			this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+			this.Column1.HeaderText = "Цена";
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
 			// 
-			// amountDataGridViewTextBoxColumn
+			// Column2
 			// 
-			this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
-			this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
-			this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-			this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-			this.amountDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-			this.nameDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// edIzmDataGridViewTextBoxColumn
-			// 
-			this.edIzmDataGridViewTextBoxColumn.DataPropertyName = "EdIzm";
-			this.edIzmDataGridViewTextBoxColumn.HeaderText = "EdIzm";
-			this.edIzmDataGridViewTextBoxColumn.Name = "edIzmDataGridViewTextBoxColumn";
-			this.edIzmDataGridViewTextBoxColumn.ReadOnly = true;
-			this.edIzmDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// goodsIdDataGridViewTextBoxColumn
-			// 
-			this.goodsIdDataGridViewTextBoxColumn.DataPropertyName = "GoodsId";
-			this.goodsIdDataGridViewTextBoxColumn.HeaderText = "GoodsId";
-			this.goodsIdDataGridViewTextBoxColumn.Name = "goodsIdDataGridViewTextBoxColumn";
-			this.goodsIdDataGridViewTextBoxColumn.ReadOnly = true;
-			this.goodsIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// requestIdDataGridViewTextBoxColumn
-			// 
-			this.requestIdDataGridViewTextBoxColumn.DataPropertyName = "RequestId";
-			this.requestIdDataGridViewTextBoxColumn.HeaderText = "RequestId";
-			this.requestIdDataGridViewTextBoxColumn.Name = "requestIdDataGridViewTextBoxColumn";
-			this.requestIdDataGridViewTextBoxColumn.ReadOnly = true;
-			this.requestIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// stringRepDataGridViewTextBoxColumn
-			// 
-			this.stringRepDataGridViewTextBoxColumn.DataPropertyName = "StringRep";
-			this.stringRepDataGridViewTextBoxColumn.HeaderText = "StringRep";
-			this.stringRepDataGridViewTextBoxColumn.Name = "stringRepDataGridViewTextBoxColumn";
-			this.stringRepDataGridViewTextBoxColumn.ReadOnly = true;
-			this.stringRepDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// amountStringDataGridViewTextBoxColumn
-			// 
-			this.amountStringDataGridViewTextBoxColumn.DataPropertyName = "AmountString";
-			this.amountStringDataGridViewTextBoxColumn.HeaderText = "AmountString";
-			this.amountStringDataGridViewTextBoxColumn.Name = "amountStringDataGridViewTextBoxColumn";
-			this.amountStringDataGridViewTextBoxColumn.ReadOnly = true;
-			this.amountStringDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// requestRowBindingSource
-			// 
-			this.requestRowBindingSource.DataSource = typeof(PostReq.Model.RequestRow);
-			this.requestRowBindingSource.CurrentChanged += new System.EventHandler(this.requestRowBindingSource_CurrentChanged);
+			this.Column2.DataPropertyName = "Cost";
+			dataGridViewCellStyle2.Format = "F2";
+			this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+			this.Column2.HeaderText = "Сумма";
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
 			// 
 			// label2
 			// 
@@ -223,7 +177,7 @@
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(572, 26);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(157, 27);
+			this.label2.Size = new System.Drawing.Size(81, 13);
 			this.label2.TabIndex = 6;
 			this.label2.Text = "Состав заявки";
 			// 
@@ -232,7 +186,7 @@
 			this.searchPatternTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.searchPatternTextBox.Location = new System.Drawing.Point(390, 51);
 			this.searchPatternTextBox.Name = "searchPatternTextBox";
-			this.searchPatternTextBox.Size = new System.Drawing.Size(143, 34);
+			this.searchPatternTextBox.Size = new System.Drawing.Size(143, 21);
 			this.searchPatternTextBox.TabIndex = 1;
 			this.searchPatternTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchPatternTextBox_KeyPress);
 			// 
@@ -348,9 +302,78 @@
 			this.notifyIcon1.Text = "notifyIcon1";
 			this.notifyIcon1.Visible = true;
 			// 
+			// idDataGridViewTextBoxColumn
+			// 
+			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+			this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.ReadOnly = true;
+			this.idDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// amountDataGridViewTextBoxColumn
+			// 
+			this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+			this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
+			this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+			this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+			this.amountDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.nameDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// edIzmDataGridViewTextBoxColumn
+			// 
+			this.edIzmDataGridViewTextBoxColumn.DataPropertyName = "EdIzm";
+			this.edIzmDataGridViewTextBoxColumn.HeaderText = "EdIzm";
+			this.edIzmDataGridViewTextBoxColumn.Name = "edIzmDataGridViewTextBoxColumn";
+			this.edIzmDataGridViewTextBoxColumn.ReadOnly = true;
+			this.edIzmDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// goodsIdDataGridViewTextBoxColumn
+			// 
+			this.goodsIdDataGridViewTextBoxColumn.DataPropertyName = "GoodsId";
+			this.goodsIdDataGridViewTextBoxColumn.HeaderText = "GoodsId";
+			this.goodsIdDataGridViewTextBoxColumn.Name = "goodsIdDataGridViewTextBoxColumn";
+			this.goodsIdDataGridViewTextBoxColumn.ReadOnly = true;
+			this.goodsIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// requestIdDataGridViewTextBoxColumn
+			// 
+			this.requestIdDataGridViewTextBoxColumn.DataPropertyName = "RequestId";
+			this.requestIdDataGridViewTextBoxColumn.HeaderText = "RequestId";
+			this.requestIdDataGridViewTextBoxColumn.Name = "requestIdDataGridViewTextBoxColumn";
+			this.requestIdDataGridViewTextBoxColumn.ReadOnly = true;
+			this.requestIdDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// stringRepDataGridViewTextBoxColumn
+			// 
+			this.stringRepDataGridViewTextBoxColumn.DataPropertyName = "StringRep";
+			this.stringRepDataGridViewTextBoxColumn.HeaderText = "StringRep";
+			this.stringRepDataGridViewTextBoxColumn.Name = "stringRepDataGridViewTextBoxColumn";
+			this.stringRepDataGridViewTextBoxColumn.ReadOnly = true;
+			this.stringRepDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// amountStringDataGridViewTextBoxColumn
+			// 
+			this.amountStringDataGridViewTextBoxColumn.DataPropertyName = "AmountString";
+			this.amountStringDataGridViewTextBoxColumn.HeaderText = "AmountString";
+			this.amountStringDataGridViewTextBoxColumn.Name = "amountStringDataGridViewTextBoxColumn";
+			this.amountStringDataGridViewTextBoxColumn.ReadOnly = true;
+			this.amountStringDataGridViewTextBoxColumn.Visible = false;
+			// 
+			// requestRowBindingSource
+			// 
+			this.requestRowBindingSource.DataSource = typeof(PostReq.Model.RequestRow);
+			this.requestRowBindingSource.CurrentChanged += new System.EventHandler(this.requestRowBindingSource_CurrentChanged);
+			// 
 			// AddRequestForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 27F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(1020, 396);
@@ -377,9 +400,9 @@
 			this.Load += new System.EventHandler(this.Form1_Load);
 			this.Resize += new System.EventHandler(this.Form1_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).EndInit();
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -403,8 +426,12 @@
 		private System.Windows.Forms.Button printRequestButton;
 		private System.Windows.Forms.NotifyIcon notifyIcon1;
 		private System.Windows.Forms.BindingSource requestRowBindingSource;
+		private System.Windows.Forms.ToolStripStatusLabel infoStatusBarLabel;
+		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn _Name;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
@@ -413,8 +440,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn requestIdDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn stringRepDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn amountStringDataGridViewTextBoxColumn;
-		private System.Windows.Forms.ToolStripStatusLabel infoStatusBarLabel;
-		private System.Windows.Forms.ToolTip toolTip1;
 	}
 }
 

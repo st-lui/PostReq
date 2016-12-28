@@ -33,6 +33,7 @@ namespace PostReq.Model
 			edIzm = o.edIzm;
 			goodsId = o.goodsId;
 			code = o.code;
+			price = o.price;
 		}
 
 		[Column(Name = "id", IsPrimaryKey = true, AutoSync = AutoSync.OnInsert, IsDbGenerated = true, DbType = "INT IDENTITY(1,1)")]
@@ -127,6 +128,11 @@ namespace PostReq.Model
 		public string AmountString
 		{
 			get { return $"{Amount:f3} {EdIzm}"; }
+		}
+
+		public double Cost
+		{
+			get { return Amount*Price; }
 		}
 
 		[Column(Name = "code",DbType = "varchar(30)")]
