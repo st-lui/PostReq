@@ -37,6 +37,7 @@
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.открытьЗаявкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.addRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -48,16 +49,16 @@
 			this.postamtComboBox = new System.Windows.Forms.ToolStripComboBox();
 			this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.toDateTimePicker = new System.Windows.Forms.DateTimePicker();
-			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.usernameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
-			this.toolStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -102,8 +103,9 @@
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.dateDataGridViewTextBoxColumn,
-            this.usernameDataGridViewTextBoxColumn,
-            this.dataGridViewTextBoxColumn1});
+            this.dataGridViewTextBoxColumn1,
+            this.Column1,
+            this.Column2});
 			this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
 			this.dataGridView1.DataSource = this.bindingSource1;
 			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -132,6 +134,10 @@
 			this.открытьЗаявкуToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
 			this.открытьЗаявкуToolStripMenuItem.Text = "Открыть заявку";
 			this.открытьЗаявкуToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаявкуToolStripMenuItem_Click);
+			// 
+			// bindingSource1
+			// 
+			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
 			// 
 			// toolStrip1
 			// 
@@ -226,10 +232,6 @@
 			this.toDateTimePicker.Size = new System.Drawing.Size(150, 21);
 			this.toDateTimePicker.TabIndex = 5;
 			// 
-			// bindingSource1
-			// 
-			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
-			// 
 			// idDataGridViewTextBoxColumn
 			// 
 			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -244,19 +246,26 @@
 			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
 			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
-			// usernameDataGridViewTextBoxColumn
-			// 
-			this.usernameDataGridViewTextBoxColumn.DataPropertyName = "User.Fio";
-			this.usernameDataGridViewTextBoxColumn.HeaderText = "Имя пользователя";
-			this.usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
-			this.usernameDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
 			// dataGridViewTextBoxColumn1
 			// 
 			this.dataGridViewTextBoxColumn1.DataPropertyName = "State.Name";
 			this.dataGridViewTextBoxColumn1.HeaderText = "Состояние";
 			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
 			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "User.Fio";
+			this.Column1.HeaderText = "Автор";
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "User.Post.Name";
+			this.Column2.HeaderText = "Почтамт";
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
 			// 
 			// MainForm
 			// 
@@ -280,9 +289,9 @@
 			this.menuStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.contextMenuStrip1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -308,9 +317,11 @@
 		private System.Windows.Forms.DateTimePicker toDateTimePicker;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem открытьЗаявкуToolStripMenuItem;
+		private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 	}
 }

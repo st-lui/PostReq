@@ -15,6 +15,7 @@ namespace PostReq.Model
 		public string Code { get; set; }
 		public Byte[] EdIzmId { get; set; }
 		public string EdIzm { get; set; }
+		public double Price { get; set; }
 
 		public override string ToString()
 		{
@@ -31,6 +32,8 @@ namespace PostReq.Model
 				stringRep += "null";
 			else
 				stringRep+=EdIzm;
+			stringRep += "$";
+			stringRep += Price.ToString("F2", CultureInfo.InvariantCulture);
 			stringRep = stringRep.Replace("\n", "");
 			return stringRep;
 		}
@@ -47,6 +50,11 @@ namespace PostReq.Model
 				nom.EdIzm = null;
 			else
 				nom.EdIzm = split[4];
+			double d = 0;
+			if (double.TryParse(split[5], NumberStyles.Any,CultureInfo.InvariantCulture,out d))
+				nom.Price = d;
+			else
+				nom.Price = 0.0;
 			return nom;
 		}
 	}

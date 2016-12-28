@@ -18,6 +18,7 @@ namespace PostReq.Util
 		FileInfo fileInfo;
 		string nomTableName = "_Reference112";
 		string edIzmTableName = "_Reference80";
+		string priceTableName = "_InfoRg11000";
 		public List<Nom> NomList { get; set; }
 		private NomLoader() { }
 		
@@ -44,7 +45,8 @@ namespace PostReq.Util
 					conn.Open();
 					using (SqlCommand comm = new SqlCommand($@"with tree (_IDRRef,_ParentIDRRef,_Code,_level) as 
 (select _IDRRef, _ParentIDRRef, _Code, 0 from[{nomTableName}] where _code = '00000000085'
-union all select[{nomTableName}]._IDRRef,[{nomTableName}]._ParentIDRRef,[{nomTableName}]._Code, tree._level + 1 from[{nomTableName}], tree where tree._IDRRef =[{nomTableName}]._ParentIDRRef)
+union all select[{nomTableName}]._IDRRef,[{nomTableName}]._ParentIDRRef,[{nomTableName}]._Code, tree._level + 1 from [{nomTableName}], tree 
+where tree._IDRRef =[{nomTableName}]._ParentIDRRef and [{nomTableName}]._Code<>'С1-00001709' and [{nomTableName}]._Code<>'С1-00001897')
 select count(_IDRRef)from tree; ", conn))
 					{
 						SqlDataReader dataReader = comm.ExecuteReader();
@@ -81,9 +83,28 @@ select count(_IDRRef)from tree; ", conn))
 								edIzmDictionary.Add(dataReader.GetSqlBinary(0), dataReader.GetString(1));
 							dataReader.Close();
 						}
+						Dictionary<SqlBinary, double> priceDictionary = new Dictionary<SqlBinary, double>();
+						using (SqlCommand comm = new SqlCommand($@"select _Fld11001RRef,_Fld11004 from {priceTableName} s,(
+select _Fld11001RRef nomid, max(_Period) period
+from {priceTableName}
+where _Fld11002RRef = 0xA4AEF4CE46FB566011E3DC100178205B
+group by _Fld11001RRef) p
+where s._Fld11001RRef = p.nomid and s._Period = p.period", conn))
+						{
+							var dataReader = comm.ExecuteReader();
+							while (dataReader.Read())
+							{
+								var id = dataReader.GetSqlBinary(0);
+								var price = (double) dataReader.GetDecimal(1);
+								if (!priceDictionary.ContainsKey(id))
+									priceDictionary.Add(id, price);
+							}
+							dataReader.Close();
+						}
 						using (SqlCommand comm = new SqlCommand($@"with tree (_IDRRef,_ParentIDRRef,_Description,_Code,_Fld2258RRef,_level) as 
 (select _IDRRef,_ParentIDRRef,_Description,_Code,_Fld2258RRef,0 from [{nomTableName}] where _code='00000000085'
-union all select [{nomTableName}]._IDRRef,[{nomTableName}]._ParentIDRRef,[{nomTableName}]._Description,[{nomTableName}]._Code,[{nomTableName}]._Fld2258RRef,tree._level+1 from [{nomTableName}],tree where tree._IDRRef=[{nomTableName}]._ParentIDRRef)
+union all select [{nomTableName}]._IDRRef,[{nomTableName}]._ParentIDRRef,[{nomTableName}]._Description,[{nomTableName}]._Code,[{nomTableName}]._Fld2258RRef,tree._level+1 from [{nomTableName}],tree
+where tree._IDRRef=[{nomTableName}]._ParentIDRRef and [{nomTableName}]._Code<>'С1-00001709' and [{nomTableName}]._Code<>'С1-00001897')
 select _IDRRef,_ParentIDRRef,_Description,_Code,_Fld2258RRef from tree;", conn))
 						{
 							SqlDataReader dataReader = comm.ExecuteReader();
@@ -93,12 +114,13 @@ select _IDRRef,_ParentIDRRef,_Description,_Code,_Fld2258RRef from tree;", conn))
 							{
 								Nom nom = new Nom();
 								string stringRep = "";
-								var byteArray = dataReader.GetSqlBinary(0).Value;
-								Array.ForEach(byteArray, b => stringRep += b.ToString("X"));
+								var binaryId = dataReader.GetSqlBinary(0);
+								var byteArray = binaryId.Value;
+								Array.ForEach(byteArray, b => stringRep += b.ToString("X2"));
 								nom.Id = stringRep;
 								byteArray = dataReader.GetSqlBinary(1).Value;
 								stringRep = "";
-								Array.ForEach(byteArray, b => stringRep += b.ToString("X"));
+								Array.ForEach(byteArray, b => stringRep += b.ToString("X2"));
 								nom.ParentId = stringRep;
 								nom.Name = dataReader.GetString(2);
 								nom.Code = dataReader.GetString(3);
@@ -111,6 +133,10 @@ select _IDRRef,_ParentIDRRef,_Description,_Code,_Fld2258RRef from tree;", conn))
 									var EdIzmId = dataReader.GetSqlBinary(4);
 									nom.EdIzm = edIzmDictionary[EdIzmId];
 								}
+								if (priceDictionary.ContainsKey(binaryId))
+									nom.Price = priceDictionary[binaryId];
+								else
+									nom.Price = 0;
 								writer.WriteLine(nom.ToString());
 								writer.Flush();
 							}

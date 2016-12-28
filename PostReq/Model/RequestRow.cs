@@ -20,6 +20,7 @@ namespace PostReq.Model
 		private int requestId;
 		EntityRef<Request> request;
 		private string code;
+		private double price;
 
 		public RequestRow()
 		{
@@ -97,6 +98,17 @@ namespace PostReq.Model
 			{
 				requestId = value;
 				Change("RequestId");
+			}
+		}
+
+		[Column(Name = "price", DbType = "decimal(10,2)", CanBeNull = false)]
+		public double Price
+		{
+			get { return price; }
+			set
+			{
+				price= value;
+				Change("Price");
 			}
 		}
 
