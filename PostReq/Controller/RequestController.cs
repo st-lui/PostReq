@@ -53,6 +53,7 @@ namespace PostReq.Controller
 						row.Cells[4].SetCellValue(requestRows[0].Name);
 						row.Cells[8].SetCellValue(requestRows[0].Amount);
 						row.Cells[9].SetCellValue(requestRows[0].Price);
+						row.Cells[10].SetCellValue(requestRows[0].Cost);
 					}
 					for (int i = 1; i < requestRows.Count; i++)
 					{
@@ -62,6 +63,7 @@ namespace PostReq.Controller
 						row.Cells[4].SetCellValue(requestRows[i].Name);
 						row.Cells[8].SetCellValue(requestRows[i].Amount);
 						row.Cells[9].SetCellValue(requestRows[i].Price);
+						row.Cells[10].SetCellValue(requestRows[i].Cost);
 					}
 					//for (int i = 0; i < 11; i++)
 					//{
@@ -86,6 +88,40 @@ namespace PostReq.Controller
 		{
 			var requests = filterModel.UnitOfWork.Requests.GetAll().ToList();
 			return requests;
+		}
+
+		public static void LoadData(UploadDataModel uploadDataModel)
+		{
+			if (File.Exists(uploadDataModel.FileName))
+			{
+				using (FileStream fs = new FileStream(uploadDataModel.FileName, FileMode.Open))
+				{
+					HSSFWorkbook wb = new HSSFWorkbook(fs);
+					HSSFSheet sheet = (HSSFSheet) wb.GetSheetAt(0);
+					int dataStartRow = 14;
+					int numberCellIndex = 0;
+					int codelCellIndex = 2;
+					int nomCellIndex = 5;
+					int amountCellIndex = 34;
+					var i = 0;
+					var row = sheet.GetRow(dataStartRow + i);
+					bool changesMade = false;
+					while (!string.IsNullOrWhiteSpace(row.Cells[numberCellIndex].ToString()))
+					{
+						RequestRow requsetRow =
+							uploadDataModel.Request.RequestRows.SingleOrDefault(x => x.Code == row.Cells[codelCellIndex].StringCellValue);
+						if (requsetRow != null)
+						{
+							requsetRow.FactAmount = row.Cells[amountCellIndex].NumericCellValue;
+							changesMade = true;
+						}
+						row = sheet.GetRow(dataStartRow + ++i);
+					}
+					if (changesMade)
+						uploadDataModel.UnitOfWork.SaveChanges();
+					wb.Close();
+				}
+			}
 		}
 	}
 }

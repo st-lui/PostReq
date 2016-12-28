@@ -106,6 +106,7 @@
     <Compile Include="Model\SearchModel.cs" />
     <Compile Include="Model\State.cs" />
     <Compile Include="Model\UnitOfWork.cs" />
+    <Compile Include="Model\UploadDataModel.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

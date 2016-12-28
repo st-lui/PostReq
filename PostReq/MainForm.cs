@@ -79,7 +79,7 @@ namespace PostReq
 		{
 			unitOfWork.Dispose();
 			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.New, nomLoader);
-			addRequestForm.ShowDialog();
+			addRequestForm.ShowDialog(this);
 			unitOfWork = new UnitOfWork();
 			filterModel.UnitOfWork = unitOfWork;
 			if (addRequestForm.Result > 0)
@@ -97,7 +97,7 @@ namespace PostReq
 			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Edit, nomLoader, ((Request)bindingSource1.Current).Id);
 			unitOfWork=new UnitOfWork();
 			filterModel.UnitOfWork = unitOfWork;
-			addRequestForm.ShowDialog();
+			addRequestForm.ShowDialog(this);
 			if (addRequestForm.Result > 0)
 				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 		}
@@ -107,7 +107,7 @@ namespace PostReq
 			if (bindingSource1.Current == null) return;
 			unitOfWork.Dispose();
 			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Copy, nomLoader, ((Request)bindingSource1.Current).Id);
-			addRequestForm.ShowDialog();
+			addRequestForm.ShowDialog(this);
 			unitOfWork = new UnitOfWork();
 			filterModel.UnitOfWork = unitOfWork;
 			if (addRequestForm.Result > 0)
@@ -115,6 +115,17 @@ namespace PostReq
 				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 			}
 			
+		}
+
+		private void LoadData()
+		{
+			if (bindingSource1.Current == null) return;
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+			openFileDialog.Filter = "Таблицы Excel (*.xls)|*.xls";
+			if (openFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				RequestController.LoadData(new  UploadDataModel() {FileName = openFileDialog.FileName,Request = (Request)bindingSource1.Current,UnitOfWork = unitOfWork});
+			}
 		}
 
 		private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -149,31 +160,6 @@ namespace PostReq
 			}
 		}
 
-		private void dateFromCombBox_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void fromDateTimePicker_ValueChanged(object sender, EventArgs e)
-		{
-
-		}
-
-		private void toolStripLabel2_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-		{
-
-		}
-
-		private void postamtComboBox_Click(object sender, EventArgs e)
-		{
-
-		}
-
 		private void toolStripButton3_Click(object sender, EventArgs e)
 		{
 			EditCurrentRequest();
@@ -193,6 +179,16 @@ namespace PostReq
 		private void открытьЗаявкуToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditCurrentRequest();
+		}
+
+		private void создатьКопиюToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CreateCopyRequest();
+		}
+
+		private void загрузитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			LoadData();
 		}
 	}
 }

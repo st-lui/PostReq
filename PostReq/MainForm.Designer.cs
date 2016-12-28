@@ -35,9 +35,11 @@
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.открытьЗаявкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.addRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -49,16 +51,16 @@
 			this.postamtComboBox = new System.Windows.Forms.ToolStripComboBox();
 			this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.toDateTimePicker = new System.Windows.Forms.DateTimePicker();
+			this.создатьКопиюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+			this.загрузитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
 			this.toolStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -121,23 +123,42 @@
 			this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
 			this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
 			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "State.Name";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Состояние";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "User.Fio";
+			this.Column1.HeaderText = "Автор";
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "User.Post.Name";
+			this.Column2.HeaderText = "Почтамт";
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
+			// 
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.открытьЗаявкуToolStripMenuItem});
+            this.открытьЗаявкуToolStripMenuItem,
+            this.создатьКопиюToolStripMenuItem,
+            this.загрузитьДанныеToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(160, 26);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(193, 92);
 			// 
 			// открытьЗаявкуToolStripMenuItem
 			// 
 			this.открытьЗаявкуToolStripMenuItem.Name = "открытьЗаявкуToolStripMenuItem";
-			this.открытьЗаявкуToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+			this.открытьЗаявкуToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
 			this.открытьЗаявкуToolStripMenuItem.Text = "Открыть заявку";
 			this.открытьЗаявкуToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаявкуToolStripMenuItem_Click);
-			// 
-			// bindingSource1
-			// 
-			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
 			// 
 			// toolStrip1
 			// 
@@ -156,7 +177,6 @@
 			this.toolStrip1.Size = new System.Drawing.Size(1111, 25);
 			this.toolStrip1.TabIndex = 3;
 			this.toolStrip1.Text = "toolStrip1";
-			this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
 			// 
 			// addRequestToolStripButton
 			// 
@@ -198,7 +218,6 @@
 			this.toolStripLabel2.Name = "toolStripLabel2";
 			this.toolStripLabel2.Size = new System.Drawing.Size(13, 22);
 			this.toolStripLabel2.Text = "с";
-			this.toolStripLabel2.Click += new System.EventHandler(this.toolStripLabel2_Click);
 			// 
 			// toolStripLabel1
 			// 
@@ -215,7 +234,6 @@
 			// 
 			this.postamtComboBox.Name = "postamtComboBox";
 			this.postamtComboBox.Size = new System.Drawing.Size(121, 25);
-			this.postamtComboBox.Click += new System.EventHandler(this.postamtComboBox_Click);
 			// 
 			// fromDateTimePicker
 			// 
@@ -223,7 +241,6 @@
 			this.fromDateTimePicker.Name = "fromDateTimePicker";
 			this.fromDateTimePicker.Size = new System.Drawing.Size(150, 21);
 			this.fromDateTimePicker.TabIndex = 4;
-			this.fromDateTimePicker.ValueChanged += new System.EventHandler(this.fromDateTimePicker_ValueChanged);
 			// 
 			// toDateTimePicker
 			// 
@@ -231,6 +248,13 @@
 			this.toDateTimePicker.Name = "toDateTimePicker";
 			this.toDateTimePicker.Size = new System.Drawing.Size(150, 21);
 			this.toDateTimePicker.TabIndex = 5;
+			// 
+			// создатьКопиюToolStripMenuItem
+			// 
+			this.создатьКопиюToolStripMenuItem.Name = "создатьКопиюToolStripMenuItem";
+			this.создатьКопиюToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.создатьКопиюToolStripMenuItem.Text = "Создать копию";
+			this.создатьКопиюToolStripMenuItem.Click += new System.EventHandler(this.создатьКопиюToolStripMenuItem_Click);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -246,26 +270,16 @@
 			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
 			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
-			// dataGridViewTextBoxColumn1
+			// bindingSource1
 			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "State.Name";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Состояние";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
 			// 
-			// Column1
+			// загрузитьДанныеToolStripMenuItem
 			// 
-			this.Column1.DataPropertyName = "User.Fio";
-			this.Column1.HeaderText = "Автор";
-			this.Column1.Name = "Column1";
-			this.Column1.ReadOnly = true;
-			// 
-			// Column2
-			// 
-			this.Column2.DataPropertyName = "User.Post.Name";
-			this.Column2.HeaderText = "Почтамт";
-			this.Column2.Name = "Column2";
-			this.Column2.ReadOnly = true;
+			this.загрузитьДанныеToolStripMenuItem.Name = "загрузитьДанныеToolStripMenuItem";
+			this.загрузитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.загрузитьДанныеToolStripMenuItem.Text = "Загрузить накладную";
+			this.загрузитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.загрузитьДанныеToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -289,9 +303,9 @@
 			this.menuStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.contextMenuStrip1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -323,5 +337,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+		private System.Windows.Forms.ToolStripMenuItem создатьКопиюToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem загрузитьДанныеToolStripMenuItem;
 	}
 }
