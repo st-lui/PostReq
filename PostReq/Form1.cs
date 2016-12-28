@@ -27,7 +27,7 @@ namespace PostReq
 		bool changed = false;
 		public int Result { get; private set; }
 
-		public AddRequestForm(UnitOfWork unitOfWork, Utils.FormMode formMode, NomLoader nomLoader, int editId = 0)
+		public AddRequestForm(Utils.FormMode formMode, NomLoader nomLoader, int editId = 0)
 		{
 			this.formMode = formMode;
 			InitializeComponent();
@@ -44,18 +44,18 @@ namespace PostReq
 			}
 			this.nomLoader = nomLoader;
 			searchModel = new SearchModel();
-			this.unitOfWork = unitOfWork;
+			this.unitOfWork = new UnitOfWork();
 			if (formMode == Utils.FormMode.New)
 			{
 				request = new Request();
-				request.User = UserController.GetUserInfo(request.Username,unitOfWork);
+				request.User = UserController.GetUserInfo(request.Username, unitOfWork);
 				requestRowBindingSource.DataSource = request.RequestRows;
 				dataGridView1.DataSource = requestRowBindingSource;
 			}
 			else
 			if (formMode == Utils.FormMode.Copy)
 			{
-				request=new Request(unitOfWork.Requests.Get(editId));
+				request = new Request(unitOfWork.Requests.Get(editId));
 				request.User = UserController.GetUserInfo(request.Username, unitOfWork);
 				requestRowBindingSource.DataSource = request.RequestRows;
 				dataGridView1.DataSource = requestRowBindingSource;
@@ -188,7 +188,7 @@ namespace PostReq
 								GoodsId = nom.Id,
 								Name = nom.Name,
 								RequestId = request.Id,
-								Price=nom.Price
+								Price = nom.Price
 							};
 							unitOfWork.RequestRows.Add(requestRow);
 							requestRowBindingSource.Add(requestRow);
@@ -285,11 +285,14 @@ namespace PostReq
 		private void deletePositionButton_Click(object sender, EventArgs e)
 		{
 			if (formMode == Utils.FormMode.New || formMode == Utils.FormMode.Copy)
-				requestRowBindingSource.RemoveCurrent();
-			else
+			{
+				if (requestRowBindingSource.Current != null)
+					requestRowBindingSource.RemoveCurrent();
+			}
+			else if (requestRowBindingSource.Current != null)
 			{
 				((RequestRow) requestRowBindingSource.Current).Request = null;
-				unitOfWork.RequestRows.Delete((RequestRow)requestRowBindingSource.Current);
+				unitOfWork.RequestRows.Delete((RequestRow) requestRowBindingSource.Current);
 				requestRowBindingSource.RemoveCurrent();
 			}
 			dataGridView1.Focus();
@@ -312,13 +315,27 @@ namespace PostReq
 
 		private void AddRequestForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			unitOfWork.Dispose();
 		}
 
 		private void cancelButton_Click(object sender, EventArgs e)
 		{
 			if (changed)
 			{
-				MessageBox.Show("В заявке есть несохраненные изменения. Вы хотите сохранить внесенные изменения?","Заявки на ")
+				DialogResult closeResult = MessageBox.Show("В заявке есть несохраненные изменения. Вы хотите сохранить заявку?",
+					"Заявки на поставку товаров", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+				if (closeResult == DialogResult.Yes)
+				{
+					SaveRequest();
+					Result = request.Id;
+					Close();
+				}
+				else if (closeResult == DialogResult.No)
+				{
+					Close();
+				}
+				else if (closeResult == DialogResult.Cancel)
+					return;
 			}
 			else
 				Close();
@@ -333,6 +350,12 @@ namespace PostReq
 				fileName = RequestController.GeneratePrintForm(request, request.RequestRows.ToList());
 			if (fileName != null)
 				Process.Start(fileName);
+		}
+
+		private void AddRequestForm_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Escape)
+				cancelButton_Click(sender, e);
 		}
 	}
 }

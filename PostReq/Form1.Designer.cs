@@ -109,7 +109,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridView1.AutoGenerateColumns = false;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-			this.dataGridView1.ColumnHeadersVisible = false;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this._Name,
             this.Amount,
@@ -128,6 +127,7 @@
 			this.dataGridView1.MultiSelect = false;
 			this.dataGridView1.Name = "dataGridView1";
 			this.dataGridView1.ReadOnly = true;
+			this.dataGridView1.RowHeadersVisible = false;
 			this.dataGridView1.RowHeadersWidth = 15;
 			this.dataGridView1.RowTemplate.Height = 18;
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -141,7 +141,7 @@
 			this._Name.HeaderText = "Номенклатура";
 			this._Name.Name = "_Name";
 			this._Name.ReadOnly = true;
-			this._Name.Width = 5;
+			this._Name.Width = 105;
 			// 
 			// Amount
 			// 
@@ -150,7 +150,7 @@
 			this.Amount.HeaderText = "Количество";
 			this.Amount.Name = "Amount";
 			this.Amount.ReadOnly = true;
-			this.Amount.Width = 5;
+			this.Amount.Width = 92;
 			// 
 			// Column1
 			// 
@@ -193,6 +193,7 @@
 			// addPositionButton
 			// 
 			this.addPositionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.addPositionButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.addPositionButton.Location = new System.Drawing.Point(390, 108);
 			this.addPositionButton.Name = "addPositionButton";
 			this.addPositionButton.Size = new System.Drawing.Size(143, 23);
@@ -229,6 +230,7 @@
 			// saveButton
 			// 
 			this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.saveButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.saveButton.Location = new System.Drawing.Point(390, 310);
 			this.saveButton.Name = "saveButton";
 			this.saveButton.Size = new System.Drawing.Size(143, 23);
@@ -253,7 +255,6 @@
 			// cancelButton
 			// 
 			this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.cancelButton.Location = new System.Drawing.Point(390, 339);
 			this.cancelButton.Name = "cancelButton";
 			this.cancelButton.Size = new System.Drawing.Size(143, 23);
@@ -375,7 +376,6 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.CancelButton = this.cancelButton;
 			this.ClientSize = new System.Drawing.Size(1020, 396);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.cancelButton);
@@ -398,6 +398,7 @@
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddRequestForm_FormClosed);
 			this.Load += new System.EventHandler(this.Form1_Load);
+			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddRequestForm_KeyUp);
 			this.Resize += new System.EventHandler(this.Form1_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.statusStrip1.ResumeLayout(false);

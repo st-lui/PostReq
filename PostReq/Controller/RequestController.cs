@@ -52,6 +52,7 @@ namespace PostReq.Controller
 						row.Cells[1].SetCellValue(requestRows[0].Code);
 						row.Cells[4].SetCellValue(requestRows[0].Name);
 						row.Cells[8].SetCellValue(requestRows[0].Amount);
+						row.Cells[9].SetCellValue(requestRows[0].Price);
 					}
 					for (int i = 1; i < requestRows.Count; i++)
 					{
@@ -60,6 +61,7 @@ namespace PostReq.Controller
 						row.Cells[1].SetCellValue(requestRows[i].Code);
 						row.Cells[4].SetCellValue(requestRows[i].Name);
 						row.Cells[8].SetCellValue(requestRows[i].Amount);
+						row.Cells[9].SetCellValue(requestRows[i].Price);
 					}
 					//for (int i = 0; i < 11; i++)
 					//{

@@ -40,7 +40,10 @@ namespace PostReq.Controller
 			{
 				user = new User
 				{
-					UserName = userName
+					UserName = userName,
+					Post = uow.Posts.Get(1),
+					Fio="Луценко Евгений Вячеславович"
+					
 				};
 				return user;
 			}

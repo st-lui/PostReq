@@ -21,6 +21,7 @@ namespace PostReq.Model
 		EntityRef<Request> request;
 		private string code;
 		private double price;
+		private double factAmount;
 
 		public RequestRow()
 		{
@@ -124,12 +125,13 @@ namespace PostReq.Model
 		{
 			get { return $"{Name} {Amount:f3} {EdIzm}"; }
 		}
-
+		[DisplayName("Количество")]
 		public string AmountString
 		{
 			get { return $"{Amount:f3} {EdIzm}"; }
 		}
 
+		[DisplayName("Стоимость")]
 		public double Cost
 		{
 			get { return Amount*Price; }
@@ -142,6 +144,25 @@ namespace PostReq.Model
 			set { code = value; Change("Code");}
 		}
 
+		[Column(Name="fact_amount",DbType="decimal(10,3)")]
+		[DisplayName("Факт")]
+		public double FactAmount
+		{
+			get { return factAmount; }
+			set { factAmount = value; Change("FactAmount"); }
+		}
+
+		[DisplayName("Процент")]
+		public double Percent
+		{
+			get
+			{
+				if (Amount == 0)
+					return 0;
+				else
+					return Math.Round(FactAmount/Amount*100,2);
+			}
+		}
 		public override string ToString()
 		{
 			return StringRep;

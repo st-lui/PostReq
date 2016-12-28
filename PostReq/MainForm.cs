@@ -77,22 +77,26 @@ namespace PostReq
 
 		private void addRequestToolStripButton_Click(object sender, EventArgs e)
 		{
-			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork, Utils.FormMode.New, nomLoader);
+			unitOfWork.Dispose();
+			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.New, nomLoader);
 			addRequestForm.ShowDialog();
+			unitOfWork = new UnitOfWork();
+			filterModel.UnitOfWork = unitOfWork;
 			if (addRequestForm.Result > 0)
 			{
 				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 				setGridSelectedItem(addRequestForm.Result);
 				//Refresh(dataGridView1);
 			}
-
 		}
 
 		void EditCurrentRequest()
 		{
 			if (bindingSource1.Current == null) return;
-			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork, Utils.FormMode.Edit, nomLoader,
-				((Request)bindingSource1.Current).Id);
+			unitOfWork.Dispose();
+			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Edit, nomLoader, ((Request)bindingSource1.Current).Id);
+			unitOfWork=new UnitOfWork();
+			filterModel.UnitOfWork = unitOfWork;
 			addRequestForm.ShowDialog();
 			if (addRequestForm.Result > 0)
 				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
@@ -100,12 +104,16 @@ namespace PostReq
 
 		void CreateCopyRequest()
 		{
-			AddRequestForm addRequestForm = new AddRequestForm(unitOfWork, Utils.FormMode.Copy, nomLoader, ((Request)bindingSource1.Current).Id);
+			unitOfWork.Dispose();
+			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Copy, nomLoader, ((Request)bindingSource1.Current).Id);
 			addRequestForm.ShowDialog();
+			unitOfWork = new UnitOfWork();
+			filterModel.UnitOfWork = unitOfWork;
 			if (addRequestForm.Result > 0)
 			{
 				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 			}
+			
 		}
 
 		private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
