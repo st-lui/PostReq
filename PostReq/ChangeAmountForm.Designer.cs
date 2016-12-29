@@ -108,6 +108,7 @@
 			this.Controls.Add(this.acceptButton);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.Name = "ChangeAmountForm";
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Количество товара";
 			this.Load += new System.EventHandler(this.ChangeAmountForm_Load);

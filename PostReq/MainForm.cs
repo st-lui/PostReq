@@ -122,7 +122,7 @@ namespace PostReq
 			if (bindingSource1.Current == null) return;
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 			openFileDialog.Filter = "Таблицы Excel (*.xls)|*.xls";
-			if (openFileDialog.ShowDialog() == DialogResult.OK)
+			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				RequestController.LoadData(new  UploadDataModel() {FileName = openFileDialog.FileName,Request = (Request)bindingSource1.Current,UnitOfWork = unitOfWork});
 			}

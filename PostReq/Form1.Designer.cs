@@ -38,6 +38,12 @@
 			this.findButton = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this._Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.FactAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.label2 = new System.Windows.Forms.Label();
 			this.searchPatternTextBox = new System.Windows.Forms.TextBox();
 			this.addPositionButton = new System.Windows.Forms.Button();
@@ -52,11 +58,6 @@
 			this.printRequestButton = new System.Windows.Forms.Button();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-			this.requestRowBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this._Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,8 +66,7 @@
 			this.requestIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.stringRepDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.amountStringDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.FactAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.requestRowBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.statusStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).BeginInit();
@@ -139,6 +139,60 @@
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridView1.Size = new System.Drawing.Size(454, 311);
 			this.dataGridView1.TabIndex = 10;
+			// 
+			// _Name
+			// 
+			this._Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this._Name.DataPropertyName = "Name";
+			this._Name.HeaderText = "Номенклатура";
+			this._Name.Name = "_Name";
+			this._Name.ReadOnly = true;
+			this._Name.Width = 105;
+			// 
+			// Amount
+			// 
+			this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.Amount.DataPropertyName = "AmountString";
+			this.Amount.HeaderText = "Количество";
+			this.Amount.Name = "Amount";
+			this.Amount.ReadOnly = true;
+			this.Amount.Width = 92;
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "Price";
+			dataGridViewCellStyle1.Format = "F2";
+			this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+			this.Column1.HeaderText = "Цена";
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "Cost";
+			dataGridViewCellStyle2.Format = "F2";
+			this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+			this.Column2.HeaderText = "Сумма";
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
+			// 
+			// FactAmount
+			// 
+			this.FactAmount.DataPropertyName = "FactAmount";
+			dataGridViewCellStyle3.Format = "f3";
+			this.FactAmount.DefaultCellStyle = dataGridViewCellStyle3;
+			this.FactAmount.HeaderText = "Факт";
+			this.FactAmount.Name = "FactAmount";
+			this.FactAmount.ReadOnly = true;
+			// 
+			// Percent
+			// 
+			this.Percent.DataPropertyName = "Percent";
+			dataGridViewCellStyle4.Format = "f2";
+			this.Percent.DefaultCellStyle = dataGridViewCellStyle4;
+			this.Percent.HeaderText = "Процент";
+			this.Percent.Name = "Percent";
+			this.Percent.ReadOnly = true;
 			// 
 			// label2
 			// 
@@ -271,47 +325,6 @@
 			this.notifyIcon1.Text = "notifyIcon1";
 			this.notifyIcon1.Visible = true;
 			// 
-			// requestRowBindingSource
-			// 
-			this.requestRowBindingSource.DataSource = typeof(PostReq.Model.RequestRow);
-			this.requestRowBindingSource.CurrentChanged += new System.EventHandler(this.requestRowBindingSource_CurrentChanged);
-			// 
-			// _Name
-			// 
-			this._Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this._Name.DataPropertyName = "Name";
-			this._Name.HeaderText = "Номенклатура";
-			this._Name.Name = "_Name";
-			this._Name.ReadOnly = true;
-			this._Name.Width = 105;
-			// 
-			// Amount
-			// 
-			this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.Amount.DataPropertyName = "AmountString";
-			this.Amount.HeaderText = "Количество";
-			this.Amount.Name = "Amount";
-			this.Amount.ReadOnly = true;
-			this.Amount.Width = 92;
-			// 
-			// Column1
-			// 
-			this.Column1.DataPropertyName = "Price";
-			dataGridViewCellStyle1.Format = "F2";
-			this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-			this.Column1.HeaderText = "Цена";
-			this.Column1.Name = "Column1";
-			this.Column1.ReadOnly = true;
-			// 
-			// Column2
-			// 
-			this.Column2.DataPropertyName = "Cost";
-			dataGridViewCellStyle2.Format = "F2";
-			this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
-			this.Column2.HeaderText = "Сумма";
-			this.Column2.Name = "Column2";
-			this.Column2.ReadOnly = true;
-			// 
 			// idDataGridViewTextBoxColumn
 			// 
 			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
@@ -376,23 +389,10 @@
 			this.amountStringDataGridViewTextBoxColumn.ReadOnly = true;
 			this.amountStringDataGridViewTextBoxColumn.Visible = false;
 			// 
-			// FactAmount
+			// requestRowBindingSource
 			// 
-			this.FactAmount.DataPropertyName = "FactAmount";
-			dataGridViewCellStyle3.Format = "f3";
-			this.FactAmount.DefaultCellStyle = dataGridViewCellStyle3;
-			this.FactAmount.HeaderText = "Факт";
-			this.FactAmount.Name = "FactAmount";
-			this.FactAmount.ReadOnly = true;
-			// 
-			// Percent
-			// 
-			this.Percent.DataPropertyName = "Percent";
-			dataGridViewCellStyle4.Format = "f2";
-			this.Percent.DefaultCellStyle = dataGridViewCellStyle4;
-			this.Percent.HeaderText = "Процент";
-			this.Percent.Name = "Percent";
-			this.Percent.ReadOnly = true;
+			this.requestRowBindingSource.DataSource = typeof(PostReq.Model.RequestRow);
+			this.requestRowBindingSource.CurrentChanged += new System.EventHandler(this.requestRowBindingSource_CurrentChanged);
 			// 
 			// AddRequestForm
 			// 
@@ -416,6 +416,7 @@
 			this.Font = new System.Drawing.Font("Tahoma", 8.25F);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "AddRequestForm";
+			this.ShowInTaskbar = false;
 			this.Text = "Новая заявка";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddRequestForm_FormClosing);

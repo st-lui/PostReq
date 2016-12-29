@@ -159,7 +159,7 @@ namespace PostReq
 					if (formMode == Utils.FormMode.New || formMode == Utils.FormMode.Copy)
 					{
 						var changeAmountForm = new ChangeAmountForm(nom.Name, nom.EdIzm);
-						if (changeAmountForm.ShowDialog() == DialogResult.OK)
+						if (changeAmountForm.ShowDialog(this) == DialogResult.OK)
 						{
 							requestRowBindingSource.Add(new RequestRow()
 							{
@@ -179,7 +179,7 @@ namespace PostReq
 					else
 					{
 						var changeAmountForm = new ChangeAmountForm(nom.Name, nom.EdIzm);
-						if (changeAmountForm.ShowDialog() == DialogResult.OK)
+						if (changeAmountForm.ShowDialog(this) == DialogResult.OK)
 						{
 							var requestRow = new RequestRow()
 							{
@@ -234,7 +234,7 @@ namespace PostReq
 		{
 			RequestRow currentRequestRow = (RequestRow)requestRowBindingSource.Current;
 			var changeAmountForm = new ChangeAmountForm(currentRequestRow.Name, currentRequestRow.EdIzm, currentRequestRow.Amount);
-			if (changeAmountForm.ShowDialog() == DialogResult.OK)
+			if (changeAmountForm.ShowDialog(this) == DialogResult.OK)
 			{
 				currentRequestRow.Amount = changeAmountForm.Value;
 				Refresh(dataGridView1);
