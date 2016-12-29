@@ -35,11 +35,16 @@
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.открытьЗаявкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.создатьКопиюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.загрузитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.addRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -51,16 +56,11 @@
 			this.postamtComboBox = new System.Windows.Forms.ToolStripComboBox();
 			this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.toDateTimePicker = new System.Windows.Forms.DateTimePicker();
-			this.создатьКопиюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-			this.загрузитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
-			this.toolStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+			this.toolStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -119,9 +119,24 @@
 			this.dataGridView1.Size = new System.Drawing.Size(1111, 212);
 			this.dataGridView1.TabIndex = 2;
 			this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+			this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
 			this.dataGridView1.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.dataGridView1_CellContextMenuStripNeeded);
 			this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
 			this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
+			// 
+			// idDataGridViewTextBoxColumn
+			// 
+			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+			this.idDataGridViewTextBoxColumn.HeaderText = "Номер заявки";
+			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// dateDataGridViewTextBoxColumn
+			// 
+			this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
+			this.dateDataGridViewTextBoxColumn.HeaderText = "Дата заявки";
+			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
+			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
 			// dataGridViewTextBoxColumn1
 			// 
@@ -151,7 +166,7 @@
             this.создатьКопиюToolStripMenuItem,
             this.загрузитьДанныеToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(193, 92);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(193, 70);
 			// 
 			// открытьЗаявкуToolStripMenuItem
 			// 
@@ -159,6 +174,24 @@
 			this.открытьЗаявкуToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
 			this.открытьЗаявкуToolStripMenuItem.Text = "Открыть заявку";
 			this.открытьЗаявкуToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаявкуToolStripMenuItem_Click);
+			// 
+			// создатьКопиюToolStripMenuItem
+			// 
+			this.создатьКопиюToolStripMenuItem.Name = "создатьКопиюToolStripMenuItem";
+			this.создатьКопиюToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.создатьКопиюToolStripMenuItem.Text = "Создать копию";
+			this.создатьКопиюToolStripMenuItem.Click += new System.EventHandler(this.создатьКопиюToolStripMenuItem_Click);
+			// 
+			// загрузитьДанныеToolStripMenuItem
+			// 
+			this.загрузитьДанныеToolStripMenuItem.Name = "загрузитьДанныеToolStripMenuItem";
+			this.загрузитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.загрузитьДанныеToolStripMenuItem.Text = "Загрузить накладную";
+			this.загрузитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.загрузитьДанныеToolStripMenuItem_Click);
+			// 
+			// bindingSource1
+			// 
+			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
 			// 
 			// toolStrip1
 			// 
@@ -249,38 +282,6 @@
 			this.toDateTimePicker.Size = new System.Drawing.Size(150, 21);
 			this.toDateTimePicker.TabIndex = 5;
 			// 
-			// создатьКопиюToolStripMenuItem
-			// 
-			this.создатьКопиюToolStripMenuItem.Name = "создатьКопиюToolStripMenuItem";
-			this.создатьКопиюToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-			this.создатьКопиюToolStripMenuItem.Text = "Создать копию";
-			this.создатьКопиюToolStripMenuItem.Click += new System.EventHandler(this.создатьКопиюToolStripMenuItem_Click);
-			// 
-			// idDataGridViewTextBoxColumn
-			// 
-			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			this.idDataGridViewTextBoxColumn.HeaderText = "Номер заявки";
-			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			this.idDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// dateDataGridViewTextBoxColumn
-			// 
-			this.dateDataGridViewTextBoxColumn.DataPropertyName = "Date";
-			this.dateDataGridViewTextBoxColumn.HeaderText = "Дата заявки";
-			this.dateDataGridViewTextBoxColumn.Name = "dateDataGridViewTextBoxColumn";
-			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// bindingSource1
-			// 
-			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
-			// 
-			// загрузитьДанныеToolStripMenuItem
-			// 
-			this.загрузитьДанныеToolStripMenuItem.Name = "загрузитьДанныеToolStripMenuItem";
-			this.загрузитьДанныеToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-			this.загрузитьДанныеToolStripMenuItem.Text = "Загрузить накладную";
-			this.загрузитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.загрузитьДанныеToolStripMenuItem_Click);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,9 +304,9 @@
 			this.menuStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.contextMenuStrip1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

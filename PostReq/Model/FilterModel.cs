@@ -10,6 +10,6 @@ namespace PostReq.Model
 		public UnitOfWork UnitOfWork { get; set;}
 		public DateTime DateFrom { get; set; }
 		public DateTime DateTo { get; set; }
-		public int PostId { get; set; }
+		public Post Post { get; set; }
 	}
 }

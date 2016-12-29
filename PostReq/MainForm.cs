@@ -18,12 +18,16 @@ namespace PostReq
 		NomLoader nomLoader;
 		FilterModel filterModel;
 		UnitOfWork unitOfWork;
+		User currentUser;
 		public MainForm()
 		{
 			unitOfWork = new UnitOfWork();
 			filterModel = new FilterModel();
 			filterModel.UnitOfWork = unitOfWork;
 			InitializeComponent();
+			currentUser = UserController.GetUserInfo(Environment.UserDomainName, unitOfWork);
+			if (currentUser.Post.Privilegies != 0)
+				postamtComboBox.Visible = false;
 			Text += $" {Assembly.GetExecutingAssembly().GetName().Version}";
 			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 			ToolStripControlHost tsHostFrom = new ToolStripControlHost(fromDateTimePicker);
@@ -40,6 +44,8 @@ namespace PostReq
 			//}
 			nomLoader = NomLoader.Create();
 			nomLoader.UpdateLocalNom();
+			
+			
 		}
 
 		private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -78,43 +84,56 @@ namespace PostReq
 		private void addRequestToolStripButton_Click(object sender, EventArgs e)
 		{
 			unitOfWork.Dispose();
-			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.New, nomLoader);
+			var editRequesModel = new EditRequestModel()
+			{
+				FormMode = Utils.FormMode.New,
+				NomLoader = nomLoader,
+				FormText = "Создание заявки"
+			};
+			AddRequestForm addRequestForm = new AddRequestForm(editRequesModel);
 			addRequestForm.ShowDialog(this);
 			unitOfWork = new UnitOfWork();
 			filterModel.UnitOfWork = unitOfWork;
+			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 			if (addRequestForm.Result > 0)
-			{
-				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
+
 				setGridSelectedItem(addRequestForm.Result);
-				//Refresh(dataGridView1);
-			}
 		}
 
 		void EditCurrentRequest()
 		{
 			if (bindingSource1.Current == null) return;
 			unitOfWork.Dispose();
-			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Edit, nomLoader, ((Request)bindingSource1.Current).Id);
+			var editRequestModel = new EditRequestModel()
+			{
+				FormMode = Utils.FormMode.Edit,
+				NomLoader = nomLoader,
+				FormText = "Изменение заявки",
+				EditId = ((Request) bindingSource1.Current).Id
+			};
+			AddRequestForm addRequestForm = new AddRequestForm(editRequestModel);
 			unitOfWork=new UnitOfWork();
 			filterModel.UnitOfWork = unitOfWork;
 			addRequestForm.ShowDialog(this);
-			if (addRequestForm.Result > 0)
-				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
+			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 		}
 
 		void CreateCopyRequest()
 		{
 			if (bindingSource1.Current == null) return;
 			unitOfWork.Dispose();
-			AddRequestForm addRequestForm = new AddRequestForm(Utils.FormMode.Copy, nomLoader, ((Request)bindingSource1.Current).Id);
+			EditRequestModel editRequestModel = new EditRequestModel()
+			{
+				FormMode = Utils.FormMode.Copy,
+				NomLoader = nomLoader,
+				FormText = "Создание заявки",
+				EditId = ((Request) bindingSource1.Current).Id
+			};
+			AddRequestForm addRequestForm = new AddRequestForm(editRequestModel);
 			addRequestForm.ShowDialog(this);
 			unitOfWork = new UnitOfWork();
 			filterModel.UnitOfWork = unitOfWork;
-			if (addRequestForm.Result > 0)
-			{
-				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
-			}
-			
+			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 		}
 
 		private void LoadData()
@@ -167,6 +186,7 @@ namespace PostReq
 
 		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
+			bindingSource1.Position = e.RowIndex;
 		}
 
 		private void dataGridView1_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
@@ -189,6 +209,11 @@ namespace PostReq
 		private void загрузитьДанныеToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			LoadData();
+		}
+
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+			bindingSource1.Position = e.RowIndex;
 		}
 	}
 }

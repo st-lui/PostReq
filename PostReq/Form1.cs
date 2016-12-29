@@ -27,10 +27,11 @@ namespace PostReq
 		bool changed = false;
 		public int Result { get; private set; }
 
-		public AddRequestForm(Utils.FormMode formMode, NomLoader nomLoader, int editId = 0)
+		public AddRequestForm(EditRequestModel editRequestModel)
 		{
-			this.formMode = formMode;
 			InitializeComponent();
+			this.formMode = editRequestModel.FormMode;
+			Text = editRequestModel.FormText;
 			Stack<Control> controlsStack = new Stack<Control>();
 			controlsStack.Push(this);
 			while (controlsStack.Count > 0)
@@ -42,7 +43,7 @@ namespace PostReq
 					controlsStack.Push(o);
 				}
 			}
-			this.nomLoader = nomLoader;
+			this.nomLoader = editRequestModel.NomLoader;
 			searchModel = new SearchModel();
 			this.unitOfWork = new UnitOfWork();
 			if (formMode == Utils.FormMode.New)
@@ -55,7 +56,7 @@ namespace PostReq
 			else
 			if (formMode == Utils.FormMode.Copy)
 			{
-				request = new Request(unitOfWork.Requests.Get(editId));
+				request = new Request(unitOfWork.Requests.Get(editRequestModel.EditId));
 				request.User = UserController.GetUserInfo(request.Username, unitOfWork);
 				requestRowBindingSource.DataSource = request.RequestRows;
 				dataGridView1.DataSource = requestRowBindingSource;
@@ -63,7 +64,7 @@ namespace PostReq
 			else
 			if (formMode == Utils.FormMode.Edit)
 			{
-				request = unitOfWork.Requests.Get(editId);
+				request = unitOfWork.Requests.Get(editRequestModel.EditId);
 				requestRowBindingSource.DataSource = request.RequestRows;
 				dataGridView1.DataSource = requestRowBindingSource;
 			}
@@ -95,7 +96,7 @@ namespace PostReq
 		private void Form1_Resize(object sender, EventArgs e)
 		{
 			treeView1.Width = (int)Math.Round(Width * 0.4 - treeView1.Left);
-			dataGridView1.Left = (int)Math.Round(Width * 0.6);
+			dataGridView1.Left = (int)Math.Round(Width * 0.55);
 			int w = 30;
 			dataGridView1.Width = Width - dataGridView1.Left - w;
 			label2.Left = dataGridView1.Left;
@@ -188,7 +189,8 @@ namespace PostReq
 								GoodsId = nom.Id,
 								Name = nom.Name,
 								RequestId = request.Id,
-								Price = nom.Price
+								Price = nom.Price,
+								Code = nom.Code
 							};
 							unitOfWork.RequestRows.Add(requestRow);
 							requestRowBindingSource.Add(requestRow);
