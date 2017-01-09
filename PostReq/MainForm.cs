@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows.Forms;
 using PostReq.Controller;
 using PostReq.Model;
@@ -19,6 +13,7 @@ namespace PostReq
 		FilterModel filterModel;
 		UnitOfWork unitOfWork;
 		User currentUser;
+		int selectedRow;
 		public MainForm()
 		{
 			unitOfWork = new UnitOfWork();
@@ -26,6 +21,7 @@ namespace PostReq
 			filterModel.UnitOfWork = unitOfWork;
 			InitializeComponent();
 			currentUser = UserController.GetUserInfo(Environment.UserDomainName, unitOfWork);
+			
 			if (currentUser.Post.Privilegies != 0)
 				postamtComboBox.Visible = false;
 			Text += $" {Assembly.GetExecutingAssembly().GetName().Version}";
@@ -96,7 +92,6 @@ namespace PostReq
 			filterModel.UnitOfWork = unitOfWork;
 			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 			if (addRequestForm.Result > 0)
-
 				setGridSelectedItem(addRequestForm.Result);
 		}
 
@@ -184,18 +179,6 @@ namespace PostReq
 			EditCurrentRequest();
 		}
 
-		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-		{
-			bindingSource1.Position = e.RowIndex;
-		}
-
-		private void dataGridView1_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
-		{
-			if (MouseButtons == MouseButtons.Right)
-				bindingSource1.Position = e.RowIndex;
-			contextMenuStrip1.Show();
-		}
-
 		private void открытьЗаявкуToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EditCurrentRequest();
@@ -211,9 +194,23 @@ namespace PostReq
 			LoadData();
 		}
 
-		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
 		{
-			bindingSource1.Position = e.RowIndex;
+			if (e.Button == MouseButtons.Right)
+			{
+				try
+				{
+					var htInfo = dataGridView1.HitTest(e.X, e.Y);
+					dataGridView1.ClearSelection();
+					if (htInfo != null)
+					{
+						bindingSource1.Position = htInfo.RowIndex;
+					}
+				}
+				catch
+				{
+				}
+			}
 		}
 	}
 }
