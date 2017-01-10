@@ -129,6 +129,9 @@
   <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Percent.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>374, 17</value>
   </metadata>
@@ -151,7 +154,7 @@
         7uQb0PnI7H/3EzPyDUDBgxQwMAAADYXFV03UbkcAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="toolStripButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="copyRequestToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEESURBVDhPjZBNaoRAEEaHbFwGshEEIeAdsggEl7lEvEqO
@@ -162,7 +165,7 @@
         RU5ErkJggg==
 </value>
   </data>
-  <data name="toolStripButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="openRequestToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHzSURBVDhPhZJPSJphHMcfpms5LDJzipfOwaBThy7t3CXa
@@ -175,6 +178,37 @@
         kYYNODTLYPk0jVgsxtfraRAoFAouiEQi2HWtwj75AgvznxEOh7ngPuxmNBpNo8Dr9eLdq3F4PB4uY7DX
         dx92O00FbLxEIsEb6m+j/nAZrPeOgFYvfVlzdHG2ilqtbopKpTIyaKbvOkrIFT0ZmkKlTbbpAAAAAElF
         TkSuQmCC
+</value>
+  </data>
+  <data name="printRequestToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJvSURBVDhPjZNdSFphGMcPwiYzBrsYYyCsey+DwAgv82Kw
+        CxHv0plhF7oCb8dAdIY3qVAwdtGFpl1JQvYB7ioJliCmgcPMaamIgfkZJyvN/973dLItFPaDP+fw8n+e
+        83y8h3nCi83Nzfjp6Wkjm81yKpVKnOj7+Pj4R943FNHh4WEef3Fzc4PLy0uUy2VIpdJPvG8oolgslqWB
+        vV4PV1dXqNVqOD8/Ry6Xw8TEhIH3DeVZPB7/TRNcX1+j0WhwwYVCAel0GqQFPe8bjEQiebe/v1+kXz07
+        O8Px8TGOjo4QjUYRDoehUCi+Epvw3j0Ar9f7c2dnp0eSYG9vD6FQCMFgEH6/H263Gx6Pp0OSfObtjxj1
+        xrEVx4q91WrR6vt0u1202200m01UKhVcXFwgEAjklUqlfmRk5A0XPCmd/LAV32ofVA/4sP9jY2PjFwl/
+        zSw7lv0n7ROESiF0O13c3t4OVKfT6YtCz8hQtcx2aDvDNlmwDRa1eg31ep2b/lPR8wdVq1XQdnU63TeG
+        DKqcSqWQyWRAbiDy+Ty3tmKx+I/oGd0M9dDt0KfBYFhn1tbWUmT3IBuA0+mEzWYbqMXFRdjtdrhcLuzu
+        7iKZTEKlUn1n5ufnvYlEAlNTUxAKhZiensbs7Cwtj5NWq4VGo4FarYZcLodAIIDVakUkEgG5N3pGLBZL
+        zWZzgmTvOByO3sOQKHd3d2BZluuZ/gu0UovFgqWlJZYk/UG28JZbJeHl6Ojoe1JJm4/tQ+8C/ZnoPaAi
+        CaIikWiMxDy/D33kFRnKqslk8i0sLHAyGo2+ubk5H2nJR1rxzczMrMtksi+8n8AwfwDbpmB8ZjkIsQAA
+        AABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="uploadDataToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHrSURBVDhPpZPNTxpRFMXftv0HXLf/hwu3rIoapIkmjXFj
+        jBsKDFg1mgIJiyZtdFOgSgnUZReNCxcuJqkfqY5bRzTTkNgW6CACysAgc3rfmzDFpB9pvckv7717zj25
+        mWTYncvreflifn5TeSZ9+COS9F7x+WyChEQ9lysmsVAotXN8XMXh4flvOTr6gu3tPHLZA2xsKMjSub//
+        DWNjUoLNziaV9PoBkomPf2EHqeSuQyajYHT06RsWCryWNe0cZ2caTk9v82lgQKCqeaH30LTPxFe4H/lS
+        LBxOyPr3KkqlEorFogMfLGcyoP3FvVAoOFq5XCKqcLv9KbawsCZfXjZQqVSg67qADxjBILCyAqyugvYV
+        vbyqCv3iokI0MDISsAOur9uo1+uo1WrCCJcLmJwEZmYAHrS4CPj9QuOeRqOOq6uWHbC0tCabpgXDMNBs
+        NoWJow8NARMTwNQU6HM7fe5ptQy02114eMDy8lvZsoBOpwPTNElo/9xkehoIBMS92+0KnXNz06E34PFI
+        dgCoLErhpp5RBORywNaWE9CD3HwE3v4A3rQs28C34UP9/DLASwHx+Ls98fqPGn88l2bDw75X8Xj2JBJZ
+        VyPPCX72EeVEbxOLptVYLK0ODj4J8//pHvGQePCP8Jn7xF2KsR9cgoFCO+VWJAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

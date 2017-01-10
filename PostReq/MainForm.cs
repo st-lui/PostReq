@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using PostReq.Controller;
@@ -16,23 +19,39 @@ namespace PostReq
 		int selectedRow;
 		public MainForm()
 		{
+			if (Directory.Exists("files"))
+			{
+				var files = Directory.GetFiles("files");
+				foreach (var filePath in files)
+				{
+					try
+					{
+						File.Delete(filePath);
+					}
+					catch (IOException)
+					{
+					}
+				}
+			}
 			unitOfWork = new UnitOfWork();
 			filterModel = new FilterModel();
 			filterModel.UnitOfWork = unitOfWork;
 			InitializeComponent();
 			currentUser = UserController.GetUserInfo(Environment.UserDomainName, unitOfWork);
-			
-			if (currentUser.Post.Privilegies != 0)
-				postamtComboBox.Visible = false;
 			Text += $" {Assembly.GetExecutingAssembly().GetName().Version}";
-			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 			ToolStripControlHost tsHostFrom = new ToolStripControlHost(fromDateTimePicker);
 			ToolStripControlHost tsHostTo = new ToolStripControlHost(toDateTimePicker);
 			tsHostFrom.Height = 40;
 			tsHostTo.Height = 40;
-			toolStrip1.Items.Insert(6, tsHostTo);
-			toolStrip1.Items.Insert(5, tsHostFrom);
+			toolStrip1.Items.Insert(8, tsHostTo);
+			toolStrip1.Items.Insert(7, tsHostFrom);
 			toolStrip1.Height = 40;
+			if (currentUser.Post.Privilegies == 1)
+				ChangeInterfacePriv1();
+			else
+				if (currentUser.Post.Privilegies == 0)
+					ChangeInterfacePriv0();
+			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 			//dataGridView1.DataSource = requestBindingSource;
 			//for (int i = 0; i < dataGridView1.ColumnCount; i++)
 			//{
@@ -40,8 +59,43 @@ namespace PostReq
 			//}
 			nomLoader = NomLoader.Create();
 			nomLoader.UpdateLocalNom();
-			
-			
+
+
+		}
+
+		private void ChangeInterfacePriv1()
+		{
+			создатьКопиюToolStripMenuItem.Visible = false;
+			addRequestToolStripButton.Visible = false;
+			copyRequestToolStripButton.Visible = false;
+			создатьКопиюToolStripMenuItem.Dispose();
+			addRequestToolStripButton.Dispose();
+			copyRequestToolStripButton.Dispose();
+			GC.Collect();
+			GC.WaitForPendingFinalizers();
+			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateLoaded));
+			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateSent));
+			filterModel.Post = null;
+			filterModel.DateFrom = fromDateTimePicker.Value;
+			filterModel.DateTo = toDateTimePicker.Value;
+		}
+
+		private void ChangeInterfacePriv0()
+		{
+			postamtComboBox.Visible = false;
+			uploadDataToolStripButton.Visible = false;
+			загрузитьДанныеToolStripMenuItem.Visible = false;
+			postamtComboBox.Dispose();
+			uploadDataToolStripButton.Dispose();
+			загрузитьДанныеToolStripMenuItem.Dispose();
+			GC.Collect();
+			GC.WaitForPendingFinalizers();
+			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateLoaded));
+			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateSent));
+			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateSaved));
+			filterModel.Post = currentUser.Post;
+			filterModel.DateFrom = fromDateTimePicker.Value;
+			filterModel.DateTo = toDateTimePicker.Value;
 		}
 
 		private void выходToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,12 +158,13 @@ namespace PostReq
 				FormMode = Utils.FormMode.Edit,
 				NomLoader = nomLoader,
 				FormText = "Изменение заявки",
-				EditId = ((Request) bindingSource1.Current).Id
+				EditId = ((Request)bindingSource1.Current).Id
 			};
 			AddRequestForm addRequestForm = new AddRequestForm(editRequestModel);
-			unitOfWork=new UnitOfWork();
-			filterModel.UnitOfWork = unitOfWork;
 			addRequestForm.ShowDialog(this);
+
+			unitOfWork = new UnitOfWork();
+			filterModel.UnitOfWork = unitOfWork;
 			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 		}
 
@@ -122,7 +177,7 @@ namespace PostReq
 				FormMode = Utils.FormMode.Copy,
 				NomLoader = nomLoader,
 				FormText = "Создание заявки",
-				EditId = ((Request) bindingSource1.Current).Id
+				EditId = ((Request)bindingSource1.Current).Id
 			};
 			AddRequestForm addRequestForm = new AddRequestForm(editRequestModel);
 			addRequestForm.ShowDialog(this);
@@ -138,8 +193,17 @@ namespace PostReq
 			openFileDialog.Filter = "Таблицы Excel (*.xls)|*.xls";
 			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
-				RequestController.LoadData(new  UploadDataModel() {FileName = openFileDialog.FileName,Request = (Request)bindingSource1.Current,UnitOfWork = unitOfWork});
+				RequestController.LoadData(new UploadDataModel() { FileName = openFileDialog.FileName, Request = (Request)bindingSource1.Current, UnitOfWork = unitOfWork });
 			}
+		}
+
+		private void PrintCurrentRequest()
+		{
+			if (bindingSource1.Current == null)
+				return;
+			var fileName = RequestController.GeneratePrintForm((Request)bindingSource1.Current, ((Request)bindingSource1.Current).RequestRows.ToList());
+			if (fileName != null)
+				Process.Start(fileName);
 		}
 
 		private void dataGridView1_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -150,7 +214,7 @@ namespace PostReq
 			}
 		}
 
-		private void toolStripButton2_Click(object sender, EventArgs e)
+		private void copyRequestToolStripButton_Click(object sender, EventArgs e)
 		{
 			CreateCopyRequest();
 		}
@@ -174,7 +238,7 @@ namespace PostReq
 			}
 		}
 
-		private void toolStripButton3_Click(object sender, EventArgs e)
+		private void openRequestToolStripButton_Click(object sender, EventArgs e)
 		{
 			EditCurrentRequest();
 		}
@@ -201,7 +265,6 @@ namespace PostReq
 				try
 				{
 					var htInfo = dataGridView1.HitTest(e.X, e.Y);
-					dataGridView1.ClearSelection();
 					if (htInfo != null)
 					{
 						bindingSource1.Position = htInfo.RowIndex;
@@ -211,6 +274,33 @@ namespace PostReq
 				{
 				}
 			}
+		}
+
+		private void uploadDataToolStripButton_Click(object sender, EventArgs e)
+		{
+			LoadData();
+		}
+
+		private void printRequestToolStripButton_Click(object sender, EventArgs e)
+		{
+			PrintCurrentRequest();
+		}
+
+		private void напечататьToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			PrintCurrentRequest();
+		}
+
+		private void toDateTimePicker_ValueChanged(object sender, EventArgs e)
+		{
+			filterModel.DateTo = new DateTime(toDateTimePicker.Value.Year,toDateTimePicker.Value.Month,toDateTimePicker.Value.Day);
+			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
+		}
+
+		private void fromDateTimePicker_ValueChanged(object sender, EventArgs e)
+		{
+			filterModel.DateFrom = new DateTime(fromDateTimePicker.Value.Year, fromDateTimePicker.Value.Month, fromDateTimePicker.Value.Day);
+			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 		}
 	}
 }

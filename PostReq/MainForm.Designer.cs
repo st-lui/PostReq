@@ -30,22 +30,23 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.открытьЗаявкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.создатьКопиюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.открытьЗаявкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.напечататьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.загрузитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.addRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-			this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+			this.copyRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
+			this.openRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
+			this.printRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
+			this.uploadDataToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
 			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -53,9 +54,13 @@
 			this.postamtComboBox = new System.Windows.Forms.ToolStripComboBox();
 			this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
 			this.toDateTimePicker = new System.Windows.Forms.DateTimePicker();
+			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
@@ -107,7 +112,8 @@
             this.dateDataGridViewTextBoxColumn,
             this.dataGridViewTextBoxColumn1,
             this.Column1,
-            this.Column2});
+            this.Column2,
+            this.Percent});
 			this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
 			this.dataGridView1.DataSource = this.bindingSource1;
 			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -122,45 +128,15 @@
 			this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
 			this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDown);
 			// 
-			// dataGridViewTextBoxColumn1
-			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "State.Name";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Состояние";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.Width = 214;
-			// 
-			// Column1
-			// 
-			this.Column1.DataPropertyName = "User.Fio";
-			this.Column1.HeaderText = "Автор";
-			this.Column1.Name = "Column1";
-			this.Column1.ReadOnly = true;
-			this.Column1.Width = 213;
-			// 
-			// Column2
-			// 
-			this.Column2.DataPropertyName = "User.Post.Name";
-			this.Column2.HeaderText = "Почтамт";
-			this.Column2.Name = "Column2";
-			this.Column2.ReadOnly = true;
-			this.Column2.Width = 214;
-			// 
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.открытьЗаявкуToolStripMenuItem,
             this.создатьКопиюToolStripMenuItem,
+            this.открытьЗаявкуToolStripMenuItem,
+            this.напечататьToolStripMenuItem,
             this.загрузитьДанныеToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(193, 70);
-			// 
-			// открытьЗаявкуToolStripMenuItem
-			// 
-			this.открытьЗаявкуToolStripMenuItem.Name = "открытьЗаявкуToolStripMenuItem";
-			this.открытьЗаявкуToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
-			this.открытьЗаявкуToolStripMenuItem.Text = "Открыть заявку";
-			this.открытьЗаявкуToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаявкуToolStripMenuItem_Click);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(193, 92);
 			// 
 			// создатьКопиюToolStripMenuItem
 			// 
@@ -168,6 +144,20 @@
 			this.создатьКопиюToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
 			this.создатьКопиюToolStripMenuItem.Text = "Создать копию";
 			this.создатьКопиюToolStripMenuItem.Click += new System.EventHandler(this.создатьКопиюToolStripMenuItem_Click);
+			// 
+			// открытьЗаявкуToolStripMenuItem
+			// 
+			this.открытьЗаявкуToolStripMenuItem.Name = "открытьЗаявкуToolStripMenuItem";
+			this.открытьЗаявкуToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.открытьЗаявкуToolStripMenuItem.Text = "Открыть";
+			this.открытьЗаявкуToolStripMenuItem.Click += new System.EventHandler(this.открытьЗаявкуToolStripMenuItem_Click);
+			// 
+			// напечататьToolStripMenuItem
+			// 
+			this.напечататьToolStripMenuItem.Name = "напечататьToolStripMenuItem";
+			this.напечататьToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+			this.напечататьToolStripMenuItem.Text = "Напечатать";
+			this.напечататьToolStripMenuItem.Click += new System.EventHandler(this.напечататьToolStripMenuItem_Click);
 			// 
 			// загрузитьДанныеToolStripMenuItem
 			// 
@@ -181,8 +171,10 @@
 			this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addRequestToolStripButton,
-            this.toolStripButton2,
-            this.toolStripButton3,
+            this.copyRequestToolStripButton,
+            this.openRequestToolStripButton,
+            this.printRequestToolStripButton,
+            this.uploadDataToolStripButton,
             this.toolStripSeparator1,
             this.toolStripLabel2,
             this.toolStripLabel1,
@@ -204,25 +196,45 @@
 			this.addRequestToolStripButton.Text = "Создать заявку";
 			this.addRequestToolStripButton.Click += new System.EventHandler(this.addRequestToolStripButton_Click);
 			// 
-			// toolStripButton2
+			// copyRequestToolStripButton
 			// 
-			this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-			this.toolStripButton2.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-			this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton2.Name = "toolStripButton2";
-			this.toolStripButton2.Size = new System.Drawing.Size(173, 22);
-			this.toolStripButton2.Text = "Создать заявку из текущей";
-			this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+			this.copyRequestToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("copyRequestToolStripButton.Image")));
+			this.copyRequestToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+			this.copyRequestToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.copyRequestToolStripButton.Name = "copyRequestToolStripButton";
+			this.copyRequestToolStripButton.Size = new System.Drawing.Size(173, 22);
+			this.copyRequestToolStripButton.Text = "Создать заявку из текущей";
+			this.copyRequestToolStripButton.Click += new System.EventHandler(this.copyRequestToolStripButton_Click);
 			// 
-			// toolStripButton3
+			// openRequestToolStripButton
 			// 
-			this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-			this.toolStripButton3.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-			this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.toolStripButton3.Name = "toolStripButton3";
-			this.toolStripButton3.Size = new System.Drawing.Size(112, 22);
-			this.toolStripButton3.Text = "Открыть заявку";
-			this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+			this.openRequestToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openRequestToolStripButton.Image")));
+			this.openRequestToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+			this.openRequestToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.openRequestToolStripButton.Name = "openRequestToolStripButton";
+			this.openRequestToolStripButton.Size = new System.Drawing.Size(112, 22);
+			this.openRequestToolStripButton.Text = "Открыть заявку";
+			this.openRequestToolStripButton.Click += new System.EventHandler(this.openRequestToolStripButton_Click);
+			// 
+			// printRequestToolStripButton
+			// 
+			this.printRequestToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printRequestToolStripButton.Image")));
+			this.printRequestToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+			this.printRequestToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.printRequestToolStripButton.Name = "printRequestToolStripButton";
+			this.printRequestToolStripButton.Size = new System.Drawing.Size(128, 22);
+			this.printRequestToolStripButton.Text = "Напечатать заявку";
+			this.printRequestToolStripButton.Click += new System.EventHandler(this.printRequestToolStripButton_Click);
+			// 
+			// uploadDataToolStripButton
+			// 
+			this.uploadDataToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("uploadDataToolStripButton.Image")));
+			this.uploadDataToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+			this.uploadDataToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.uploadDataToolStripButton.Name = "uploadDataToolStripButton";
+			this.uploadDataToolStripButton.Size = new System.Drawing.Size(145, 22);
+			this.uploadDataToolStripButton.Text = "Загрузить накладную";
+			this.uploadDataToolStripButton.Click += new System.EventHandler(this.uploadDataToolStripButton_Click);
 			// 
 			// toolStripSeparator1
 			// 
@@ -257,6 +269,7 @@
 			this.fromDateTimePicker.Name = "fromDateTimePicker";
 			this.fromDateTimePicker.Size = new System.Drawing.Size(150, 21);
 			this.fromDateTimePicker.TabIndex = 4;
+			this.fromDateTimePicker.ValueChanged += new System.EventHandler(this.fromDateTimePicker_ValueChanged);
 			// 
 			// toDateTimePicker
 			// 
@@ -264,6 +277,11 @@
 			this.toDateTimePicker.Name = "toDateTimePicker";
 			this.toDateTimePicker.Size = new System.Drawing.Size(150, 21);
 			this.toDateTimePicker.TabIndex = 5;
+			this.toDateTimePicker.ValueChanged += new System.EventHandler(this.toDateTimePicker_ValueChanged);
+			// 
+			// bindingSource1
+			// 
+			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -281,9 +299,38 @@
 			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
 			this.dateDataGridViewTextBoxColumn.Width = 213;
 			// 
-			// bindingSource1
+			// dataGridViewTextBoxColumn1
 			// 
-			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "State.Name";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Состояние";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.Width = 214;
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "User.Fio";
+			this.Column1.HeaderText = "Автор";
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			this.Column1.Width = 213;
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "User.Post.Name";
+			this.Column2.HeaderText = "Почтамт";
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
+			this.Column2.Width = 214;
+			// 
+			// Percent
+			// 
+			this.Percent.DataPropertyName = "Percent";
+			dataGridViewCellStyle1.Format = "F2";
+			this.Percent.DefaultCellStyle = dataGridViewCellStyle1;
+			this.Percent.HeaderText = "Процент";
+			this.Percent.Name = "Percent";
+			this.Percent.ReadOnly = true;
 			// 
 			// MainForm
 			// 
@@ -323,8 +370,8 @@
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.ToolStrip toolStrip1;
 		private System.Windows.Forms.ToolStripButton addRequestToolStripButton;
-		private System.Windows.Forms.ToolStripButton toolStripButton2;
-		private System.Windows.Forms.ToolStripButton toolStripButton3;
+		private System.Windows.Forms.ToolStripButton copyRequestToolStripButton;
+		private System.Windows.Forms.ToolStripButton openRequestToolStripButton;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -336,12 +383,16 @@
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem открытьЗаявкуToolStripMenuItem;
 		private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.ToolStripMenuItem создатьКопиюToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem загрузитьДанныеToolStripMenuItem;
+		private System.Windows.Forms.ToolStripButton uploadDataToolStripButton;
+		private System.Windows.Forms.ToolStripButton printRequestToolStripButton;
+		private System.Windows.Forms.ToolStripMenuItem напечататьToolStripMenuItem;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-		private System.Windows.Forms.ToolStripMenuItem создатьКопиюToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem загрузитьДанныеToolStripMenuItem;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Percent;
 	}
 }

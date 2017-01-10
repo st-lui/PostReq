@@ -158,6 +158,8 @@
     <Content Include="Image\edit_add_9943.png" />
     <Content Include="Image\icon.ico" />
     <Content Include="Image\icon.png" />
+    <Content Include="Image\klpq_4618.png" />
+    <Content Include="Image\window_fullscreen_2706.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

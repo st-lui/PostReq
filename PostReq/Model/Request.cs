@@ -112,6 +112,18 @@ namespace PostReq.Model
 			set { user.Entity=value; }
 		}
 
+		[DisplayName("Процент")]
+		public double Percent
+		{
+			get
+			{
+				double result = 0;
+				foreach (var requestRow in RequestRows)
+					result += requestRow.Percent;
+				result = result/requestRows.Count;
+				return result;
+			}
+		}
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		//public override string ToString()
