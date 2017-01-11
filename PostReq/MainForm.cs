@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -41,8 +42,10 @@ namespace PostReq
 			Text += $" {Assembly.GetExecutingAssembly().GetName().Version}";
 			ToolStripControlHost tsHostFrom = new ToolStripControlHost(fromDateTimePicker);
 			ToolStripControlHost tsHostTo = new ToolStripControlHost(toDateTimePicker);
+			ToolStripControlHost tsHostPostamtCombobox = new ToolStripControlHost(postamtComboBox);
 			tsHostFrom.Height = 40;
 			tsHostTo.Height = 40;
+			toolStrip1.Items.Insert(9, tsHostPostamtCombobox);
 			toolStrip1.Items.Insert(8, tsHostTo);
 			toolStrip1.Items.Insert(7, tsHostFrom);
 			toolStrip1.Height = 40;
@@ -50,7 +53,27 @@ namespace PostReq
 				ChangeInterfacePriv1();
 			else
 				if (currentUser.Post.Privilegies == 0)
-					ChangeInterfacePriv0();
+				ChangeInterfacePriv0();
+			string tmp = Cfg.Read(SettingsKey.DateFrom);
+			if (tmp != null)
+			{
+				DateTime fromDate;
+				if (DateTime.TryParse(tmp, out fromDate))
+					fromDateTimePicker.Value = fromDate;
+				else
+					fromDateTimePicker.Value = DateTime.Today;
+			}
+			tmp = Cfg.Read(SettingsKey.DateTo);
+			if (tmp != null)
+			{
+				DateTime toDate;
+				if (DateTime.TryParse(tmp, out toDate))
+				{
+					toDateTimePicker.Value = toDate;
+				}
+				else
+					toDateTimePicker.Value = DateTime.Today;
+			}
 			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 			//dataGridView1.DataSource = requestBindingSource;
 			//for (int i = 0; i < dataGridView1.ColumnCount; i++)
@@ -75,9 +98,32 @@ namespace PostReq
 			GC.WaitForPendingFinalizers();
 			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateLoaded));
 			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateSent));
-			filterModel.Post = null;
+			filterModel.Post = (Post)postamtComboBox.SelectedItem;
 			filterModel.DateFrom = fromDateTimePicker.Value;
 			filterModel.DateTo = toDateTimePicker.Value;
+
+			var postList = unitOfWork.Posts.GetAll().ToList();
+			postList.Insert(0, new Post() { Id = 0, Name = "Все почтамты" });
+			postamtComboBox.Items.Clear();
+
+			postamtComboBox.DataSource = postList;
+			postamtComboBox.DisplayMember = "Name";
+			postamtComboBox.ValueMember = "Id";
+			string tmp = Cfg.Read(SettingsKey.PostId);
+			if (tmp != null)
+			{
+				int postId;
+				if (int.TryParse(tmp, out postId))
+				{
+					var post = postamtComboBox.Items.Cast<Post>().Where(x => x.Id == postId).SingleOrDefault();
+					if (post == null)
+						postamtComboBox.SelectedIndex = 0;
+					else
+						postamtComboBox.SelectedItem = post;
+				}
+				else
+					postamtComboBox.SelectedIndex = 0;
+			}
 		}
 
 		private void ChangeInterfacePriv0()
@@ -111,6 +157,10 @@ namespace PostReq
 		private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			unitOfWork.Dispose();
+			if (!postamtComboBox.IsDisposed)
+				Cfg.Update(SettingsKey.PostId, ((Post)postamtComboBox.SelectedItem).Id.ToString());
+			Cfg.Update(SettingsKey.DateFrom, fromDateTimePicker.Value.ToString());
+			Cfg.Update(SettingsKey.DateTo, toDateTimePicker.Value.ToString());
 		}
 
 		private void Refresh(DataGridView gridView)
@@ -194,6 +244,7 @@ namespace PostReq
 			if (openFileDialog.ShowDialog(this) == DialogResult.OK)
 			{
 				RequestController.LoadData(new UploadDataModel() { FileName = openFileDialog.FileName, Request = (Request)bindingSource1.Current, UnitOfWork = unitOfWork });
+				Refresh(dataGridView1);
 			}
 		}
 
@@ -293,7 +344,7 @@ namespace PostReq
 
 		private void toDateTimePicker_ValueChanged(object sender, EventArgs e)
 		{
-			filterModel.DateTo = new DateTime(toDateTimePicker.Value.Year,toDateTimePicker.Value.Month,toDateTimePicker.Value.Day);
+			filterModel.DateTo = new DateTime(toDateTimePicker.Value.Year, toDateTimePicker.Value.Month, toDateTimePicker.Value.Day);
 			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
 		}
 
@@ -301,6 +352,15 @@ namespace PostReq
 		{
 			filterModel.DateFrom = new DateTime(fromDateTimePicker.Value.Year, fromDateTimePicker.Value.Month, fromDateTimePicker.Value.Day);
 			bindingSource1.DataSource = RequestController.GetRequests(filterModel);
+		}
+
+		private void postamtComboBox_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			if (postamtComboBox.SelectedItem != null)
+			{
+				filterModel.Post = (Post)postamtComboBox.SelectedItem;
+				bindingSource1.DataSource = RequestController.GetRequests(filterModel);
+			}
 		}
 	}
 }

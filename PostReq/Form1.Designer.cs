@@ -38,21 +38,6 @@
 			this.findButton = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this._Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.edIzmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.goodsIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.requestIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.stringRepDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.amountStringDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.FactAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.requestRowBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.label2 = new System.Windows.Forms.Label();
 			this.searchPatternTextBox = new System.Windows.Forms.TextBox();
 			this.addPositionButton = new System.Windows.Forms.Button();
@@ -67,9 +52,24 @@
 			this.printRequestButton = new System.Windows.Forms.Button();
 			this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+			this.requestRowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this._Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.amountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.edIzmDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.goodsIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.requestIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.stringRepDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.amountStringDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.FactAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).BeginInit();
 			this.statusStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// treeView1
@@ -112,6 +112,7 @@
 			this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.dataGridView1.AutoGenerateColumns = false;
+			this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
 			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this._Name,
@@ -139,129 +140,6 @@
 			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGridView1.Size = new System.Drawing.Size(454, 311);
 			this.dataGridView1.TabIndex = 10;
-			// 
-			// _Name
-			// 
-			this._Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this._Name.DataPropertyName = "Name";
-			this._Name.HeaderText = "Номенклатура";
-			this._Name.Name = "_Name";
-			this._Name.ReadOnly = true;
-			this._Name.Width = 105;
-			// 
-			// Amount
-			// 
-			this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.Amount.DataPropertyName = "AmountString";
-			this.Amount.HeaderText = "Количество";
-			this.Amount.Name = "Amount";
-			this.Amount.ReadOnly = true;
-			this.Amount.Width = 92;
-			// 
-			// Column1
-			// 
-			this.Column1.DataPropertyName = "Price";
-			dataGridViewCellStyle1.Format = "F2";
-			this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
-			this.Column1.HeaderText = "Цена";
-			this.Column1.Name = "Column1";
-			this.Column1.ReadOnly = true;
-			// 
-			// Column2
-			// 
-			this.Column2.DataPropertyName = "Cost";
-			dataGridViewCellStyle2.Format = "F2";
-			this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
-			this.Column2.HeaderText = "Сумма";
-			this.Column2.Name = "Column2";
-			this.Column2.ReadOnly = true;
-			// 
-			// idDataGridViewTextBoxColumn
-			// 
-			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-			this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-			this.idDataGridViewTextBoxColumn.ReadOnly = true;
-			this.idDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// amountDataGridViewTextBoxColumn
-			// 
-			this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
-			this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
-			this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
-			this.amountDataGridViewTextBoxColumn.ReadOnly = true;
-			this.amountDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// nameDataGridViewTextBoxColumn
-			// 
-			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-			this.nameDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// edIzmDataGridViewTextBoxColumn
-			// 
-			this.edIzmDataGridViewTextBoxColumn.DataPropertyName = "EdIzm";
-			this.edIzmDataGridViewTextBoxColumn.HeaderText = "EdIzm";
-			this.edIzmDataGridViewTextBoxColumn.Name = "edIzmDataGridViewTextBoxColumn";
-			this.edIzmDataGridViewTextBoxColumn.ReadOnly = true;
-			this.edIzmDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// goodsIdDataGridViewTextBoxColumn
-			// 
-			this.goodsIdDataGridViewTextBoxColumn.DataPropertyName = "GoodsId";
-			this.goodsIdDataGridViewTextBoxColumn.HeaderText = "GoodsId";
-			this.goodsIdDataGridViewTextBoxColumn.Name = "goodsIdDataGridViewTextBoxColumn";
-			this.goodsIdDataGridViewTextBoxColumn.ReadOnly = true;
-			this.goodsIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// requestIdDataGridViewTextBoxColumn
-			// 
-			this.requestIdDataGridViewTextBoxColumn.DataPropertyName = "RequestId";
-			this.requestIdDataGridViewTextBoxColumn.HeaderText = "RequestId";
-			this.requestIdDataGridViewTextBoxColumn.Name = "requestIdDataGridViewTextBoxColumn";
-			this.requestIdDataGridViewTextBoxColumn.ReadOnly = true;
-			this.requestIdDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// stringRepDataGridViewTextBoxColumn
-			// 
-			this.stringRepDataGridViewTextBoxColumn.DataPropertyName = "StringRep";
-			this.stringRepDataGridViewTextBoxColumn.HeaderText = "StringRep";
-			this.stringRepDataGridViewTextBoxColumn.Name = "stringRepDataGridViewTextBoxColumn";
-			this.stringRepDataGridViewTextBoxColumn.ReadOnly = true;
-			this.stringRepDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// amountStringDataGridViewTextBoxColumn
-			// 
-			this.amountStringDataGridViewTextBoxColumn.DataPropertyName = "AmountString";
-			this.amountStringDataGridViewTextBoxColumn.HeaderText = "AmountString";
-			this.amountStringDataGridViewTextBoxColumn.Name = "amountStringDataGridViewTextBoxColumn";
-			this.amountStringDataGridViewTextBoxColumn.ReadOnly = true;
-			this.amountStringDataGridViewTextBoxColumn.Visible = false;
-			// 
-			// FactAmount
-			// 
-			this.FactAmount.DataPropertyName = "FactAmount";
-			dataGridViewCellStyle3.Format = "f3";
-			this.FactAmount.DefaultCellStyle = dataGridViewCellStyle3;
-			this.FactAmount.HeaderText = "Факт";
-			this.FactAmount.Name = "FactAmount";
-			this.FactAmount.ReadOnly = true;
-			// 
-			// Percent
-			// 
-			this.Percent.DataPropertyName = "Percent";
-			dataGridViewCellStyle4.Format = "f2";
-			this.Percent.DefaultCellStyle = dataGridViewCellStyle4;
-			this.Percent.HeaderText = "Процент";
-			this.Percent.Name = "Percent";
-			this.Percent.ReadOnly = true;
-			// 
-			// requestRowBindingSource
-			// 
-			this.requestRowBindingSource.DataSource = typeof(PostReq.Model.RequestRow);
-			this.requestRowBindingSource.CurrentChanged += new System.EventHandler(this.requestRowBindingSource_CurrentChanged);
 			// 
 			// label2
 			// 
@@ -394,6 +272,141 @@
 			this.notifyIcon1.Text = "notifyIcon1";
 			this.notifyIcon1.Visible = true;
 			// 
+			// requestRowBindingSource
+			// 
+			this.requestRowBindingSource.DataSource = typeof(PostReq.Model.RequestRow);
+			this.requestRowBindingSource.CurrentChanged += new System.EventHandler(this.requestRowBindingSource_CurrentChanged);
+			// 
+			// _Name
+			// 
+			this._Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+			this._Name.DataPropertyName = "Name";
+			this._Name.HeaderText = "Номенклатура";
+			this._Name.Name = "_Name";
+			this._Name.ReadOnly = true;
+			this._Name.Width = 250;
+			// 
+			// Amount
+			// 
+			this.Amount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+			this.Amount.DataPropertyName = "AmountString";
+			this.Amount.HeaderText = "Количество";
+			this.Amount.Name = "Amount";
+			this.Amount.ReadOnly = true;
+			this.Amount.Width = 92;
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "Price";
+			dataGridViewCellStyle1.Format = "F2";
+			this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+			this.Column1.HeaderText = "Цена";
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			this.Column1.Width = 58;
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "Cost";
+			dataGridViewCellStyle2.Format = "F2";
+			this.Column2.DefaultCellStyle = dataGridViewCellStyle2;
+			this.Column2.HeaderText = "Сумма";
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
+			this.Column2.Width = 63;
+			// 
+			// idDataGridViewTextBoxColumn
+			// 
+			this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+			this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+			this.idDataGridViewTextBoxColumn.ReadOnly = true;
+			this.idDataGridViewTextBoxColumn.Visible = false;
+			this.idDataGridViewTextBoxColumn.Width = 42;
+			// 
+			// amountDataGridViewTextBoxColumn
+			// 
+			this.amountDataGridViewTextBoxColumn.DataPropertyName = "Amount";
+			this.amountDataGridViewTextBoxColumn.HeaderText = "Amount";
+			this.amountDataGridViewTextBoxColumn.Name = "amountDataGridViewTextBoxColumn";
+			this.amountDataGridViewTextBoxColumn.ReadOnly = true;
+			this.amountDataGridViewTextBoxColumn.Visible = false;
+			this.amountDataGridViewTextBoxColumn.Width = 69;
+			// 
+			// nameDataGridViewTextBoxColumn
+			// 
+			this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+			this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+			this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+			this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+			this.nameDataGridViewTextBoxColumn.Visible = false;
+			this.nameDataGridViewTextBoxColumn.Width = 59;
+			// 
+			// edIzmDataGridViewTextBoxColumn
+			// 
+			this.edIzmDataGridViewTextBoxColumn.DataPropertyName = "EdIzm";
+			this.edIzmDataGridViewTextBoxColumn.HeaderText = "EdIzm";
+			this.edIzmDataGridViewTextBoxColumn.Name = "edIzmDataGridViewTextBoxColumn";
+			this.edIzmDataGridViewTextBoxColumn.ReadOnly = true;
+			this.edIzmDataGridViewTextBoxColumn.Visible = false;
+			this.edIzmDataGridViewTextBoxColumn.Width = 61;
+			// 
+			// goodsIdDataGridViewTextBoxColumn
+			// 
+			this.goodsIdDataGridViewTextBoxColumn.DataPropertyName = "GoodsId";
+			this.goodsIdDataGridViewTextBoxColumn.HeaderText = "GoodsId";
+			this.goodsIdDataGridViewTextBoxColumn.Name = "goodsIdDataGridViewTextBoxColumn";
+			this.goodsIdDataGridViewTextBoxColumn.ReadOnly = true;
+			this.goodsIdDataGridViewTextBoxColumn.Visible = false;
+			this.goodsIdDataGridViewTextBoxColumn.Width = 72;
+			// 
+			// requestIdDataGridViewTextBoxColumn
+			// 
+			this.requestIdDataGridViewTextBoxColumn.DataPropertyName = "RequestId";
+			this.requestIdDataGridViewTextBoxColumn.HeaderText = "RequestId";
+			this.requestIdDataGridViewTextBoxColumn.Name = "requestIdDataGridViewTextBoxColumn";
+			this.requestIdDataGridViewTextBoxColumn.ReadOnly = true;
+			this.requestIdDataGridViewTextBoxColumn.Visible = false;
+			this.requestIdDataGridViewTextBoxColumn.Width = 82;
+			// 
+			// stringRepDataGridViewTextBoxColumn
+			// 
+			this.stringRepDataGridViewTextBoxColumn.DataPropertyName = "StringRep";
+			this.stringRepDataGridViewTextBoxColumn.HeaderText = "StringRep";
+			this.stringRepDataGridViewTextBoxColumn.Name = "stringRepDataGridViewTextBoxColumn";
+			this.stringRepDataGridViewTextBoxColumn.ReadOnly = true;
+			this.stringRepDataGridViewTextBoxColumn.Visible = false;
+			this.stringRepDataGridViewTextBoxColumn.Width = 79;
+			// 
+			// amountStringDataGridViewTextBoxColumn
+			// 
+			this.amountStringDataGridViewTextBoxColumn.DataPropertyName = "AmountString";
+			this.amountStringDataGridViewTextBoxColumn.HeaderText = "AmountString";
+			this.amountStringDataGridViewTextBoxColumn.Name = "amountStringDataGridViewTextBoxColumn";
+			this.amountStringDataGridViewTextBoxColumn.ReadOnly = true;
+			this.amountStringDataGridViewTextBoxColumn.Visible = false;
+			this.amountStringDataGridViewTextBoxColumn.Width = 97;
+			// 
+			// FactAmount
+			// 
+			this.FactAmount.DataPropertyName = "FactAmount";
+			dataGridViewCellStyle3.Format = "f3";
+			this.FactAmount.DefaultCellStyle = dataGridViewCellStyle3;
+			this.FactAmount.HeaderText = "Факт";
+			this.FactAmount.Name = "FactAmount";
+			this.FactAmount.ReadOnly = true;
+			this.FactAmount.Width = 58;
+			// 
+			// Percent
+			// 
+			this.Percent.DataPropertyName = "Percent";
+			dataGridViewCellStyle4.Format = "f2";
+			this.Percent.DefaultCellStyle = dataGridViewCellStyle4;
+			this.Percent.HeaderText = "Процент";
+			this.Percent.Name = "Percent";
+			this.Percent.ReadOnly = true;
+			this.Percent.Width = 75;
+			// 
 			// AddRequestForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -425,9 +438,9 @@
 			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AddRequestForm_KeyUp);
 			this.Resize += new System.EventHandler(this.Form1_Resize);
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).EndInit();
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.requestRowBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -453,20 +466,20 @@
 		private System.Windows.Forms.BindingSource requestRowBindingSource;
 		private System.Windows.Forms.ToolStripStatusLabel infoStatusBarLabel;
 		private System.Windows.Forms.ToolTip toolTip1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Percent;
-		private System.Windows.Forms.DataGridViewTextBoxColumn FactAmount;
-		private System.Windows.Forms.DataGridViewTextBoxColumn amountStringDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn stringRepDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn requestIdDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn goodsIdDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn edIzmDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
 		private System.Windows.Forms.DataGridViewTextBoxColumn _Name;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn amountDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn edIzmDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn goodsIdDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn requestIdDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn stringRepDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn amountStringDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn FactAmount;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Percent;
 	}
 }
 

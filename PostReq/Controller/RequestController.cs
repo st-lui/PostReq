@@ -81,14 +81,13 @@ namespace PostReq.Controller
 		public static void SendEmail()
 		{
 			SmtpClient smtpClient = new SmtpClient();
-			
 		}
 
 		public static IEnumerable<Request> GetRequests(FilterModel filterModel)
 		{
 			var requests = filterModel.UnitOfWork.Requests.GetAll();
 			requests = requests.Where(x=>x.Date>=filterModel.DateFrom && x.Date<=filterModel.DateTo);
-			if (filterModel.Post != null)
+			if (filterModel.Post.Id != 0)
 				requests = requests.Where(x => x.User.Post.Id == filterModel.Post.Id);
 			var statesId = filterModel.States.Select(x=>x.Id).ToList();
 			requests = requests.Where(x => statesId.Contains(x.State.Id));
@@ -123,9 +122,13 @@ namespace PostReq.Controller
 						row = sheet.GetRow(dataStartRow + ++i);
 					}
 					if (changesMade)
+					{
+						uploadDataModel.Request.State = uploadDataModel.UnitOfWork.States.Get(Properties.Resources.requestStateLoaded);
 						uploadDataModel.UnitOfWork.SaveChanges();
+					}
 					wb.Close();
 				}
+
 			}
 		}
 	}

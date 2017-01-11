@@ -29,19 +29,25 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
 			this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.создатьКопиюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.открытьЗаявкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.напечататьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.загрузитьДанныеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+			this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
+			this.toDateTimePicker = new System.Windows.Forms.DateTimePicker();
+			this.postamtComboBox = new System.Windows.Forms.ComboBox();
 			this.addRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.copyRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
 			this.openRequestToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -51,16 +57,10 @@
 			this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
 			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.postamtComboBox = new System.Windows.Forms.ToolStripComboBox();
-			this.fromDateTimePicker = new System.Windows.Forms.DateTimePicker();
-			this.toDateTimePicker = new System.Windows.Forms.DateTimePicker();
-			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.Percent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.contextMenuStrip1.SuspendLayout();
@@ -128,6 +128,39 @@
 			this.dataGridView1.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDoubleClick);
 			this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDown);
 			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "State.Name";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Состояние";
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.Width = 214;
+			// 
+			// Column1
+			// 
+			this.Column1.DataPropertyName = "User.Fio";
+			this.Column1.HeaderText = "Автор";
+			this.Column1.Name = "Column1";
+			this.Column1.ReadOnly = true;
+			this.Column1.Width = 213;
+			// 
+			// Column2
+			// 
+			this.Column2.DataPropertyName = "User.Post.Name";
+			this.Column2.HeaderText = "Почтамт";
+			this.Column2.Name = "Column2";
+			this.Column2.ReadOnly = true;
+			this.Column2.Width = 214;
+			// 
+			// Percent
+			// 
+			this.Percent.DataPropertyName = "Percent";
+			dataGridViewCellStyle1.Format = "F2";
+			this.Percent.DefaultCellStyle = dataGridViewCellStyle1;
+			this.Percent.HeaderText = "Процент";
+			this.Percent.Name = "Percent";
+			this.Percent.ReadOnly = true;
+			// 
 			// contextMenuStrip1
 			// 
 			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -166,25 +199,31 @@
 			this.загрузитьДанныеToolStripMenuItem.Text = "Загрузить накладную";
 			this.загрузитьДанныеToolStripMenuItem.Click += new System.EventHandler(this.загрузитьДанныеToolStripMenuItem_Click);
 			// 
-			// toolStrip1
+			// fromDateTimePicker
 			// 
-			this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
-			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addRequestToolStripButton,
-            this.copyRequestToolStripButton,
-            this.openRequestToolStripButton,
-            this.printRequestToolStripButton,
-            this.uploadDataToolStripButton,
-            this.toolStripSeparator1,
-            this.toolStripLabel2,
-            this.toolStripLabel1,
-            this.toolStripSeparator2,
-            this.postamtComboBox});
-			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(1111, 25);
-			this.toolStrip1.TabIndex = 3;
-			this.toolStrip1.Text = "toolStrip1";
+			this.fromDateTimePicker.Location = new System.Drawing.Point(399, 92);
+			this.fromDateTimePicker.Name = "fromDateTimePicker";
+			this.fromDateTimePicker.Size = new System.Drawing.Size(150, 21);
+			this.fromDateTimePicker.TabIndex = 4;
+			this.fromDateTimePicker.ValueChanged += new System.EventHandler(this.fromDateTimePicker_ValueChanged);
+			// 
+			// toDateTimePicker
+			// 
+			this.toDateTimePicker.Location = new System.Drawing.Point(399, 119);
+			this.toDateTimePicker.Name = "toDateTimePicker";
+			this.toDateTimePicker.Size = new System.Drawing.Size(150, 21);
+			this.toDateTimePicker.TabIndex = 5;
+			this.toDateTimePicker.ValueChanged += new System.EventHandler(this.toDateTimePicker_ValueChanged);
+			// 
+			// postamtComboBox
+			// 
+			this.postamtComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.postamtComboBox.FormattingEnabled = true;
+			this.postamtComboBox.Location = new System.Drawing.Point(399, 146);
+			this.postamtComboBox.Name = "postamtComboBox";
+			this.postamtComboBox.Size = new System.Drawing.Size(150, 21);
+			this.postamtComboBox.TabIndex = 6;
+			this.postamtComboBox.SelectedIndexChanged += new System.EventHandler(this.postamtComboBox_SelectedIndexChanged);
 			// 
 			// addRequestToolStripButton
 			// 
@@ -258,30 +297,24 @@
 			this.toolStripSeparator2.Name = "toolStripSeparator2";
 			this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
 			// 
-			// postamtComboBox
+			// toolStrip1
 			// 
-			this.postamtComboBox.Name = "postamtComboBox";
-			this.postamtComboBox.Size = new System.Drawing.Size(121, 25);
-			// 
-			// fromDateTimePicker
-			// 
-			this.fromDateTimePicker.Location = new System.Drawing.Point(196, 153);
-			this.fromDateTimePicker.Name = "fromDateTimePicker";
-			this.fromDateTimePicker.Size = new System.Drawing.Size(150, 21);
-			this.fromDateTimePicker.TabIndex = 4;
-			this.fromDateTimePicker.ValueChanged += new System.EventHandler(this.fromDateTimePicker_ValueChanged);
-			// 
-			// toDateTimePicker
-			// 
-			this.toDateTimePicker.Location = new System.Drawing.Point(196, 113);
-			this.toDateTimePicker.Name = "toDateTimePicker";
-			this.toDateTimePicker.Size = new System.Drawing.Size(150, 21);
-			this.toDateTimePicker.TabIndex = 5;
-			this.toDateTimePicker.ValueChanged += new System.EventHandler(this.toDateTimePicker_ValueChanged);
-			// 
-			// bindingSource1
-			// 
-			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
+			this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
+			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addRequestToolStripButton,
+            this.copyRequestToolStripButton,
+            this.openRequestToolStripButton,
+            this.printRequestToolStripButton,
+            this.uploadDataToolStripButton,
+            this.toolStripSeparator1,
+            this.toolStripLabel2,
+            this.toolStripLabel1,
+            this.toolStripSeparator2});
+			this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+			this.toolStrip1.Name = "toolStrip1";
+			this.toolStrip1.Size = new System.Drawing.Size(1111, 25);
+			this.toolStrip1.TabIndex = 3;
+			this.toolStrip1.Text = "toolStrip1";
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -299,44 +332,16 @@
 			this.dateDataGridViewTextBoxColumn.ReadOnly = true;
 			this.dateDataGridViewTextBoxColumn.Width = 213;
 			// 
-			// dataGridViewTextBoxColumn1
+			// bindingSource1
 			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "State.Name";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Состояние";
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.Width = 214;
-			// 
-			// Column1
-			// 
-			this.Column1.DataPropertyName = "User.Fio";
-			this.Column1.HeaderText = "Автор";
-			this.Column1.Name = "Column1";
-			this.Column1.ReadOnly = true;
-			this.Column1.Width = 213;
-			// 
-			// Column2
-			// 
-			this.Column2.DataPropertyName = "User.Post.Name";
-			this.Column2.HeaderText = "Почтамт";
-			this.Column2.Name = "Column2";
-			this.Column2.ReadOnly = true;
-			this.Column2.Width = 214;
-			// 
-			// Percent
-			// 
-			this.Percent.DataPropertyName = "Percent";
-			dataGridViewCellStyle1.Format = "F2";
-			this.Percent.DefaultCellStyle = dataGridViewCellStyle1;
-			this.Percent.HeaderText = "Процент";
-			this.Percent.Name = "Percent";
-			this.Percent.ReadOnly = true;
+			this.bindingSource1.DataSource = typeof(PostReq.Model.Request);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1111, 261);
+			this.Controls.Add(this.postamtComboBox);
 			this.Controls.Add(this.toDateTimePicker);
 			this.Controls.Add(this.fromDateTimePicker);
 			this.Controls.Add(this.dataGridView1);
@@ -368,15 +373,6 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;
 		private System.Windows.Forms.DataGridView dataGridView1;
-		private System.Windows.Forms.ToolStrip toolStrip1;
-		private System.Windows.Forms.ToolStripButton addRequestToolStripButton;
-		private System.Windows.Forms.ToolStripButton copyRequestToolStripButton;
-		private System.Windows.Forms.ToolStripButton openRequestToolStripButton;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-		private System.Windows.Forms.ToolStripComboBox postamtComboBox;
-		private System.Windows.Forms.ToolStripLabel toolStripLabel2;
 		private System.Windows.Forms.BindingSource bindingSource1;
 		private System.Windows.Forms.DateTimePicker fromDateTimePicker;
 		private System.Windows.Forms.DateTimePicker toDateTimePicker;
@@ -385,8 +381,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn usernameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.ToolStripMenuItem создатьКопиюToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem загрузитьДанныеToolStripMenuItem;
-		private System.Windows.Forms.ToolStripButton uploadDataToolStripButton;
-		private System.Windows.Forms.ToolStripButton printRequestToolStripButton;
 		private System.Windows.Forms.ToolStripMenuItem напечататьToolStripMenuItem;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dateDataGridViewTextBoxColumn;
@@ -394,5 +388,16 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Percent;
+		private System.Windows.Forms.ComboBox postamtComboBox;
+		private System.Windows.Forms.ToolStripButton addRequestToolStripButton;
+		private System.Windows.Forms.ToolStripButton copyRequestToolStripButton;
+		private System.Windows.Forms.ToolStripButton openRequestToolStripButton;
+		private System.Windows.Forms.ToolStripButton printRequestToolStripButton;
+		private System.Windows.Forms.ToolStripButton uploadDataToolStripButton;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+		private System.Windows.Forms.ToolStripLabel toolStripLabel1;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+		private System.Windows.Forms.ToolStrip toolStrip1;
 	}
 }
