@@ -152,6 +152,7 @@
     <None Include="template.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="интерфейс.doc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="1482421095_Shop-Payment-58.ico" />

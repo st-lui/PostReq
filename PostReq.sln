@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostReq", "PostReq\PostReq.csproj", "{38170FA3-FBA7-4263-867A-194EE45E7CF3}"
 EndProject
@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		db\postreq.bak = db\postreq.bak
 		db\postreq.mdf = db\postreq.mdf
 		db\postreq.sql = db\postreq.sql
+		..\интерфейс.doc = ..\интерфейс.doc
 	EndProjectSection
 EndProject
 Global
