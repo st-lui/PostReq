@@ -70,6 +70,8 @@ namespace PostReq
 			}
 			nomLoader.LoadNomListToTreeView(treeView1);
 			Result = 0;
+			CancelButton = cancelButton;
+			cancelButton.DialogResult=DialogResult.None;
 			//bsSource = new BindingSource();
 			//bsSource.DataSource = ReqDataContext.GetInstance().Requests;
 			//Request r = (Request) bsSource.AddNew();
