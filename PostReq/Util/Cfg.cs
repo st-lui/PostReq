@@ -10,7 +10,7 @@ namespace PostReq.Util
 	/// </summary>
 	public enum SettingsKey
 	{
-		DateFrom,DateTo,PostId
+		DateFrom,DateTo,PostId, connection
 	}
 
 	public static class ConfigUtil

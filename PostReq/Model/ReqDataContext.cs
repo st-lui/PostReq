@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.Linq;
 using System.Linq;
 using System.Text;
+using PostReq.Util;
 
 namespace PostReq.Model
 {
@@ -17,7 +17,7 @@ namespace PostReq.Model
 		public Table<User> Users;
 		public Table<Post> Posts;
 
-		public ReqDataContext():base(ConfigurationManager.AppSettings["connection"])
+		public ReqDataContext():base(Cfg.Read(SettingsKey.connection))
 		{
 		}
 
