@@ -17,7 +17,7 @@ namespace PostReq.Model
 		public Table<User> Users;
 		public Table<Post> Posts;
 
-		public ReqDataContext():base(Cfg.Read(SettingsKey.connection))
+		public ReqDataContext():base(Cfg.Read(Key.connection))
 		{
 		}
 

@@ -8,9 +8,10 @@ namespace PostReq.Util
 	/// перечисления, совпадают с названиями 
 	/// ключей в конфигурационном файле
 	/// </summary>
-	public enum SettingsKey
+	public enum Key
 	{
-		DateFrom,DateTo,PostId, connection
+		DateFrom, DateTo, PostId, connection,
+		UpdateUrl
 	}
 
 	public static class ConfigUtil
@@ -19,7 +20,7 @@ namespace PostReq.Util
 		{
 			Hashtable lst = new Hashtable();
 			lst.Clear();
-			foreach (SettingsKey key in (SettingsKey[])Enum.GetValues(typeof(SettingsKey)))
+			foreach (Key key in (Key[])Enum.GetValues(typeof(Key)))
 				lst[key] = Cfg.Read(key);
 			return lst;
 		}
@@ -58,7 +59,7 @@ namespace PostReq.Util
 		/// </summary>
 		/// <param name="key"></param>
 		/// <returns></returns>
-		public static String Read(SettingsKey key)
+		public static String Read(Key key)
 		{
 			return ReadAny(key.ToString());
 		}
@@ -81,7 +82,7 @@ namespace PostReq.Util
 		/// </summary>
 		/// <param name="key"></param>
 		/// <param name="val"></param>
-		public static void Update(SettingsKey key, string val)
+		public static void Update(Key key, string val)
 		{
 			UpdateAny(key.ToString(), val);
 		}

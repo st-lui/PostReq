@@ -1,4 +1,4 @@
-namespace NoticeSorter
+namespace PostReq
 {
     partial class UpdateForm
     {
@@ -28,44 +28,44 @@ namespace NoticeSorter
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateForm));
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.progressBar1.Location = new System.Drawing.Point(0, 51);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(542, 22);
-            this.progressBar1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.SystemColors.Info;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(542, 51);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Проверка";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // UpdateForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 73);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.progressBar1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "UpdateForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Обновление программы";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateForm));
+			this.progressBar1 = new System.Windows.Forms.ProgressBar();
+			this.label1 = new System.Windows.Forms.Label();
+			this.SuspendLayout();
+			// 
+			// progressBar1
+			// 
+			this.progressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.progressBar1.Location = new System.Drawing.Point(0, 51);
+			this.progressBar1.Name = "progressBar1";
+			this.progressBar1.Size = new System.Drawing.Size(542, 22);
+			this.progressBar1.TabIndex = 0;
+			// 
+			// label1
+			// 
+			this.label1.BackColor = System.Drawing.SystemColors.Info;
+			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.label1.Location = new System.Drawing.Point(0, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(542, 51);
+			this.label1.TabIndex = 1;
+			this.label1.Text = "Проверка";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// UpdateForm
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(542, 73);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.progressBar1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Name = "UpdateForm";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "Обновление программы";
+			this.Load += new System.EventHandler(this.Form1_Load);
+			this.ResumeLayout(false);
 
         }
 

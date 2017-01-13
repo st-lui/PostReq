@@ -16,6 +16,7 @@ namespace PostReq
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+			new UpdateForm();
 			Application.Run(new MainForm());
 		}
 	}

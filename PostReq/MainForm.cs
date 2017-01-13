@@ -54,7 +54,7 @@ namespace PostReq
 			else
 				if (currentUser.Post.Privilegies == 0)
 				ChangeInterfacePriv0();
-			string tmp = Cfg.Read(SettingsKey.DateFrom);
+			string tmp = Cfg.Read(Key.DateFrom);
 			if (tmp != null)
 			{
 				DateTime fromDate;
@@ -63,7 +63,7 @@ namespace PostReq
 				else
 					fromDateTimePicker.Value = DateTime.Today;
 			}
-			tmp = Cfg.Read(SettingsKey.DateTo);
+			tmp = Cfg.Read(Key.DateTo);
 			if (tmp != null)
 			{
 				DateTime toDate;
@@ -109,7 +109,7 @@ namespace PostReq
 			postamtComboBox.DataSource = postList;
 			postamtComboBox.DisplayMember = "Name";
 			postamtComboBox.ValueMember = "Id";
-			string tmp = Cfg.Read(SettingsKey.PostId);
+			string tmp = Cfg.Read(Key.PostId);
 			if (tmp != null)
 			{
 				int postId;
@@ -158,9 +158,9 @@ namespace PostReq
 		{
 			unitOfWork.Dispose();
 			if (!postamtComboBox.IsDisposed)
-				Cfg.Update(SettingsKey.PostId, ((Post)postamtComboBox.SelectedItem).Id.ToString());
-			Cfg.Update(SettingsKey.DateFrom, fromDateTimePicker.Value.ToString());
-			Cfg.Update(SettingsKey.DateTo, toDateTimePicker.Value.ToString());
+				Cfg.Update(Key.PostId, ((Post)postamtComboBox.SelectedItem).Id.ToString());
+			Cfg.Update(Key.DateFrom, fromDateTimePicker.Value.ToString());
+			Cfg.Update(Key.DateTo, toDateTimePicker.Value.ToString());
 		}
 
 		private void Refresh(DataGridView gridView)
