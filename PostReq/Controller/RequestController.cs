@@ -7,6 +7,7 @@ using PostReq.Model;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using System.IO;
+using System.Net;
 using System.Net.Mail;
 using System.Runtime.InteropServices.ComTypes;
 
@@ -42,7 +43,7 @@ namespace PostReq.Controller
 					else
 					{
 						sheet.GetRow(firstRowNum + 10).Cells[0].SetCellValue(request.User.Post.Name);
-						sheet.GetRow(firstRowNum + 11).Cells[0].SetCellValue("Заявка №"+(request.Id==0?"":request.Id.ToString()));
+						sheet.GetRow(firstRowNum + 11).Cells[0].SetCellValue("Заявка №" + (request.Id == 0 ? "" : request.Id.ToString()));
 						sheet.GetRow(firstRowNum + 12).Cells[0].SetCellValue($"Дата составления: {request.Date:dd.MM.yyyy} г.");
 					}
 					if (requestRows.Count() > 0)
@@ -57,7 +58,7 @@ namespace PostReq.Controller
 					}
 					for (int i = 1; i < requestRows.Count; i++)
 					{
-						var row = sheet.CopyRow(firstRowNum+13,firstRowNum+13+i);
+						var row = sheet.CopyRow(firstRowNum + 13, firstRowNum + 13 + i);
 						row.Cells[0].SetCellValue(i + 1);
 						row.Cells[1].SetCellValue(requestRows[i].Code);
 						row.Cells[4].SetCellValue(requestRows[i].Name);
@@ -69,7 +70,7 @@ namespace PostReq.Controller
 					//{
 					//	sheet.AutoSizeColumn(i);
 					//}
-					filename = $"files\\{Guid.NewGuid().ToString()}.xls";
+					filename = $"files\\{Guid.NewGuid()}.xls";
 					using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
 						wb.Write(fs);
 					wb.Close();
@@ -78,18 +79,26 @@ namespace PostReq.Controller
 			return filename;
 		}
 
-		public static void SendEmail()
+		public static void SendEmail(Tuple<Request, string> sendEmailModel)
 		{
 			SmtpClient smtpClient = new SmtpClient();
+			smtpClient.Host = "smtp.russianpost.ru";
+			smtpClient.Port = 25;
+			smtpClient.Credentials = CredentialCache.DefaultNetworkCredentials;
+			MailMessage message = new MailMessage($"{Environment.UserName}@russianpost.ru	", "evgenij.lucenko@russianpost.ru");
+			message.Subject = $"Заявка на поставку товаров № {sendEmailModel.Item1.Id}";
+			message.Body = $"{sendEmailModel.Item1.User.Post.Name} направил заявку на поставку товаров.\nСодержание заявки в приложенном файле.";
+			message.Attachments.Add(new Attachment(sendEmailModel.Item2));
+			smtpClient.SendAsync(message, "22");
 		}
 
 		public static IEnumerable<Request> GetRequests(FilterModel filterModel)
 		{
 			var requests = filterModel.UnitOfWork.Requests.GetAll();
-			requests = requests.Where(x=>x.Date>=filterModel.DateFrom && x.Date<=filterModel.DateTo);
+			requests = requests.Where(x => x.Date >= filterModel.DateFrom && x.Date <= filterModel.DateTo);
 			if (filterModel.Post.Id != 0)
 				requests = requests.Where(x => x.User.Post.Id == filterModel.Post.Id);
-			var statesId = filterModel.States.Select(x=>x.Id).ToList();
+			var statesId = filterModel.States.Select(x => x.Id).ToList();
 			requests = requests.Where(x => statesId.Contains(x.State.Id));
 			return requests.ToList();
 		}
@@ -101,7 +110,7 @@ namespace PostReq.Controller
 				using (FileStream fs = new FileStream(uploadDataModel.FileName, FileMode.Open))
 				{
 					HSSFWorkbook wb = new HSSFWorkbook(fs);
-					HSSFSheet sheet = (HSSFSheet) wb.GetSheetAt(0);
+					HSSFSheet sheet = (HSSFSheet)wb.GetSheetAt(0);
 					int dataStartRow = 14;
 					int numberCellIndex = 0;
 					int codelCellIndex = 2;
