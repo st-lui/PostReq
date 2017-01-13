@@ -55,7 +55,7 @@ namespace PostReq
 				if (currentUser.Post.Privilegies == 0)
 				ChangeInterfacePriv0();
 			string tmp = Cfg.Read(Key.DateFrom);
-			if (tmp != null)
+			if (tmp != string.Empty)
 			{
 				DateTime fromDate;
 				if (DateTime.TryParse(tmp, out fromDate))
@@ -64,7 +64,7 @@ namespace PostReq
 					fromDateTimePicker.Value = DateTime.Today;
 			}
 			tmp = Cfg.Read(Key.DateTo);
-			if (tmp != null)
+			if (tmp != string.Empty)
 			{
 				DateTime toDate;
 				if (DateTime.TryParse(tmp, out toDate))
@@ -110,7 +110,7 @@ namespace PostReq
 			postamtComboBox.DisplayMember = "Name";
 			postamtComboBox.ValueMember = "Id";
 			string tmp = Cfg.Read(Key.PostId);
-			if (tmp != null)
+			if (tmp != string.Empty)
 			{
 				int postId;
 				if (int.TryParse(tmp, out postId))
