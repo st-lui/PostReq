@@ -49,11 +49,7 @@ namespace PostReq
 			toolStrip1.Items.Insert(8, tsHostTo);
 			toolStrip1.Items.Insert(7, tsHostFrom);
 			toolStrip1.Height = 40;
-			if (currentUser.Post.Privilegies == 1)
-				ChangeInterfacePriv1();
-			else
-				if (currentUser.Post.Privilegies == 0)
-				ChangeInterfacePriv0();
+			ChangeInterfaceDemo();
 			string tmp = Cfg.Read(Key.DateFrom);
 			if (tmp != string.Empty)
 			{
@@ -142,6 +138,39 @@ namespace PostReq
 			filterModel.Post = currentUser.Post;
 			filterModel.DateFrom = fromDateTimePicker.Value;
 			filterModel.DateTo = toDateTimePicker.Value;
+		}
+
+		private void ChangeInterfaceDemo()
+		{
+			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateLoaded));
+			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateSent));
+			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateSaved));
+			filterModel.Post = (Post)postamtComboBox.SelectedItem;
+			filterModel.DateFrom = fromDateTimePicker.Value;
+			filterModel.DateTo = toDateTimePicker.Value;
+
+			var postList = unitOfWork.Posts.GetAll().ToList();
+			postList.Insert(0, new Post() { Id = 0, Name = "Все почтамты" });
+			postamtComboBox.Items.Clear();
+
+			postamtComboBox.DataSource = postList;
+			postamtComboBox.DisplayMember = "Name";
+			postamtComboBox.ValueMember = "Id";
+			string tmp = Cfg.Read(Key.PostId);
+			if (tmp != string.Empty)
+			{
+				int postId;
+				if (int.TryParse(tmp, out postId))
+				{
+					var post = postamtComboBox.Items.Cast<Post>().Where(x => x.Id == postId).SingleOrDefault();
+					if (post == null)
+						postamtComboBox.SelectedIndex = 0;
+					else
+						postamtComboBox.SelectedItem = post;
+				}
+				else
+					postamtComboBox.SelectedIndex = 0;
+			}
 		}
 
 		private void выходToolStripMenuItem_Click(object sender, EventArgs e)
