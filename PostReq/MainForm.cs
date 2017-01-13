@@ -142,6 +142,9 @@ namespace PostReq
 
 		private void ChangeInterfaceDemo()
 		{
+			создатьКопиюToolStripMenuItem.Visible = false;
+			addRequestToolStripButton.Visible = false;
+			copyRequestToolStripButton.Visible = false;
 			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateLoaded));
 			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateSent));
 			filterModel.States.Add(unitOfWork.States.Get(Properties.Resources.requestStateSaved));
@@ -171,6 +174,9 @@ namespace PostReq
 				else
 					postamtComboBox.SelectedIndex = 0;
 			}
+			создатьКопиюToolStripMenuItem.Visible = true;
+			addRequestToolStripButton.Visible = true;
+			copyRequestToolStripButton.Visible = true;
 		}
 
 		private void выходToolStripMenuItem_Click(object sender, EventArgs e)

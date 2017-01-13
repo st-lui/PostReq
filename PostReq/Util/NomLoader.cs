@@ -25,7 +25,7 @@ namespace PostReq.Util
 		public static NomLoader Create()
 		{
 			var nomLoader = new NomLoader();
-			nomLoader.connectionString = "data source=r22aufsql02;initial catalog=asku-tmp;user=nom_reader;password=6LRZ{w.Y!LHXtY.";
+			nomLoader.connectionString = "data source=r22aufsql01;initial catalog=r22-asku-work;user=nom_reader;password=6LRZ{w.Y!LHXtY.";
 			nomLoader.filename = "nom.txt";
 			if (!File.Exists(nomLoader.filename))
 			{
