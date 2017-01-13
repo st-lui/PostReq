@@ -278,6 +278,8 @@ namespace PostReq
 		{
 			request.State = unitOfWork.States.Get(Properties.Resources.requestStateSent);
 			unitOfWork.SaveChanges();
+			var path=RequestController.GeneratePrintForm(request,request.RequestRows.ToList());
+			RequestController.SendEmail(new Tuple<Request,string>(request,path));
 		}
 
 		private void saveButton_Click(object sender, EventArgs e)
