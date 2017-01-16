@@ -188,7 +188,8 @@ namespace PostReq
 			{
 				FormMode = Utils.FormMode.New,
 				NomLoader = nomLoader,
-				FormText = "Создание заявки"
+				FormText = "Создание заявки",
+				CurrentUser = currentUser
 			};
 			AddRequestForm addRequestForm = new AddRequestForm(editRequesModel);
 			addRequestForm.ShowDialog(this);
@@ -208,7 +209,8 @@ namespace PostReq
 				FormMode = Utils.FormMode.Edit,
 				NomLoader = nomLoader,
 				FormText = "Изменение заявки",
-				EditId = ((Request)bindingSource1.Current).Id
+				EditId = ((Request)bindingSource1.Current).Id,
+				CurrentUser = currentUser
 			};
 			AddRequestForm addRequestForm = new AddRequestForm(editRequestModel);
 			addRequestForm.ShowDialog(this);
@@ -227,7 +229,8 @@ namespace PostReq
 				FormMode = Utils.FormMode.Copy,
 				NomLoader = nomLoader,
 				FormText = "Создание заявки",
-				EditId = ((Request)bindingSource1.Current).Id
+				EditId = ((Request)bindingSource1.Current).Id,
+				CurrentUser = currentUser
 			};
 			AddRequestForm addRequestForm = new AddRequestForm(editRequestModel);
 			addRequestForm.ShowDialog(this);

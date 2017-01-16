@@ -67,6 +67,10 @@ namespace PostReq
 				request = unitOfWork.Requests.Get(editRequestModel.EditId);
 				requestRowBindingSource.DataSource = request.RequestRows;
 				dataGridView1.DataSource = requestRowBindingSource;
+				if (request.State.Name == Properties.Resources.requestStateSent)
+				{
+					
+				}
 			}
 			nomLoader.LoadNomListToTreeView(treeView1);
 			Result = 0;
